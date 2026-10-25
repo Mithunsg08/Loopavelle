@@ -99,6 +99,10 @@ label.lbl{display:block;font-weight:800;margin-bottom:10px}
 .btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
 .btn.ghost{background:var(--card2);color:var(--ink);box-shadow:none;border:1.5px solid var(--line);margin-top:10px}
 .btn.ghost:hover:not(:disabled){box-shadow:none;border-color:var(--a)}
+.seam{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;margin-bottom:14px;border-radius:18px;background:var(--card2);border:1.5px solid var(--line);cursor:pointer}
+.seam input{width:20px;height:20px;margin-top:3px;accent-color:#8b7cf6;flex:none}
+.seam b{display:block;font-weight:800}
+.seam small{display:block;color:var(--muted);font-weight:600;font-size:.82rem;line-height:1.35}
 .warn{margin:-6px 0 14px;font-size:.85rem;font-weight:700;color:#d98a2b}
 .center{text-align:center;padding:14px 0 4px}
 .orb{width:92px;height:92px;margin:6px auto 18px;border-radius:50%;background:var(--grad);display:grid;place-items:center;box-shadow:0 20px 50px -14px rgba(244,114,182,.9);animation:pulse 1.8s ease-in-out infinite}
@@ -167,9 +171,14 @@ footer{margin-top:22px;text-align:center;color:var(--muted);font-weight:600;font
       <div class="presets" id="presets"></div>
       <div class="hours">
         <button class="step" id="minus" type="button" aria-label="Less">−</button>
-        <div class="box"><input id="hrs" type="number" inputmode="decimal" min="0.1" max="48" step="0.5" value="1"><span class="unit">hours</span></div>
+        <div class="box"><input id="hrs" type="number" inputmode="decimal" min="0.1" max="24" step="0.5" value="1"><span class="unit">hours</span></div>
         <button class="step" id="plus" type="button" aria-label="More">+</button>
       </div>
+
+      <label class="seam" id="seamRow" hidden>
+        <input type="checkbox" id="seam" checked>
+        <span><b>Gapless audio</b><small id="seamNote"></small></span>
+      </label>
 
       <div class="stats">
         <div class="stat"><b id="sLen">—</b><small>final length</small></div>
@@ -287,6 +296,7 @@ const Loopavelle = (() => {
     if (!stsd || !stts || !stsc || !stsz || !stco) throw fail('BAD');
     t.stsd = m.slice(stsd.start, stsd.end);
     t.codec = typ(m, stsd.body + 12);
+    if (t.handler === 'soun') { const eb = stsd.body + 16; t.channels = dv.getUint16(eb + 16) || 2; t.sampleRate = dv.getUint16(eb + 24) || t.ts; }
 
     let n = dv.getUint32(stts.body + 4); t.stts = new Array(n * 2);
     for (let i = 0; i < n; i++) { t.stts[2*i] = dv.getUint32(stts.body + 8 + i*8); t.stts[2*i+1] = dv.getUint32(stts.body + 12 + i*8); }
@@ -364,10 +374,13 @@ const Loopavelle = (() => {
     for (const k of mk1) if (k.type === 'trak') { const t = parseTrack(m, dv, k); if (t) S.tracks.push(t); }
     if (!S.tracks.length) throw fail('NO_TRACKS');
 
-    let minOff = Infinity, maxEnd = 0, period = 0;
+    let minOff = Infinity, maxEnd = 0, period = 0, vMin = Infinity, vMax = 0;
     for (const t of S.tracks) {
       const cs = chunkSizes(t);
-      for (let i = 0; i < t.offsets.length; i++) { minOff = Math.min(minOff, t.offsets[i]); maxEnd = Math.max(maxEnd, t.offsets[i] + cs[i]); }
+      for (let i = 0; i < t.offsets.length; i++) {
+        minOff = Math.min(minOff, t.offsets[i]); maxEnd = Math.max(maxEnd, t.offsets[i] + cs[i]);
+        if (t.handler === 'vide') { vMin = Math.min(vMin, t.offsets[i]); vMax = Math.max(vMax, t.offsets[i] + cs[i]); }
+      }
       period = Math.max(period, t.mediaTotal / t.ts);
     }
     if (!(maxEnd > minOff) || maxEnd > file.size + 1) throw fail('BAD');
@@ -377,21 +390,31 @@ const Loopavelle = (() => {
       t.sttsPad = padLast(t.stts, t.periodTicks - t.mediaTotal);
     }
     S.minOff = minOff; S.blobLen = maxEnd - minOff; S.blob = file.slice(minOff, maxEnd);
+    S.file = file; S.vMin = vMin; S.vMax = vMax;
     S.periodSec = Math.max(...S.tracks.map(t => t.periodTicks / t.ts));
     const names = { avc1:'H.264', avc3:'H.264', hvc1:'H.265', hev1:'H.265', av01:'AV1', vp09:'VP9', mp4a:'AAC', 'ac-3':'AC-3', 'ec-3':'E-AC-3', Opus:'Opus', alac:'ALAC' };
     const v = S.tracks.find(t => t.handler === 'vide'), a = S.tracks.find(t => t.handler === 'soun');
     S.info = {
       durationSec: S.periodSec, size: file.size, hasAudio: !!a, hasVideo: !!v,
       vcodec: v ? (names[v.codec] || v.codec) : null, acodec: a ? (names[a.codec] || a.codec) : null,
-      frames: v ? v.S : 0
+      frames: v ? v.S : 0,
+      sampleRate: a ? Math.min(a.sampleRate, 48000) : 0, channels: a ? Math.min(a.channels, 2) : 0
     };
+    S.canSeamless = !!(v && a && vMax > vMin);
+    S.periodVideoSec = v ? Math.max(...S.tracks.filter(t => t.handler === 'vide').map(t => t.mediaTotal / t.ts)) : S.periodSec;
     S.sampleTotal = S.tracks.reduce((n, t) => n + t.S, 0);
     S.chunkTotal = S.tracks.reduce((n, t) => n + t.offsets.length, 0);
     return S;
   }
 
   const loopsFor = (S, sec) => Math.max(1, Math.ceil(sec / S.periodSec - 1e-9));
-  const estimate = (S, sec) => {
+  const estimate = (S, sec, seamless) => {
+    if (seamless && S.canSeamless) {
+      const V = S.periodVideoSec, N = Math.max(1, Math.ceil(sec / V - 1e-9));
+      const per = (S.vMax - S.vMin) + Math.round(V * S.info.sampleRate) * S.info.channels * 2;
+      const vs = S.tracks.filter(t => t.handler === 'vide');
+      return { loops: N, seconds: N * V, bytes: N * per + N * vs.reduce((n, t) => n + t.S * 8 + t.offsets.length * 8, 0) + 4096 };
+    }
     const N = loopsFor(S, sec);
     return { loops: N, seconds: N * S.periodSec, bytes: N * S.blobLen + N * (S.sampleTotal * 8 + S.chunkTotal * 8) + 4096 };
   };
@@ -492,31 +515,81 @@ const Loopavelle = (() => {
     return mk('moov', [mvhd, ...S.tracks.map((t, i) => trakBox(S, t, tms[i], N, base, co64))]);
   }
 
-  async function build(S, targetSec, onStage) {
+  function pcmStsd(sr, ch) {
+    const e = new Uint8Array(36), dv = new DataView(e.buffer);
+    dv.setUint32(0, 36); e.set(cc('sowt'), 4); dv.setUint16(14, 1);
+    dv.setUint16(24, ch); dv.setUint16(26, 16); dv.setUint32(32, sr * 65536);
+    return mk('stsd', [new Uint8Array([0, 0, 0, 0, 0, 0, 0, 1]), e]);
+  }
+
+  // Fit the decoded audio to EXACTLY one video loop and make its edges continuous.
+  function fitPcm(at, pcm, Na) {
+    const ch = pcm.channels.length, sr = pcm.sampleRate, len = pcm.channels[0].length;
+    let lead = 0;
+    const first = at.elst && at.elst.find(e => e.mt >= 0), mt = first ? first.mt : 0;
+    if (mt > 0) {   // some decoders don't remove the encoder delay; detect it by length
+      const full = at.mediaTotal / at.ts * sr, trimmed = (at.mediaTotal - mt) / at.ts * sr;
+      if (Math.abs(len - full) < Math.abs(len - trimmed)) lead = Math.round(mt / at.ts * sr);
+    }
+    const avail = Math.max(0, len - lead), extra = Math.max(0, avail - Na);
+    const F = extra >= 16 ? Math.min(extra, Math.round(sr * 0.005)) : 0;
+    const out = new Int16Array(Na * ch);
+    for (let c = 0; c < ch; c++) {
+      const x = pcm.channels[c], b = new Float32Array(Na);
+      for (let i = 0; i < Na; i++) b[i] = i < avail ? x[lead + i] : 0;
+      if (F > 0) {
+        // the audio that naturally follows the end is blended into the start -> no jump at the seam
+        for (let i = 0; i < F; i++) { const w = (i + 1) / (F + 1) * Math.PI / 2; b[i] = x[lead + Na + i] * Math.cos(w) + b[i] * Math.sin(w); }
+      } else if (Math.abs(b[0] - b[Na - 1]) > 0.01) {
+        const f = Math.min(48, Math.floor(Na / 8));
+        for (let i = 0; i < f; i++) { const g = (i + 1) / (f + 1); b[i] *= g; b[Na - 1 - i] *= g; }
+      }
+      for (let i = 0; i < Na; i++) out[i * ch + c] = Math.round(Math.max(-1, Math.min(1, b[i])) * 32767);
+    }
+    return out;
+  }
+
+  async function build(S, targetSec, onStage, pcm) {
     const stage = async (p, label) => { if (onStage) await onStage(p, label); };
-    const N = loopsFor(S, targetSec);
-    const est = estimate(S, targetSec);
-    if (N * (S.sampleTotal * 8 + S.chunkTotal * 8) > 1.4e9) throw fail('TOO_BIG');
+    let E = S, blob = S.blob, periodSec = S.periodSec, Na = 0;
+    if (pcm && S.canSeamless) {
+      const at = S.tracks.find(t => t.handler === 'soun');
+      const vts = S.tracks.filter(t => t.handler === 'vide');
+      const V = S.periodVideoSec, sr = pcm.sampleRate, ch = pcm.channels.length;
+      Na = Math.round(V * sr);
+      const data = fitPcm(at, pcm, Na), vLen = S.vMax - S.vMin;
+      blob = new Blob([S.file.slice(S.vMin, S.vMax), new Uint8Array(data.buffer)]);
+      const vt2 = vts.map(t => { const pt = Math.max(t.mediaTotal, Math.round(V * t.ts)); return Object.assign({}, t, { periodTicks: pt, sttsPad: padLast(t.stts, pt - t.mediaTotal) }); });
+      const a2 = Object.assign({}, at, { ts: sr, S: Na, szUniform: ch * 2, sizes: null, stsc: [1, Na, 1], offsets: Float64Array.of(S.vMin + vLen), stsd: pcmStsd(sr, ch), sttsPad: [Na, 1], ctts: null, stss: null, elst: null, periodTicks: Na });
+      const tracks = S.tracks.map(t => t === at ? a2 : (vts.includes(t) ? vt2[vts.indexOf(t)] : null)).filter(Boolean);
+      periodSec = Math.max(...vt2.map(t => t.periodTicks / t.ts));
+      E = Object.assign({}, S, { tracks, minOff: S.vMin, blobLen: vLen + data.byteLength,
+        sampleTotal: vt2.reduce((n, t) => n + t.S, 0), chunkTotal: vt2.reduce((n, t) => n + t.offsets.length, 0) + 1 });
+    }
+    const N = loopsFor({ periodSec }, targetSec);
+    if (Na && N * Na > 0xFFFFFFFF) throw fail('TOO_BIG');
+    if (N * (E.sampleTotal * 8 + E.chunkTotal * 8) > 1.4e9) throw fail('TOO_BIG');
+    const est = N * E.blobLen + N * (E.sampleTotal * 8 + E.chunkTotal * 8) + 4096;
     await stage(0.12, 'Planning ' + N.toLocaleString() + ' loops');
-    const tms = S.tracks.map(t => timing(S, t, N));
-    const co64 = est.bytes > 0xFFFFFFFF - 1024;
-    const payload = N * S.blobLen;
+    const tms = E.tracks.map(t => timing(E, t, N));
+    const co64 = est > 0xFFFFFFFF - 1024;
+    const payload = N * E.blobLen;
     const hdrLen = payload + 8 > 0xFFFFFFFF ? 16 : 8;
     const ftyp = mk('ftyp', [cc('isom'), be32(512), cc('isom'), cc('iso2'), cc('avc1'), cc('mp41')]);
     await stage(0.35, 'Stitching frames together');
-    let moov = moovBox(S, N, 0, co64, tms);
+    let moov = moovBox(E, N, 0, co64, tms);
     const base = ftyp.length + moov.length + hdrLen;
     await stage(0.65, 'Aligning audio and video');
-    moov = moovBox(S, N, base, co64, tms);
+    moov = moovBox(E, N, base, co64, tms);
     const hdr = new Uint8Array(hdrLen), h = new DataView(hdr.buffer);
     if (hdrLen === 8) { h.setUint32(0, payload + 8); hdr.set(cc('mdat'), 4); }
     else { h.setUint32(0, 1); hdr.set(cc('mdat'), 4); wr64(h, 8, payload + 16); }
     await stage(0.88, 'Packing your video');
     const parts = [ftyp, moov, hdr];
-    for (let i = 0; i < N; i++) parts.push(S.blob);
-    const blob = new Blob(parts, { type: 'video/mp4' });
+    for (let i = 0; i < N; i++) parts.push(blob);
+    const out = new Blob(parts, { type: 'video/mp4' });
     await stage(1, 'Done');
-    return { blob, loops: N, seconds: N * S.periodSec, bytes: ftyp.length + moov.length + hdrLen + payload };
+    return { blob: out, loops: N, seconds: N * periodSec, bytes: ftyp.length + moov.length + hdrLen + payload, gapless: !!Na };
   }
 
   return { analyze, build, estimate, loopsFor };
@@ -528,7 +601,7 @@ if (typeof module !== 'undefined') module.exports = Loopavelle;
 <script>
 (() => {
   const $ = s => document.querySelector(s);
-  const MAX_H = 48, MIN_H = 0.1, PRESETS = [1, 2, 3, 5, 8, 10, 12];
+  const MAX_H = 24, MIN_H = 0.1, PRESETS = [1, 2, 3, 5, 8, 10, 12];
   let S = null, file = null, hours = 1, outUrl = null, outName = '', previewUrl = null, busy = false;
 
   const views = { 1: $('#v1'), 2: $('#v2'), 3: $('#v3') };
@@ -587,6 +660,13 @@ if (typeof module !== 'undefined') module.exports = Loopavelle;
     chips.push(S.info.hasAudio ? 'with sound' : 'silent');
     $('#chips').innerHTML = chips.map(c => `<span class="chip">${c}</span>`).join('');
     $('#err2').hidden = true;
+    const row = $('#seamRow');
+    row.hidden = !S.canSeamless;
+    if (S.canSeamless) {
+      $('#seam').checked = true;
+      $('#seamNote').textContent = 'Lossless sound with no pause or click between loops. Makes the file about ' +
+        fmtBytes(S.info.sampleRate * S.info.channels * 2 * 3600) + ' bigger per hour.';
+    }
     setHours(hours); show(2);
   }
   $('#swap').addEventListener('click', () => { input.value = ''; show(1); });
@@ -599,8 +679,17 @@ if (typeof module !== 'undefined') module.exports = Loopavelle;
   $('#plus').addEventListener('click', () => setHours(Math.min(MAX_H, (+hrs.value || 0) + ((+hrs.value || 0) >= 1 ? 1 : 0.5))));
   hrs.addEventListener('input', () => { const v = parseFloat(hrs.value); if (v > 0) { hours = v; refresh(); } else refresh(true); });
   hrs.addEventListener('blur', () => { if (!(parseFloat(hrs.value) > 0)) setHours(hours); });
+  $('#seam').addEventListener('change', () => refresh());
   hrs.addEventListener('keydown', e => { if (e.key === 'Enter') $('#go').click(); });
 
+  const seamOn = () => !!(S && S.canSeamless && $('#seam').checked);
+  async function decodePcm(f, S) {
+    const AC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    const sr = S.info.sampleRate || 48000;
+    const buf = await new AC(2, 1, sr).decodeAudioData(await f.arrayBuffer());
+    const n = Math.min(buf.numberOfChannels, 2);
+    return { sampleRate: buf.sampleRate, channels: Array.from({ length: n }, (_, i) => buf.getChannelData(i)) };
+  }
   function setHours(h) { hours = Math.round(h * 100) / 100; hrs.value = hours; refresh(); }
   function refresh(invalid) {
     document.querySelectorAll('.pre').forEach(b => b.classList.toggle('on', +b.dataset.h === hours && !invalid));
@@ -612,7 +701,7 @@ if (typeof module !== 'undefined') module.exports = Loopavelle;
       if (!invalid && hours > MAX_H) { warn.textContent = 'Please choose between ' + MIN_H + ' and ' + MAX_H + ' hours.'; warn.hidden = false; }
       return;
     }
-    const est = Loopavelle.estimate(S, hours * 3600);
+    const est = Loopavelle.estimate(S, hours * 3600, seamOn());
     $('#sLen').textContent = fmtDur(est.seconds);
     $('#sLoops').textContent = est.loops.toLocaleString();
     $('#sSize').textContent = '≈ ' + fmtBytes(est.bytes);
@@ -629,9 +718,15 @@ if (typeof module !== 'undefined') module.exports = Loopavelle;
     $('#fill').style.width = '0%'; $('#stage').textContent = 'Getting ready'; $('#stage').parentElement.querySelector('.bar').hidden = false;
     show(3); await sleep(60);
     try {
+      let pcm = null, note = '';
+      if (seamOn()) {
+        $('#fill').style.width = '5%'; $('#stage').textContent = 'Preparing gapless audio';
+        try { pcm = await decodePcm(file, S); }
+        catch (e) { note = ' (Your browser could not read the audio, so the original sound was kept and may pause briefly at each loop.)'; }
+      }
       const r = await Loopavelle.build(S, hours * 3600, async (p, label) => {
-        $('#fill').style.width = Math.round(p * 100) + '%'; $('#stage').textContent = label; await sleep(160);
-      });
+        $('#fill').style.width = Math.round(6 + p * 94) + '%'; $('#stage').textContent = label; await sleep(160);
+      }, pcm);
       if (outUrl) URL.revokeObjectURL(outUrl);
       outUrl = URL.createObjectURL(r.blob);
       const base = file.name.replace(/\.[^.]+$/, '').replace(/[^\w\-]+/g, '_').slice(0, 40) || 'video';
@@ -639,7 +734,7 @@ if (typeof module !== 'undefined') module.exports = Loopavelle;
       $('#orb').className = 'orb ok';
       $('#orbSvg').innerHTML = '<path d="M17 33l10 10 20-22"/>';
       $('#t3').textContent = 'All done! 🎉';
-      $('#s3').textContent = fmtDur(r.seconds) + ' of seamless looping · ' + r.loops.toLocaleString() + ' loops · ' + fmtBytes(r.bytes) + ' — your download has started.';
+      $('#s3').textContent = fmtDur(r.seconds) + ' of seamless looping · ' + r.loops.toLocaleString() + ' loops · ' + fmtBytes(r.bytes) + ' — your download has started.' + note;
       $('#stage').textContent = 'Saved as ' + outName;
       $('#doneBtns').hidden = false;
       save();
