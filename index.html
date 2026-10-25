@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoopLoom — Infinite Browser Video Looper</title>
+    
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            900: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-amber-50/50 text-stone-800 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 selection:bg-amber-200">
+
+    <main class="max-w-md w-full bg-white/80 backdrop-blur-md rounded-3xl shadow-xl shadow-amber-900/5 p-6 sm:p-8 border border-amber-100/80 transition-all">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-12 h-12 bg-amber-100 rounded-2xl text-2xl mb-3 shadow-inner">
+                🧶
+            </div>
+            <h1 class="text-2xl font-bold text-amber-950 tracking-tight">LoopLoom</h1>
+            <p class="text-xs text-stone-500 mt-1">Weave short clips into endless loops without quality loss</p>
+        </div>
+
+        <!-- Step 1: Upload Video -->
+        <div id="step-upload" class="space-y-4">
+            <div id="drop-zone" class="group relative flex flex-col items-center justify-center border-2 border-dashed border-amber-200 hover:border-amber-400 rounded-2xl p-8 cursor-pointer bg-amber-50/30 hover:bg-amber-50/70 transition-all">
+                <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                    </svg>
+                </div>
+                <span class="text-sm font-semibold text-amber-900">Upload video clip</span>
+                <span class="text-xs text-stone-400 mt-1">MP4, MOV, WebM (Any duration)</span>
+                <input type="file" id="video-input" accept="video/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+            </div>
+            <div class="flex items-center gap-2 text-[11px] text-stone-400 justify-center">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                100% Client-side — Video never leaves your browser
+            </div>
+        </div>
+
+        <!-- Step 2: Configure Duration & Convert -->
+        <div id="step-config" class="space-y-5 hidden">
+            <!-- File Badge -->
+            <div class="bg-amber-50/80 p-3.5 rounded-2xl flex items-center justify-between border border-amber-100">
+                <div class="flex items-center space-x-3 truncate">
+                    <span class="text-lg">🎬</span>
+                    <div class="truncate">
+                        <p id="file-name-display" class="text-xs font-semibold text-stone-700 truncate"></p>
+                        <p id="file-size-display" class="text-[10px] text-stone-400"></p>
+                    </div>
+                </div>
+                <button id="change-file-btn" class="text-xs text-amber-700 hover:text-amber-900 font-medium px-2 py-1 rounded-lg hover:bg-amber-100/50 transition">
+                    Change
+                </button>
+            </div>
+
+            <!-- Hours Input -->
+            <div class="space-y-1.5">
+                <label for="hours-input" class="block text-xs font-semibold uppercase tracking-wider text-stone-500">
+                    Target Duration (Hours)
+                </label>
+                <div class="relative">
+                    <input type="number" id="hours-input" min="0.01" max="24" step="0.5" value="1" 
+                        class="w-full px-4 py-3 rounded-xl border border-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-stone-800 font-semibold text-sm bg-white shadow-sm">
+                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-stone-400">Hours</span>
+                </div>
+                <p id="loop-estimate" class="text-[11px] text-stone-400 px-1"></p>
+            </div>
+
+            <!-- Submit Button -->
+            <button id="process-btn" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3.5 rounded-xl shadow-lg shadow-amber-600/20 transition transform active:scale-[0.99]">
+                Weave Video Now 🧵
+            </button>
+        </div>
+
+        <!-- Processing State -->
+        <div id="status-area" class="mt-4 text-center space-y-3 hidden">
+            <div class="w-full bg-stone-100 rounded-full h-2 overflow-hidden p-0.5 border border-stone-200/50">
+                <div id="progress-bar" class="bg-amber-500 h-full rounded-full w-0 transition-all duration-300"></div>
+            </div>
+            <p id="status-text" class="text-xs font-medium text-stone-600 animate-pulse">Initializing engine...</p>
+        </div>
+
+        <!-- Download Section -->
+        <div id="download-area" class="mt-6 space-y-3 hidden">
+            <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-100 text-center">
+                <span class="text-xs font-medium text-emerald-800">✨ Ready! Zero quality loss maintained.</span>
+            </div>
+            <a id="download-link" class="flex items-center justify-center gap-2 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 rounded-xl shadow-lg shadow-emerald-600/20 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Download Looped Video
+            </a>
+            <button id="reset-btn" class="w-full text-xs text-stone-400 hover:text-stone-600 py-1 transition">
+                Process another video
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Client-Side Engine Script (FFmpeg.wasm ESM) -->
+    <script type="module">
+        import { FFmpeg } from 'https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/esm/index.js';
+        import { fetchFile, toBlobURL } from 'https://unpkg.com/@ffmpeg/util@0.12.1/dist/esm/index.js';
+
+        const uploadInput = document.getElementById('video-input');
+        const stepUpload = document.getElementById('step-upload');
+        const stepConfig = document.getElementById('step-config');
+        const fileNameDisplay = document.getElementById('file-name-display');
+        const fileSizeDisplay = document.getElementById('file-size-display');
+        const hoursInput = document.getElementById('hours-input');
+        const loopEstimate = document.getElementById('loop-estimate');
+        const processBtn = document.getElementById('process-btn');
+        const statusArea = document.getElementById('status-area');
+        const progressBar = document.getElementById('progress-bar');
+        const statusText = document.getElementById('status-text');
+        const downloadArea = document.getElementById('download-area');
+        const downloadLink = document.getElementById('download-link');
+        const changeFileBtn = document.getElementById('change-file-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        let selectedFile = null;
+        let videoDuration = 0;
+        let ffmpeg = null;
+
+        // Step 1: File selection
+        uploadInput.addEventListener('change', async (e) => {
+            if (e.target.files.length > 0) {
+                selectedFile = e.target.files[0];
+                fileNameDisplay.textContent = selectedFile.name;
+                fileSizeDisplay.textContent = (selectedFile.size / (1024 * 1024)).toFixed(1) + ' MB';
+                
+                // Read clip duration
+                const tempVideo = document.createElement('video');
+                tempVideo.src = URL.createObjectURL(selectedFile);
+                await new Promise((res) => {
+                    tempVideo.onloadedmetadata = () => {
+                        videoDuration = tempVideo.duration;
+                        res();
+                    };
+                });
+
+                updateEstimate();
+                stepUpload.classList.add('hidden');
+                stepConfig.classList.remove('hidden');
+            }
+        });
+
+        hoursInput.addEventListener('input', updateEstimate);
+
+        function updateEstimate() {
+            const hrs = parseFloat(hoursInput.value) || 0;
+            if (hrs > 0 && videoDuration > 0) {
+                const totalSeconds = hrs * 3600;
+                const loops = Math.ceil(totalSeconds / videoDuration);
+                loopEstimate.textContent = `Clip length: ${videoDuration.toFixed(1)}s • Repeats approximately ${loops.toLocaleString()} times`;
+            } else {
+                loopEstimate.textContent = '';
+            }
+        }
+
+        // Change File button
+        changeFileBtn.addEventListener('click', () => {
+            uploadInput.value = '';
+            selectedFile = null;
+            stepConfig.classList.add('hidden');
+            stepUpload.classList.remove('hidden');
+        });
+
+        // Step 2: Processing & Downloading
+        processBtn.addEventListener('click', async () => {
+            const hours = parseFloat(hoursInput.value);
+            if (!hours || hours <= 0 || !selectedFile) return;
+
+            stepConfig.classList.add('hidden');
+            statusArea.classList.remove('hidden');
+            statusText.textContent = "Loading WebAssembly video engine...";
+
+            try {
+                if (!ffmpeg) {
+                    ffmpeg = new FFmpeg();
+                    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+                    
+                    ffmpeg.on('progress', ({ progress }) => {
+                        const percent = Math.min(Math.round(progress * 100), 100);
+                        progressBar.style.width = `${percent}%`;
+                        statusText.textContent = `Processing in browser... ${percent}%`;
+                    });
+
+                    await ffmpeg.load({
+                        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+                        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+                    });
+                }
+
+                statusText.textContent = "Loading file into memory...";
+                const extension = selectedFile.name.split('.').pop() || 'mp4';
+                const inputName = `input.${extension}`;
+                const outputName = `output.${extension}`;
+
+                await ffmpeg.writeFile(inputName, await fetchFile(selectedFile));
+
+                const targetSeconds = hours * 3600;
+                const loopCount = Math.ceil(targetSeconds / videoDuration);
+
+                statusText.textContent = `Looping video ${loopCount} times (Stream copy — 0% loss)...`;
+
+                // Stream copy command: -stream_loop repeats without re-encoding, preserving quality and speed
+                await ffmpeg.exec([
+                    '-stream_loop', loopCount.toString(),
+                    '-i', inputName,
+                    '-c', 'copy',
+                    outputName
+                ]);
+
+                statusText.textContent = "Generating instant download...";
+                const data = await ffmpeg.readFile(outputName);
+                const blob = new Blob([data.buffer], { type: selectedFile.type || 'video/mp4' });
+                const url = URL.createObjectURL(blob);
+
+                statusArea.classList.add('hidden');
+                downloadArea.classList.remove('hidden');
+                downloadLink.href = url;
+                downloadLink.download = `looped_${hours}hr_${selectedFile.name}`;
+
+            } catch (err) {
+                console.error(err);
+                statusText.textContent = "An error occurred during processing.";
+                statusText.classList.remove('animate-pulse');
+                statusText.classList.add('text-red-600');
+            }
+        });
+
+        // Reset
+        resetBtn.addEventListener('click', () => {
+            downloadArea.classList.add('hidden');
+            stepUpload.classList.remove('hidden');
+            uploadInput.value = '';
+            selectedFile = null;
+            progressBar.style.width = '0%';
+        });
+    </script>
+</body>
+</html>
