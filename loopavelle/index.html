@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Loopavelle — turn a few seconds into hours</title>
+<meta name="description" content="Loopavelle loops a short video into hours of seamless playback. 100% in your browser, no re-encoding, no quality loss, nothing uploaded.">
+<meta name="theme-color" content="#8b7cf6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b7cf6'/%3E%3Cstop offset='1' stop-color='%23f472b6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Cpath d='M20 26h20a8 8 0 0 1 0 16H26' fill='none' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M26 20l-6 6 6 6' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#fff1f7; --bg2:#efeeff; --bg3:#e4fbff;
+  --ink:#2b2442; --muted:#7a7296; --card:rgba(255,255,255,.74); --card2:rgba(255,255,255,.55);
+  --line:rgba(139,124,246,.24); --a:#8b7cf6; --b:#f472b6; --c:#fbbf77; --ok:#2fd1a0; --err:#e5527a;
+  --shadow:0 30px 80px -30px rgba(139,124,246,.45), 0 8px 24px -12px rgba(244,114,182,.25);
+  --grad:linear-gradient(135deg,#8b7cf6 0%,#f472b6 60%,#fbaa77 100%);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg1:#1c1533;--bg2:#171a3c;--bg3:#102331;--ink:#f6f1ff;--muted:#a99fcb;--card:rgba(35,29,62,.7);--card2:rgba(52,44,90,.5);--line:rgba(167,139,250,.3);--shadow:0 30px 80px -30px rgba(0,0,0,.6)}
+}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{
+  font-family:"Nunito",ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--ink); background:linear-gradient(135deg,var(--bg1),var(--bg2) 50%,var(--bg3));
+  background-attachment:fixed; display:flex; flex-direction:column; align-items:center;
+  padding:28px 16px 36px; overflow-x:hidden; line-height:1.5;
+}
+.blob{position:fixed;border-radius:50%;filter:blur(70px);opacity:.55;z-index:0;pointer-events:none;animation:float 20s ease-in-out infinite alternate}
+.blob.b1{width:380px;height:380px;background:#c4b5fd;top:-90px;left:-90px}
+.blob.b2{width:340px;height:340px;background:#fbcfe8;bottom:-80px;right:-60px;animation-delay:-6s}
+.blob.b3{width:260px;height:260px;background:#fde1c4;top:45%;left:60%;animation-delay:-12s;opacity:.4}
+@media (prefers-color-scheme:dark){.blob{opacity:.28}}
+@keyframes float{to{transform:translate(40px,30px) scale(1.12)}}
+main{position:relative;z-index:1;width:100%;max-width:640px}
+header{display:flex;align-items:center;gap:14px;margin:6px 4px 22px}
+.logo{width:52px;height:52px;border-radius:16px;background:var(--grad);display:grid;place-items:center;box-shadow:0 10px 26px -8px rgba(244,114,182,.7);flex:none}
+.logo svg{width:30px;height:30px;animation:spin 9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+h1{font-size:1.9rem;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{color:var(--muted);font-weight:600;font-size:.95rem;margin-top:2px}
+.card{background:var(--card);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);border:1px solid var(--line);border-radius:30px;padding:26px;box-shadow:var(--shadow)}
+.steps{display:flex;gap:10px;margin-bottom:22px}
+.pill{flex:1;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:var(--card2);border:1px solid transparent;color:var(--muted);font-weight:700;font-size:.92rem;transition:.35s}
+.pill i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.8rem;background:rgba(139,124,246,.15);color:var(--a);transition:.35s}
+.pill.on{color:var(--ink);border-color:var(--line);background:var(--card)}
+.pill.on i,.pill.done i{background:var(--grad);color:#fff}
+.pill.done{color:var(--ink)}
+section{animation:in .45s cubic-bezier(.2,.8,.2,1)}
+section[hidden]{display:none}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+h2{font-size:1.25rem;font-weight:800;margin-bottom:4px}
+.sub{color:var(--muted);font-weight:600;font-size:.93rem;margin-bottom:18px}
+.drop{display:block;border:2.5px dashed var(--line);border-radius:24px;padding:38px 20px;text-align:center;cursor:pointer;background:var(--card2);transition:.3s}
+.drop:hover,.drop.over,.drop:focus-visible{border-color:var(--a);transform:translateY(-2px);background:var(--card);outline:none}
+.drop .ic{width:68px;height:68px;margin:0 auto 12px;border-radius:22px;background:var(--grad);display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(139,124,246,.8);animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.drop .ic svg{width:32px;height:32px}
+.drop b{display:block;font-size:1.08rem}
+.drop small{color:var(--muted);font-weight:600}
+.drop input{display:none}
+.msg{margin-top:14px;padding:12px 16px;border-radius:16px;font-weight:700;font-size:.92rem;background:rgba(229,82,122,.12);color:var(--err);border:1px solid rgba(229,82,122,.3)}
+.msg[hidden]{display:none}
+.msg.info{background:rgba(139,124,246,.12);color:var(--a);border-color:var(--line)}
+.trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.trust span{font-size:.8rem;font-weight:700;color:var(--muted);padding:6px 12px;border-radius:999px;background:var(--card2)}
+.file{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+.file video{width:120px;height:84px;border-radius:16px;object-fit:cover;background:linear-gradient(135deg,#ddd6fe,#fbcfe8);flex:none}
+.file .meta{min-width:0}
+.file .name{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{font-size:.76rem;font-weight:800;padding:4px 10px;border-radius:999px;background:rgba(139,124,246,.14);color:var(--a)}
+.link{background:none;border:0;color:var(--a);font:inherit;font-weight:800;cursor:pointer;padding:0;margin-top:6px;font-size:.85rem}
+.link:hover{text-decoration:underline}
+label.lbl{display:block;font-weight:800;margin-bottom:10px}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.pre{font:inherit;font-weight:800;font-size:.92rem;padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--card2);color:var(--ink);cursor:pointer;transition:.2s}
+.pre:hover{transform:translateY(-2px);border-color:var(--a)}
+.pre.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 10px 22px -10px rgba(244,114,182,.9)}
+.hours{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.hours .step{width:48px;height:48px;border-radius:16px;border:1.5px solid var(--line);background:var(--card2);color:var(--ink);font-size:1.4rem;font-weight:800;cursor:pointer;transition:.2s;flex:none}
+.hours .step:hover{border-color:var(--a);transform:scale(1.05)}
+.hours .box{flex:1;display:flex;align-items:baseline;justify-content:center;gap:8px;border-radius:18px;border:1.5px solid var(--line);background:var(--card2);padding:6px 14px;transition:.2s}
+.hours .box:focus-within{border-color:var(--a);box-shadow:0 0 0 4px rgba(139,124,246,.18)}
+.hours input{width:100%;min-width:0;border:0;background:none;font:inherit;font-size:2rem;font-weight:800;color:var(--ink);text-align:right;outline:none;-moz-appearance:textfield}
+.hours input::-webkit-outer-spin-button,.hours input::-webkit-inner-spin-button{-webkit-appearance:none}
+.hours .unit{font-weight:800;color:var(--muted);flex:none;width:70px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.stat{background:var(--card2);border-radius:18px;padding:12px;text-align:center}
+.stat b{display:block;font-size:1.05rem;font-weight:800}
+.stat small{color:var(--muted);font-weight:700;font-size:.75rem}
+.btn{width:100%;font:inherit;font-weight:800;font-size:1.08rem;color:#fff;border:0;border-radius:20px;padding:16px;cursor:pointer;background:var(--grad);box-shadow:0 18px 36px -14px rgba(244,114,182,.9);transition:.25s;position:relative;overflow:hidden}
+.btn:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 24px 40px -14px rgba(244,114,182,1)}
+.btn:active:not(:disabled){transform:translateY(0)}
+.btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+.btn.ghost{background:var(--card2);color:var(--ink);box-shadow:none;border:1.5px solid var(--line);margin-top:10px}
+.btn.ghost:hover:not(:disabled){box-shadow:none;border-color:var(--a)}
+.seam{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;margin-bottom:14px;border-radius:18px;background:var(--card2);border:1.5px solid var(--line);cursor:pointer}
+.seam input{width:20px;height:20px;margin-top:3px;accent-color:#8b7cf6;flex:none}
+.seam b{display:block;font-weight:800}
+.seam small{display:block;color:var(--muted);font-weight:600;font-size:.82rem;line-height:1.35}
+.warn{margin:-6px 0 14px;font-size:.85rem;font-weight:700;color:#d98a2b}
+.center{text-align:center;padding:14px 0 4px}
+.orb{width:92px;height:92px;margin:6px auto 18px;border-radius:50%;background:var(--grad);display:grid;place-items:center;box-shadow:0 20px 50px -14px rgba(244,114,182,.9);animation:pulse 1.8s ease-in-out infinite}
+.orb svg{width:44px;height:44px}
+.orb.ok{background:linear-gradient(135deg,#34d399,#2fd1a0 50%,#67e8f9);animation:pop .6s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pulse{50%{transform:scale(1.08)}}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+.bar{height:12px;border-radius:99px;background:rgba(139,124,246,.15);overflow:hidden;margin:18px 0 10px}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:var(--grad);transition:width .45s cubic-bezier(.3,.8,.3,1);position:relative}
+.bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:shim 1.2s linear infinite}
+@keyframes shim{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.stage{color:var(--muted);font-weight:700;min-height:1.5em}
+footer{margin-top:22px;text-align:center;color:var(--muted);font-weight:600;font-size:.82rem;position:relative;z-index:1}
+@media (max-width:480px){.card{padding:20px;border-radius:26px}.file video{width:92px;height:68px}.hours input{font-size:1.7rem}h1{font-size:1.6rem}.pill span{display:none}.pill{justify-content:center}.pill.on span{display:inline}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<main>
+  <header>
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 27h22a9 9 0 0 1 0 18H26"/><path d="M26 19l-8 8 8 8"/></svg>
+    </div>
+    <div>
+      <h1><span>Loopavelle</span></h1>
+      <div class="tag">A few gentle seconds, stretched into hours.</div>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="steps" aria-label="Progress">
+      <div class="pill on" id="p1"><i>1</i><span>Upload video</span></div>
+      <div class="pill" id="p2"><i>2</i><span>Choose hours</span></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <section id="v1">
+      <h2>Drop in your little clip</h2>
+      <p class="sub">5 seconds, 30 seconds, whatever you have. We'll loop it seamlessly.</p>
+      <label class="drop" id="drop" tabindex="0" for="file">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M5 20h14"/></svg></div>
+        <b>Click to choose a video</b>
+        <small>or drag &amp; drop it here · MP4 / MOV / M4V</small>
+        <input id="file" type="file" accept="video/mp4,video/quicktime,video/x-m4v,.mp4,.mov,.m4v">
+      </label>
+      <div class="msg" id="err" role="alert" hidden></div>
+      <div class="trust">
+        <span>🔒 Stays on your device</span><span>✨ No re-encoding</span><span>🎞️ Original quality</span>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section id="v2" hidden>
+      <div class="file">
+        <video id="pv" muted loop playsinline autoplay></video>
+        <div class="meta">
+          <div class="name" id="fname">clip.mp4</div>
+          <div class="chips" id="chips"></div>
+          <button class="link" id="swap" type="button">Choose a different video</button>
+        </div>
+      </div>
+
+      <label class="lbl" for="hrs">How many hours should it play?</label>
+      <div class="presets" id="presets"></div>
+      <div class="hours">
+        <button class="step" id="minus" type="button" aria-label="Less">−</button>
+        <div class="box"><input id="hrs" type="number" inputmode="decimal" min="0.1" max="24" step="0.5" value="1"><span class="unit">hours</span></div>
+        <button class="step" id="plus" type="button" aria-label="More">+</button>
+      </div>
+
+      <label class="seam" id="seamRow" hidden>
+        <input type="checkbox" id="seam" checked>
+        <span><b>Gapless audio</b><small id="seamNote"></small></span>
+      </label>
+
+      <div class="stats">
+        <div class="stat"><b id="sLen">—</b><small>final length</small></div>
+        <div class="stat"><b id="sLoops">—</b><small>loops</small></div>
+        <div class="stat"><b id="sSize">—</b><small>approx. size</small></div>
+      </div>
+      <div class="warn" id="warn" hidden></div>
+      <div class="msg" id="err2" role="alert" hidden></div>
+      <button class="btn" id="go" type="button">Create &amp; download ✨</button>
+    </section>
+
+    <!-- STEP 3 : working / done -->
+    <section id="v3" hidden>
+      <div class="center">
+        <div class="orb" id="orb">
+          <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" id="orbSvg"><path d="M18 27h22a9 9 0 0 1 0 18H26"/><path d="M26 19l-8 8 8 8"/></svg>
+        </div>
+        <h2 id="t3">Weaving your loop…</h2>
+        <p class="sub" id="s3">Copying your frames, not re-making them.</p>
+        <div class="bar"><i id="fill"></i></div>
+        <div class="stage" id="stage">Getting ready</div>
+        <div id="doneBtns" hidden>
+          <button class="btn" id="again" type="button" style="margin-top:14px">Download again</button>
+          <button class="btn ghost" id="another" type="button">Make another loop</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>Made with 💜 · Runs 100% in your browser · Your video is never uploaded</footer>
+</main>
+
+<!-- ============ ENGINE: lossless MP4 looping (no re-encode) ============ -->
+<script id="engine">
+const Loopavelle = (() => {
+  'use strict';
+  const TE = new TextEncoder();
+  const cc = s => TE.encode(s);
+  const typ = (b, o) => String.fromCharCode(b[o], b[o+1], b[o+2], b[o+3]);
+  const rd64 = (dv, o) => dv.getUint32(o) * 4294967296 + dv.getUint32(o + 4);
+  const rdS64 = (dv, o) => dv.getInt32(o) * 4294967296 + dv.getUint32(o + 4);
+  const wr64 = (dv, o, v) => { dv.setUint32(o, Math.floor(v / 4294967296)); dv.setUint32(o + 4, v % 4294967296); };
+  const be32 = n => { const a = new Uint8Array(4); new DataView(a.buffer).setUint32(0, n); return a; };
+  const fail = code => { const e = new Error(code); e.code = code; return e; };
+
+  function kids(b, start, end) {
+    const dv = new DataView(b.buffer, b.byteOffset, b.byteLength);
+    const out = []; let p = start;
+    while (p + 8 <= end) {
+      let size = dv.getUint32(p), hdr = 8;
+      const type = typ(b, p + 4);
+      if (size === 1) { size = rd64(dv, p + 8); hdr = 16; }
+      else if (size === 0) size = end - p;
+      if (size < hdr || p + size > end) break;
+      out.push({ type, start: p, end: p + size, body: p + hdr });
+      p += size;
+    }
+    return out;
+  }
+  function mk(type, parts) {
+    let len = 8; for (const p of parts) len += p.length;
+    if (len > 0xFFFFFFFF) throw fail('TOO_BIG');
+    const o = new Uint8Array(len);
+    new DataView(o.buffer).setUint32(0, len);
+    o.set(cc(type), 4);
+    let p = 8; for (const a of parts) { o.set(a, p); p += a.length; }
+    return o;
+  }
+
+  function parseTrack(m, dv, trak) {
+    const tk = kids(m, trak.body, trak.end);
+    const tkhd = tk.find(k => k.type === 'tkhd'), mdia = tk.find(k => k.type === 'mdia'), edts = tk.find(k => k.type === 'edts');
+    if (!tkhd || !mdia) return null;
+    const t = {};
+    let o = tkhd.body; const tv = m[o]; t.tkFlags = dv.getUint32(o) & 0xFFFFFF;
+    if (tv === 1) { t.tkCreate = rd64(dv, o + 4); t.tkMod = rd64(dv, o + 12); t.id = dv.getUint32(o + 20); o += 36; }
+    else { t.tkCreate = dv.getUint32(o + 4); t.tkMod = dv.getUint32(o + 8); t.id = dv.getUint32(o + 12); o += 24; }
+    t.tkTail = m.slice(o, tkhd.end);
+    if (t.tkTail.length < 60) throw fail('BAD');
+
+    const md = kids(m, mdia.body, mdia.end);
+    const mdhd = md.find(k => k.type === 'mdhd'), hdlr = md.find(k => k.type === 'hdlr'), minf = md.find(k => k.type === 'minf');
+    if (!mdhd || !hdlr || !minf) return null;
+    o = mdhd.body;
+    if (m[o] === 1) { t.mdCreate = rd64(dv, o + 4); t.mdMod = rd64(dv, o + 12); t.ts = dv.getUint32(o + 20); o += 32; }
+    else { t.mdCreate = dv.getUint32(o + 4); t.mdMod = dv.getUint32(o + 8); t.ts = dv.getUint32(o + 12); o += 20; }
+    t.mdTail = m.slice(o, mdhd.end);
+    t.hdlrRaw = m.slice(hdlr.start, hdlr.end);
+    t.handler = typ(m, hdlr.body + 8);
+    if (t.handler !== 'vide' && t.handler !== 'soun') return null;
+    if (!t.ts) throw fail('BAD');
+
+    t.elst = null;
+    if (edts) {
+      const ek = kids(m, edts.body, edts.end).find(k => k.type === 'elst');
+      if (ek) {
+        const ev = m[ek.body], cnt = dv.getUint32(ek.body + 4); let p = ek.body + 8; t.elst = [];
+        for (let i = 0; i < cnt; i++) {
+          if (ev === 1) { t.elst.push({ seg: rd64(dv, p), mt: rdS64(dv, p + 8) }); p += 20; }
+          else { t.elst.push({ seg: dv.getUint32(p), mt: dv.getInt32(p + 4) }); p += 12; }
+        }
+      }
+    }
+
+    t.minf = []; let stblBox = null;
+    for (const k of kids(m, minf.body, minf.end)) {
+      if (k.type === 'stbl') { stblBox = k; t.minf.push({ type: 'stbl' }); }
+      else t.minf.push({ type: k.type, raw: m.slice(k.start, k.end) });
+    }
+    if (!stblBox) throw fail('BAD');
+    const sk = kids(m, stblBox.body, stblBox.end);
+    const g = ty => sk.find(k => k.type === ty);
+    if (g('stz2')) throw fail('UNSUPPORTED');
+    const stsd = g('stsd'), stts = g('stts'), stsc = g('stsc'), stsz = g('stsz'), stco = g('stco') || g('co64'), ctts = g('ctts'), stss = g('stss');
+    if (!stsd || !stts || !stsc || !stsz || !stco) throw fail('BAD');
+    t.stsd = m.slice(stsd.start, stsd.end);
+    t.codec = typ(m, stsd.body + 12);
+    if (t.handler === 'soun') { const eb = stsd.body + 16; t.channels = dv.getUint16(eb + 16) || 2; t.sampleRate = dv.getUint16(eb + 24) || t.ts; }
+
+    let n = dv.getUint32(stts.body + 4); t.stts = new Array(n * 2);
+    for (let i = 0; i < n; i++) { t.stts[2*i] = dv.getUint32(stts.body + 8 + i*8); t.stts[2*i+1] = dv.getUint32(stts.body + 12 + i*8); }
+    t.ctts = null;
+    if (ctts) {
+      t.cttsVer = m[ctts.body]; n = dv.getUint32(ctts.body + 4); t.ctts = new Array(n * 2);
+      for (let i = 0; i < n; i++) { t.ctts[2*i] = dv.getUint32(ctts.body + 8 + i*8); t.ctts[2*i+1] = dv.getUint32(ctts.body + 12 + i*8); }
+    }
+    t.stss = null;
+    if (stss) { n = dv.getUint32(stss.body + 4); t.stss = new Uint32Array(n); for (let i = 0; i < n; i++) t.stss[i] = dv.getUint32(stss.body + 8 + i*4); }
+    n = dv.getUint32(stsc.body + 4); t.stsc = new Array(n * 3);
+    for (let i = 0; i < n * 3; i++) t.stsc[i] = dv.getUint32(stsc.body + 8 + i*4);
+    t.szUniform = dv.getUint32(stsz.body + 4); t.S = dv.getUint32(stsz.body + 8);
+    t.sizes = null;
+    if (!t.szUniform) { t.sizes = new Uint32Array(t.S); for (let i = 0; i < t.S; i++) t.sizes[i] = dv.getUint32(stsz.body + 12 + i*4); }
+    const c64 = stco.type === 'co64'; n = dv.getUint32(stco.body + 4); t.offsets = new Float64Array(n);
+    for (let i = 0; i < n; i++) t.offsets[i] = c64 ? rd64(dv, stco.body + 8 + i*8) : dv.getUint32(stco.body + 8 + i*4);
+
+    let total = 0, cnt = 0;
+    for (let i = 0; i < t.stts.length; i += 2) { total += t.stts[i] * t.stts[i+1]; cnt += t.stts[i]; }
+    if (!t.S || cnt !== t.S || !t.offsets.length) throw fail('BAD');
+    t.mediaTotal = total;
+    return t;
+  }
+
+  function chunkSizes(t) {
+    const C = t.offsets.length, sizes = new Float64Array(C); let si = 0;
+    for (let e = 0; e < t.stsc.length; e += 3) {
+      const first = t.stsc[e], spc = t.stsc[e+1];
+      const next = e + 3 < t.stsc.length ? t.stsc[e+3] : C + 1;
+      for (let c = first; c < next && c <= C; c++) {
+        let sum = 0;
+        if (t.szUniform) sum = spc * t.szUniform; else for (let i = 0; i < spc; i++) sum += t.sizes[si + i];
+        sizes[c-1] = sum; si += spc;
+      }
+    }
+    return sizes;
+  }
+  function padLast(runs, pad) {
+    const r = runs.slice(); if (pad <= 0) return r;
+    const n = r.length;
+    if (r[n-2] > 1) { r[n-2] -= 1; r.push(1, r[n-1] + pad); } else r[n-1] += pad;
+    return r;
+  }
+
+  async function analyze(file) {
+    let pos = 0, m = null, frag = false;
+    while (pos + 8 <= file.size) {
+      const head = new Uint8Array(await file.slice(pos, Math.min(pos + 16, file.size)).arrayBuffer());
+      if (head.length < 8) break;
+      const hd = new DataView(head.buffer);
+      let size = hd.getUint32(0); const type = typ(head, 4);
+      if (size === 1 && head.length >= 16) size = rd64(hd, 8); else if (size === 0) size = file.size - pos;
+      if (size < 8) break;
+      if (type === 'moov') m = new Uint8Array(await file.slice(pos, pos + size).arrayBuffer());
+      if (type === 'moof') frag = true;
+      pos += size;
+    }
+    if (!m) throw fail('NOT_MP4');
+    if (frag) throw fail('FRAGMENTED');
+    const dv = new DataView(m.buffer);
+    const top = kids(m, 0, m.length)[0];
+    const mk1 = kids(m, top.body, top.end);
+    if (mk1.some(k => k.type === 'mvex')) throw fail('FRAGMENTED');
+    const mvB = mk1.find(k => k.type === 'mvhd');
+    if (!mvB) throw fail('BAD');
+    const S = {};
+    let o = mvB.body;
+    if (m[o] === 1) { S.mvCreate = rd64(dv, o + 4); S.mvMod = rd64(dv, o + 12); S.mvTs = dv.getUint32(o + 20); o += 32; }
+    else { S.mvCreate = dv.getUint32(o + 4); S.mvMod = dv.getUint32(o + 8); S.mvTs = dv.getUint32(o + 12); o += 20; }
+    S.mvRest = m.slice(o, mvB.end);
+    if (S.mvRest.length !== 80 || !S.mvTs) throw fail('BAD');
+
+    S.tracks = [];
+    for (const k of mk1) if (k.type === 'trak') { const t = parseTrack(m, dv, k); if (t) S.tracks.push(t); }
+    if (!S.tracks.length) throw fail('NO_TRACKS');
+
+    let minOff = Infinity, maxEnd = 0, period = 0, vMin = Infinity, vMax = 0;
+    for (const t of S.tracks) {
+      const cs = chunkSizes(t);
+      for (let i = 0; i < t.offsets.length; i++) {
+        minOff = Math.min(minOff, t.offsets[i]); maxEnd = Math.max(maxEnd, t.offsets[i] + cs[i]);
+        if (t.handler === 'vide') { vMin = Math.min(vMin, t.offsets[i]); vMax = Math.max(vMax, t.offsets[i] + cs[i]); }
+      }
+      period = Math.max(period, t.mediaTotal / t.ts);
+    }
+    if (!(maxEnd > minOff) || maxEnd > file.size + 1) throw fail('BAD');
+    // Keep every track on the same loop length so audio and video never drift apart.
+    for (const t of S.tracks) {
+      t.periodTicks = Math.max(t.mediaTotal, Math.round(period * t.ts));
+      t.sttsPad = padLast(t.stts, t.periodTicks - t.mediaTotal);
+    }
+    S.minOff = minOff; S.blobLen = maxEnd - minOff; S.blob = file.slice(minOff, maxEnd);
+    S.file = file; S.vMin = vMin; S.vMax = vMax;
+    S.periodSec = Math.max(...S.tracks.map(t => t.periodTicks / t.ts));
+    const names = { avc1:'H.264', avc3:'H.264', hvc1:'H.265', hev1:'H.265', av01:'AV1', vp09:'VP9', mp4a:'AAC', 'ac-3':'AC-3', 'ec-3':'E-AC-3', Opus:'Opus', alac:'ALAC' };
+    const v = S.tracks.find(t => t.handler === 'vide'), a = S.tracks.find(t => t.handler === 'soun');
+    S.info = {
+      durationSec: S.periodSec, size: file.size, hasAudio: !!a, hasVideo: !!v,
+      vcodec: v ? (names[v.codec] || v.codec) : null, acodec: a ? (names[a.codec] || a.codec) : null,
+      frames: v ? v.S : 0,
+      sampleRate: a ? Math.min(a.sampleRate, 48000) : 0, channels: a ? Math.min(a.channels, 2) : 0
+    };
+    S.canSeamless = !!(v && a && vMax > vMin);
+    S.periodVideoSec = v ? Math.max(...S.tracks.filter(t => t.handler === 'vide').map(t => t.mediaTotal / t.ts)) : S.periodSec;
+    S.sampleTotal = S.tracks.reduce((n, t) => n + t.S, 0);
+    S.chunkTotal = S.tracks.reduce((n, t) => n + t.offsets.length, 0);
+    return S;
+  }
+
+  const loopsFor = (S, sec) => Math.max(1, Math.ceil(sec / S.periodSec - 1e-9));
+  const estimate = (S, sec, seamless) => {
+    if (seamless && S.canSeamless) {
+      const V = S.periodVideoSec, N = Math.max(1, Math.ceil(sec / V - 1e-9));
+      const per = (S.vMax - S.vMin) + Math.round(V * S.info.sampleRate) * S.info.channels * 2;
+      const vs = S.tracks.filter(t => t.handler === 'vide');
+      return { loops: N, seconds: N * V, bytes: N * per + N * vs.reduce((n, t) => n + t.S * 8 + t.offsets.length * 8, 0) + 4096 };
+    }
+    const N = loopsFor(S, sec);
+    return { loops: N, seconds: N * S.periodSec, bytes: N * S.blobLen + N * (S.sampleTotal * 8 + S.chunkTotal * 8) + 4096 };
+  };
+
+  function repeatRuns(runs, N) {
+    const out = [];
+    for (let k = 0; k < N; k++) for (let i = 0; i < runs.length; i += 2) {
+      const n = out.length;
+      if (n && out[n-1] === runs[i+1]) out[n-2] += runs[i]; else out.push(runs[i], runs[i+1]);
+    }
+    return out;
+  }
+  function u32box(type, ver, words, count) {
+    const o = new Uint8Array(16 + words.length * 4), dv = new DataView(o.buffer);
+    dv.setUint32(0, o.length); o.set(cc(type), 4); dv.setUint32(8, ver << 24); dv.setUint32(12, count);
+    for (let i = 0; i < words.length; i++) dv.setUint32(16 + i*4, words[i]);
+    return o;
+  }
+
+  function stblBox(S, t, N, base, co64) {
+    const parts = [t.stsd];
+    const st = repeatRuns(t.sttsPad, N); parts.push(u32box('stts', 0, st, st.length / 2));
+    if (t.ctts) { const c = repeatRuns(t.ctts, N); parts.push(u32box('ctts', t.cttsVer, c, c.length / 2)); }
+    if (t.stss) {
+      const K = t.stss.length, w = new Uint32Array(K * N);
+      for (let k = 0; k < N; k++) for (let i = 0; i < K; i++) w[k*K + i] = t.stss[i] + k * t.S;
+      parts.push(u32box('stss', 0, w, w.length));
+    }
+    const C = t.offsets.length, sc = []; let ls = -1, ld = -1;
+    for (let k = 0; k < N; k++) for (let e = 0; e < t.stsc.length; e += 3) {
+      const spc = t.stsc[e+1], sdi = t.stsc[e+2];
+      if (spc === ls && sdi === ld) continue;
+      sc.push(t.stsc[e] + k * C, spc, sdi); ls = spc; ld = sdi;
+    }
+    parts.push(u32box('stsc', 0, sc, sc.length / 3));
+    {
+      const total = t.S * N, o = new Uint8Array(20 + (t.szUniform ? 0 : total * 4)), dv = new DataView(o.buffer);
+      dv.setUint32(0, o.length); o.set(cc('stsz'), 4); dv.setUint32(12, t.szUniform); dv.setUint32(16, total);
+      if (!t.szUniform) for (let k = 0; k < N; k++) for (let i = 0; i < t.S; i++) dv.setUint32(20 + (k*t.S + i)*4, t.sizes[i]);
+      parts.push(o);
+    }
+    {
+      const total = C * N, w = co64 ? 8 : 4, o = new Uint8Array(16 + total * w), dv = new DataView(o.buffer);
+      dv.setUint32(0, o.length); o.set(cc(co64 ? 'co64' : 'stco'), 4); dv.setUint32(12, total);
+      let p = 16;
+      for (let k = 0; k < N; k++) {
+        const add = base + k * S.blobLen - S.minOff;
+        for (let c = 0; c < C; c++) { const v = t.offsets[c] + add; if (co64) wr64(dv, p, v); else dv.setUint32(p, v); p += w; }
+      }
+      parts.push(o);
+    }
+    return mk('stbl', parts);
+  }
+
+  function timing(S, t, N) {
+    const mediaDur = N * t.periodTicks;
+    let tkDur = Math.round(mediaDur * S.mvTs / t.ts), edts = null;
+    if (t.elst) {
+      const ent = []; let lead = 0, i = 0;
+      while (i < t.elst.length && t.elst[i].mt === -1) { ent.push({ seg: t.elst[i].seg, mt: -1 }); lead += t.elst[i].seg; i++; }
+      if (i < t.elst.length) {
+        const mt = t.elst[i].mt;
+        if (mt > 0 || lead > 0) {
+          const seg = Math.round(Math.max(0, mediaDur - mt) * S.mvTs / t.ts);
+          ent.push({ seg, mt }); tkDur = lead + seg;
+          const o = new Uint8Array(16 + 20 * ent.length), dv = new DataView(o.buffer);
+          dv.setUint32(0, o.length); o.set(cc('elst'), 4); dv.setUint32(8, 1 << 24); dv.setUint32(12, ent.length);
+          ent.forEach((e, j) => {
+            const p = 16 + j * 20; wr64(dv, p, e.seg);
+            if (e.mt === -1) { dv.setUint32(p + 8, 0xFFFFFFFF); dv.setUint32(p + 12, 0xFFFFFFFF); } else wr64(dv, p + 8, e.mt);
+            dv.setUint32(p + 16, 0x00010000);
+          });
+          edts = mk('edts', [o]);
+        }
+      }
+    }
+    return { mediaDur, tkDur, edts };
+  }
+
+  function trakBox(S, t, tm, N, base, co64) {
+    const tkhd = new Uint8Array(104), a = new DataView(tkhd.buffer);
+    a.setUint32(0, 104); tkhd.set(cc('tkhd'), 4); a.setUint32(8, (1 << 24) | t.tkFlags);
+    wr64(a, 12, t.tkCreate); wr64(a, 20, t.tkMod); a.setUint32(28, t.id); wr64(a, 36, tm.tkDur); tkhd.set(t.tkTail.subarray(0, 60), 44);
+    const mdhd = new Uint8Array(44), b = new DataView(mdhd.buffer);
+    b.setUint32(0, 44); mdhd.set(cc('mdhd'), 4); b.setUint32(8, 1 << 24);
+    wr64(b, 12, t.mdCreate); wr64(b, 20, t.mdMod); b.setUint32(28, t.ts); wr64(b, 32, tm.mediaDur); mdhd.set(t.mdTail.subarray(0, 4), 40);
+    const stbl = stblBox(S, t, N, base, co64);
+    const minf = mk('minf', t.minf.map(x => x.type === 'stbl' ? stbl : x.raw));
+    const mdia = mk('mdia', [mdhd, t.hdlrRaw, minf]);
+    return mk('trak', tm.edts ? [tkhd, tm.edts, mdia] : [tkhd, mdia]);
+  }
+
+  function moovBox(S, N, base, co64, tms) {
+    const mvhd = new Uint8Array(120), c = new DataView(mvhd.buffer);
+    c.setUint32(0, 120); mvhd.set(cc('mvhd'), 4); c.setUint32(8, 1 << 24);
+    wr64(c, 12, S.mvCreate); wr64(c, 20, S.mvMod); c.setUint32(28, S.mvTs);
+    wr64(c, 32, Math.max(...tms.map(x => x.tkDur))); mvhd.set(S.mvRest, 40);
+    return mk('moov', [mvhd, ...S.tracks.map((t, i) => trakBox(S, t, tms[i], N, base, co64))]);
+  }
+
+  function pcmStsd(sr, ch) {
+    const e = new Uint8Array(36), dv = new DataView(e.buffer);
+    dv.setUint32(0, 36); e.set(cc('sowt'), 4); dv.setUint16(14, 1);
+    dv.setUint16(24, ch); dv.setUint16(26, 16); dv.setUint32(32, sr * 65536);
+    return mk('stsd', [new Uint8Array([0, 0, 0, 0, 0, 0, 0, 1]), e]);
+  }
+
+  // Fit the decoded audio to EXACTLY one video loop and make its edges continuous.
+  function fitPcm(at, pcm, Na) {
+    const ch = pcm.channels.length, sr = pcm.sampleRate, len = pcm.channels[0].length;
+    let lead = 0;
+    const first = at.elst && at.elst.find(e => e.mt >= 0), mt = first ? first.mt : 0;
+    if (mt > 0) {   // some decoders don't remove the encoder delay; detect it by length
+      const full = at.mediaTotal / at.ts * sr, trimmed = (at.mediaTotal - mt) / at.ts * sr;
+      if (Math.abs(len - full) < Math.abs(len - trimmed)) lead = Math.round(mt / at.ts * sr);
+    }
+    const avail = Math.max(0, len - lead), extra = Math.max(0, avail - Na);
+    const F = extra >= 16 ? Math.min(extra, Math.round(sr * 0.005)) : 0;
+    const out = new Int16Array(Na * ch);
+    for (let c = 0; c < ch; c++) {
+      const x = pcm.channels[c], b = new Float32Array(Na);
+      for (let i = 0; i < Na; i++) b[i] = i < avail ? x[lead + i] : 0;
+      if (F > 0) {
+        // the audio that naturally follows the end is blended into the start -> no jump at the seam
+        for (let i = 0; i < F; i++) { const w = (i + 1) / (F + 1) * Math.PI / 2; b[i] = x[lead + Na + i] * Math.cos(w) + b[i] * Math.sin(w); }
+      } else if (Math.abs(b[0] - b[Na - 1]) > 0.01) {
+        const f = Math.min(48, Math.floor(Na / 8));
+        for (let i = 0; i < f; i++) { const g = (i + 1) / (f + 1); b[i] *= g; b[Na - 1 - i] *= g; }
+      }
+      for (let i = 0; i < Na; i++) out[i * ch + c] = Math.round(Math.max(-1, Math.min(1, b[i])) * 32767);
+    }
+    return out;
+  }
+
+  async function build(S, targetSec, onStage, pcm) {
+    const stage = async (p, label) => { if (onStage) await onStage(p, label); };
+    let E = S, blob = S.blob, periodSec = S.periodSec, Na = 0;
+    if (pcm && S.canSeamless) {
+      const at = S.tracks.find(t => t.handler === 'soun');
+      const vts = S.tracks.filter(t => t.handler === 'vide');
+      const V = S.periodVideoSec, sr = pcm.sampleRate, ch = pcm.channels.length;
+      Na = Math.round(V * sr);
+      const data = fitPcm(at, pcm, Na), vLen = S.vMax - S.vMin;
+      blob = new Blob([S.file.slice(S.vMin, S.vMax), new Uint8Array(data.buffer)]);
+      const vt2 = vts.map(t => { const pt = Math.max(t.mediaTotal, Math.round(V * t.ts)); return Object.assign({}, t, { periodTicks: pt, sttsPad: padLast(t.stts, pt - t.mediaTotal) }); });
+      const a2 = Object.assign({}, at, { ts: sr, S: Na, szUniform: ch * 2, sizes: null, stsc: [1, Na, 1], offsets: Float64Array.of(S.vMin + vLen), stsd: pcmStsd(sr, ch), sttsPad: [Na, 1], ctts: null, stss: null, elst: null, periodTicks: Na });
+      const tracks = S.tracks.map(t => t === at ? a2 : (vts.includes(t) ? vt2[vts.indexOf(t)] : null)).filter(Boolean);
+      periodSec = Math.max(...vt2.map(t => t.periodTicks / t.ts));
+      E = Object.assign({}, S, { tracks, minOff: S.vMin, blobLen: vLen + data.byteLength,
+        sampleTotal: vt2.reduce((n, t) => n + t.S, 0), chunkTotal: vt2.reduce((n, t) => n + t.offsets.length, 0) + 1 });
+    }
+    const N = loopsFor({ periodSec }, targetSec);
+    if (Na && N * Na > 0xFFFFFFFF) throw fail('TOO_BIG');
+    if (N * (E.sampleTotal * 8 + E.chunkTotal * 8) > 1.4e9) throw fail('TOO_BIG');
+    const est = N * E.blobLen + N * (E.sampleTotal * 8 + E.chunkTotal * 8) + 4096;
+    await stage(0.12, 'Planning ' + N.toLocaleString() + ' loops');
+    const tms = E.tracks.map(t => timing(E, t, N));
+    const co64 = est > 0xFFFFFFFF - 1024;
+    const payload = N * E.blobLen;
+    const hdrLen = payload + 8 > 0xFFFFFFFF ? 16 : 8;
+    const ftyp = mk('ftyp', [cc('isom'), be32(512), cc('isom'), cc('iso2'), cc('avc1'), cc('mp41')]);
+    await stage(0.35, 'Stitching frames together');
+    let moov = moovBox(E, N, 0, co64, tms);
+    const base = ftyp.length + moov.length + hdrLen;
+    await stage(0.65, 'Aligning audio and video');
+    moov = moovBox(E, N, base, co64, tms);
+    const hdr = new Uint8Array(hdrLen), h = new DataView(hdr.buffer);
+    if (hdrLen === 8) { h.setUint32(0, payload + 8); hdr.set(cc('mdat'), 4); }
+    else { h.setUint32(0, 1); hdr.set(cc('mdat'), 4); wr64(h, 8, payload + 16); }
+    await stage(0.88, 'Packing your video');
+    const parts = [ftyp, moov, hdr];
+    for (let i = 0; i < N; i++) parts.push(blob);
+    const out = new Blob(parts, { type: 'video/mp4' });
+    await stage(1, 'Done');
+    return { blob: out, loops: N, seconds: N * periodSec, bytes: ftyp.length + moov.length + hdrLen + payload, gapless: !!Na };
+  }
+
+  return { analyze, build, estimate, loopsFor };
+})();
+if (typeof module !== 'undefined') module.exports = Loopavelle;
+</script>
+
+<!-- ============ APP / UI ============ -->
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const MAX_H = 24, MIN_H = 0.1, PRESETS = [1, 2, 3, 5, 8, 10, 12];
+  let S = null, file = null, hours = 1, outUrl = null, outName = '', previewUrl = null, busy = false;
+
+  const views = { 1: $('#v1'), 2: $('#v2'), 3: $('#v3') };
+  function show(n) {
+    for (const k in views) views[k].hidden = (+k !== n);
+    $('#p1').className = 'pill ' + (n === 1 ? 'on' : 'done');
+    $('#p2').className = 'pill ' + (n === 1 ? '' : 'on');
+    $('#p1').querySelector('i').textContent = n === 1 ? '1' : '✓';
+  }
+  const fmtDur = s => {
+    s = Math.round(s); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
+    return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(x).padStart(2, '0');
+  };
+  const fmtBytes = b => {
+    if (b < 1e6) return Math.max(1, Math.round(b / 1e3)) + ' KB';
+    if (b < 1e9) return (b / 1e6).toFixed(b < 1e7 ? 1 : 0) + ' MB';
+    return (b / 1e9).toFixed(1) + ' GB';
+  };
+  const fmtH = h => (Math.round(h * 100) / 100).toString();
+  const MSG = {
+    NOT_MP4: "That doesn't look like an MP4 or MOV file. Loopavelle works with .mp4, .mov and .m4v clips.",
+    FRAGMENTED: "This is a streaming-style (fragmented) MP4. Please export or re-save it as a regular MP4 and try again.",
+    NO_TRACKS: "I couldn't find any video or audio inside this file.",
+    UNSUPPORTED: "This file uses a rare internal layout that isn't supported yet. A standard H.264 MP4 will work.",
+    BAD: "I couldn't read this video's structure. Try a regular MP4 exported from your phone or editor.",
+    TOO_BIG: "That's too long for this clip in a browser. Try fewer hours."
+  };
+  const showErr = (el, e) => { el.textContent = MSG[e.code] || ('Something went wrong: ' + e.message); el.hidden = false; };
+
+  /* ---------- Step 1 ---------- */
+  const drop = $('#drop'), input = $('#file');
+  input.addEventListener('change', () => input.files[0] && handle(input.files[0]));
+  ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => { const f = e.dataTransfer.files[0]; if (f) handle(f); });
+  drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } });
+  window.addEventListener('dragover', e => e.preventDefault());
+  window.addEventListener('drop', e => e.preventDefault());
+
+  async function handle(f) {
+    const err = $('#err'); err.hidden = true; err.classList.remove('info');
+    if (!/\.(mp4|mov|m4v)$/i.test(f.name) && !/^video\/(mp4|quicktime|x-m4v)$/.test(f.type)) {
+      showErr(err, { code: 'NOT_MP4' }); return;
+    }
+    err.textContent = 'Reading your video…'; err.classList.add('info'); err.hidden = false;
+    try {
+      S = await Loopavelle.analyze(f); file = f; err.hidden = true;
+    } catch (e) { err.classList.remove('info'); showErr(err, e); S = null; input.value = ''; return; }
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = URL.createObjectURL(f);
+    const pv = $('#pv'); pv.src = previewUrl; pv.play().catch(() => {});
+    $('#fname').textContent = f.name;
+    const chips = [fmtDur(S.info.durationSec).replace(/^0:/, '') + (S.info.durationSec < 60 ? ' sec' : ''), fmtBytes(f.size)];
+    if (S.info.durationSec < 60) chips[0] = (Math.round(S.info.durationSec * 10) / 10) + ' sec';
+    if (S.info.vcodec) chips.push(S.info.vcodec);
+    chips.push(S.info.hasAudio ? 'with sound' : 'silent');
+    $('#chips').innerHTML = chips.map(c => `<span class="chip">${c}</span>`).join('');
+    $('#err2').hidden = true;
+    const row = $('#seamRow');
+    row.hidden = !S.canSeamless;
+    if (S.canSeamless) {
+      $('#seam').checked = true;
+      $('#seamNote').textContent = 'Lossless sound with no pause or click between loops. Makes the file about ' +
+        fmtBytes(S.info.sampleRate * S.info.channels * 2 * 3600) + ' bigger per hour.';
+    }
+    setHours(hours); show(2);
+  }
+  $('#swap').addEventListener('click', () => { input.value = ''; show(1); });
+
+  /* ---------- Step 2 ---------- */
+  const hrs = $('#hrs');
+  $('#presets').innerHTML = PRESETS.map(h => `<button type="button" class="pre" data-h="${h}">${h} hr${h > 1 ? 's' : ''}</button>`).join('');
+  $('#presets').addEventListener('click', e => { const b = e.target.closest('.pre'); if (b) setHours(+b.dataset.h); });
+  $('#minus').addEventListener('click', () => setHours(Math.max(MIN_H, (+hrs.value || 1) - (+hrs.value > 1 ? 1 : 0.5))));
+  $('#plus').addEventListener('click', () => setHours(Math.min(MAX_H, (+hrs.value || 0) + ((+hrs.value || 0) >= 1 ? 1 : 0.5))));
+  hrs.addEventListener('input', () => { const v = parseFloat(hrs.value); if (v > 0) { hours = v; refresh(); } else refresh(true); });
+  hrs.addEventListener('blur', () => { if (!(parseFloat(hrs.value) > 0)) setHours(hours); });
+  $('#seam').addEventListener('change', () => refresh());
+  hrs.addEventListener('keydown', e => { if (e.key === 'Enter') $('#go').click(); });
+
+  const seamOn = () => !!(S && S.canSeamless && $('#seam').checked);
+  async function decodePcm(f, S) {
+    const AC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    const sr = S.info.sampleRate || 48000;
+    const buf = await new AC(2, 1, sr).decodeAudioData(await f.arrayBuffer());
+    const n = Math.min(buf.numberOfChannels, 2);
+    return { sampleRate: buf.sampleRate, channels: Array.from({ length: n }, (_, i) => buf.getChannelData(i)) };
+  }
+  function setHours(h) { hours = Math.round(h * 100) / 100; hrs.value = hours; refresh(); }
+  function refresh(invalid) {
+    document.querySelectorAll('.pre').forEach(b => b.classList.toggle('on', +b.dataset.h === hours && !invalid));
+    const warn = $('#warn'), go = $('#go'); warn.hidden = true; $('#err2').hidden = true;
+    const bad = invalid || !S || !(hours >= MIN_H) || hours > MAX_H;
+    go.disabled = bad;
+    if (bad || !S) {
+      $('#sLen').textContent = $('#sLoops').textContent = $('#sSize').textContent = '—';
+      if (!invalid && hours > MAX_H) { warn.textContent = 'Please choose between ' + MIN_H + ' and ' + MAX_H + ' hours.'; warn.hidden = false; }
+      return;
+    }
+    const est = Loopavelle.estimate(S, hours * 3600, seamOn());
+    $('#sLen').textContent = fmtDur(est.seconds);
+    $('#sLoops').textContent = est.loops.toLocaleString();
+    $('#sSize').textContent = '≈ ' + fmtBytes(est.bytes);
+    if (est.bytes > 4e9) { warn.textContent = 'Big file ahead — Chrome or Edge on a desktop with free disk space works best.'; warn.hidden = false; }
+  }
+
+  /* ---------- Step 3 ---------- */
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  $('#go').addEventListener('click', async () => {
+    if (busy || !S) return; busy = true;
+    $('#doneBtns').hidden = true; $('#orb').className = 'orb';
+    $('#orbSvg').innerHTML = '<path d="M18 27h22a9 9 0 0 1 0 18H26"/><path d="M26 19l-8 8 8 8"/>';
+    $('#t3').textContent = 'Weaving your loop…'; $('#s3').textContent = 'Copying your frames, not re-making them.';
+    $('#fill').style.width = '0%'; $('#stage').textContent = 'Getting ready'; $('#stage').parentElement.querySelector('.bar').hidden = false;
+    show(3); await sleep(60);
+    try {
+      let pcm = null, note = '';
+      if (seamOn()) {
+        $('#fill').style.width = '5%'; $('#stage').textContent = 'Preparing gapless audio';
+        try { pcm = await decodePcm(file, S); }
+        catch (e) { note = ' (Your browser could not read the audio, so the original sound was kept and may pause briefly at each loop.)'; }
+      }
+      const r = await Loopavelle.build(S, hours * 3600, async (p, label) => {
+        $('#fill').style.width = Math.round(6 + p * 94) + '%'; $('#stage').textContent = label; await sleep(160);
+      }, pcm);
+      if (outUrl) URL.revokeObjectURL(outUrl);
+      outUrl = URL.createObjectURL(r.blob);
+      const base = file.name.replace(/\.[^.]+$/, '').replace(/[^\w\-]+/g, '_').slice(0, 40) || 'video';
+      outName = base + '_' + fmtH(hours) + 'h_loop.mp4';
+      $('#orb').className = 'orb ok';
+      $('#orbSvg').innerHTML = '<path d="M17 33l10 10 20-22"/>';
+      $('#t3').textContent = 'All done! 🎉';
+      $('#s3').textContent = fmtDur(r.seconds) + ' of seamless looping · ' + r.loops.toLocaleString() + ' loops · ' + fmtBytes(r.bytes) + ' — your download has started.' + note;
+      $('#stage').textContent = 'Saved as ' + outName;
+      $('#doneBtns').hidden = false;
+      save();
+    } catch (e) {
+      show(2); showErr($('#err2'), e);
+    }
+    busy = false;
+  });
+  function save() { const a = document.createElement('a'); a.href = outUrl; a.download = outName; document.body.appendChild(a); a.click(); a.remove(); }
+  $('#again').addEventListener('click', () => outUrl && save());
+  $('#another').addEventListener('click', () => {
+    if (outUrl) { URL.revokeObjectURL(outUrl); outUrl = null; }
+    input.value = ''; S = null; file = null; show(1);
+  });
+
+  setHours(1); show(1);
+})();
+</script>
+</body>
+</html>
