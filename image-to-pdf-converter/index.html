@@ -1,1 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Universal Converter – Free Online File Converter (No Upload)</title>
+<meta name="description" content="Universal Converter: free online file converter for Image to PDF, JPG to PNG, MP4 to MP3, MP4 to MOV, PDF to Word, Excel to PDF and more. Fast, private, runs in your browser.">
+<meta name="keywords" content="universal converter, file converter, online file converter, image to pdf, jpg to png, png to jpg, webp to jpg, mp4 to mp3, mp4 to mov, mov to mp4, pdf to word, pdf to jpg, word to pdf, excel to pdf, free converter, no upload converter">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#5b4bff">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/image-to-pdf-converter">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Universal Converter">
+<meta property="og:title" content="Universal Converter – Free Online File Converter">
+<meta property="og:description" content="Convert images, PDF, Word, Excel, video and audio privately in your browser. No upload, no sign-up.">
+<meta property="og:url" content="https://YOUR-DOMAIN.com/image-to-pdf-converter">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Universal Converter – Free Online File Converter">
+<meta name="twitter:description" content="Image to PDF, MP4 to MP3, PDF to Word and 50+ conversions, all in your browser.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebApplication","name":"Universal Converter","url":"https://YOUR-DOMAIN.com/image-to-pdf-converter","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":"Image to PDF, JPG to PNG, PNG to WebP, PDF to Word, PDF to JPG, Word to PDF, Excel to PDF, MP4 to MP3, MP4 to MOV, video to GIF, audio converter"},
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://YOUR-DOMAIN.com/"},{"@type":"ListItem","position":2,"name":"Universal Converter"}]},
+{"@type":"HowTo","name":"How to convert a file online","step":[{"@type":"HowToStep","name":"Upload","text":"Drop your file. The file type is detected automatically."},{"@type":"HowToStep","name":"Choose format","text":"Pick the format you want from the list."},{"@type":"HowToStep","name":"Download","text":"Watch the progress to 100%. The converted file downloads automatically."}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Universal Converter works inside your browser, so your files never leave your device."}},
+{"@type":"Question","name":"How do I convert MP4 to MP3?","acceptedAnswer":{"@type":"Answer","text":"Drop your MP4, choose MP3, and the audio downloads automatically at 100%."}},
+{"@type":"Question","name":"How do I convert JPG to PNG or PNG to JPG?","acceptedAnswer":{"@type":"Answer","text":"Upload the image, pick the new format such as PNG, JPG or WebP, and the converted image downloads automatically."}},
+{"@type":"Question","name":"Can I convert PDF to Word?","acceptedAnswer":{"@type":"Answer","text":"Yes. Text is extracted into an editable DOCX file. Complex layouts are simplified."}},
+{"@type":"Question","name":"Is Universal Converter free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free, with no sign-up, no watermark and no file limit other than your device memory."}}]}]}
+</script>
+<style>
+:root{--bg:#f7f7fc;--card:#fff;--tx:#12142a;--mut:#626a85;--pri:#5b4bff;--pri2:#00c2ff;--bd:#e5e7f2;--sh:0 20px 60px -20px rgba(91,75,255,.35)}
+@media(prefers-color-scheme:dark){:root{--bg:#0a0b16;--card:#12142a;--tx:#f1f2fb;--mut:#9aa1bd;--bd:#242847;--sh:0 20px 60px -20px rgba(0,0,0,.8)}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.65 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx)}
+.w{max-width:1000px;margin:0 auto;padding:0 18px}
+.hero{background:radial-gradient(900px 400px at 20% -10%,rgba(91,75,255,.28),transparent),radial-gradient(700px 360px at 90% 0,rgba(0,194,255,.22),transparent);padding:20px 0 8px;text-align:center}
+nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;font-weight:700}
+nav a{color:var(--tx);text-decoration:none}nav .l{display:flex;gap:8px;align-items:center}
+.logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--pri),var(--pri2));display:inline-grid;place-items:center;color:#fff;font-size:16px}
+.badge{display:inline-block;margin-top:28px;padding:6px 14px;border-radius:99px;background:rgba(91,75,255,.12);color:var(--pri);font-weight:600;font-size:.85rem}
+h1{font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.12;margin:16px 0 12px;letter-spacing:-.02em}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--pri),var(--pri2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);max-width:660px;margin:0 auto;font-size:1.1rem}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin:18px 0 0;color:var(--mut);font-size:.9rem;font-weight:600}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:22px;margin:28px auto 0;box-shadow:var(--sh);text-align:left}
+#drop{border:2px dashed var(--bd);border-radius:16px;padding:48px 16px;text-align:center;cursor:pointer;transition:.2s;outline:0}
+#drop.o,#drop:hover,#drop:focus-visible{border-color:var(--pri);background:rgba(91,75,255,.06)}
+.up{width:64px;height:64px;border-radius:20px;margin:0 auto 12px;display:grid;place-items:center;font-size:30px;color:#fff;background:linear-gradient(135deg,var(--pri),var(--pri2))}
+.big{font-size:1.2rem;font-weight:700;margin:0}
+button{font:inherit;cursor:pointer}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.chip{border:1px solid var(--bd);background:transparent;color:var(--tx);border-radius:12px;padding:10px 20px;text-transform:uppercase;font-weight:700;font-size:.85rem;transition:.15s}
+.chip:hover{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;border-color:transparent;transform:translateY(-2px)}
+.bar{height:16px;background:var(--bd);border-radius:99px;overflow:hidden;margin:14px 0}
+#fill{height:100%;width:0;background:linear-gradient(90deg,var(--pri),var(--pri2));transition:width .15s;border-radius:99px}
+#pct{font-size:2rem;font-weight:800;margin:0}
+.mut{color:var(--mut);font-size:.92rem}.hide{display:none}
+section{padding:36px 0 0}h2{font-size:clamp(1.5rem,3.5vw,2rem);letter-spacing:-.01em;margin:0 0 8px}h3{margin:0}
+.steps,.feat,.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:18px}
+.box,.grid a{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;color:var(--tx);text-decoration:none;transition:.2s}
+.grid a:hover{border-color:var(--pri);transform:translateY(-3px);box-shadow:var(--sh)}
+.grid a h3{font-size:1.02rem;color:var(--pri)}.grid a span{display:block;font-size:.88rem;color:var(--mut);margin-top:4px}
+.n{width:34px;height:34px;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-weight:800;margin-bottom:8px}
+.ic{font-size:26px}
+details{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 18px;margin-top:10px}summary{cursor:pointer;font-weight:700}
+.kw{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.kw span{font-size:.82rem;padding:5px 12px;border-radius:99px;border:1px solid var(--bd);color:var(--mut)}
+footer{text-align:center;color:var(--mut);padding:44px 0 36px;font-size:.88rem}
+</style>
+</head>
+<body>
+<div class="hero"><div class="w">
+<nav aria-label="Main"><a class="l" href="/"><span class="logo" aria-hidden="true">⇄</span> Universal Converter</a><a href="/" style="font-weight:600;font-size:.9rem">← Image Compress</a></nav>
+<span class="badge">100% free · No upload · No sign-up</span>
+<h1>Universal Converter: <em>convert any file</em> in your browser</h1>
+<p class="sub">The free online file converter for images, PDF, Word, Excel, video and audio. Image to PDF, JPG to PNG, MP4 to MP3, PDF to Word and more, fast and private.</p>
+<div class="trust"><span>🔒 Files never leave your device</span><span>⚡ Live progress to 100%</span><span>⬇ Auto download</span><span>🚫 No watermark</span></div>
 
+<main class="card" id="convert">
+<div id="drop" tabindex="0" role="button" aria-label="Choose files to convert">
+<div class="up" aria-hidden="true">↑</div>
+<p class="big">Drop your file here or click to browse</p>
+<p class="mut" style="margin:6px 0 0">PNG · JPG · WebP · PDF · DOCX · XLSX · CSV · TXT · MP4 · MOV · MP3 · WAV</p>
+<input id="file" type="file" multiple hidden>
+</div>
+<div id="step2" class="hide">
+<p style="margin:0"><b id="fname"></b> <span class="mut" id="fmeta"></span> <button class="chip" id="reset" style="text-transform:none;padding:4px 12px;margin-left:8px">Change file</button></p>
+<p style="margin:14px 0 0;font-weight:700">Convert to:</p>
+<div class="chips" id="opts"></div>
+<p class="mut" id="note" style="margin:0"></p>
+</div>
+<div id="step3" class="hide">
+<p id="status" style="margin:0"><b>Converting…</b></p>
+<div class="bar"><div id="fill"></div></div>
+<p id="pct">0%</p>
+<p class="mut" id="msg" style="margin:0"></p>
+</div>
+</main>
+</div></div>
+
+<div class="w">
+<section aria-labelledby="how">
+<h2 id="how">How to convert files online in 3 steps</h2>
+<div class="steps">
+<div class="box"><div class="n">1</div><h3>Upload your file</h3><p class="mut">Drop any image, PDF, document, spreadsheet, video or audio file. The type is detected automatically.</p></div>
+<div class="box"><div class="n">2</div><h3>Pick a format</h3><p class="mut">Only the formats that work for your file are shown, like PNG to JPG or PDF to Word.</p></div>
+<div class="box"><div class="n">3</div><h3>Download instantly</h3><p class="mut">Watch the live percentage. Your converted file downloads by itself at 100%.</p></div>
+</div>
+</section>
+
+<section aria-labelledby="all">
+<h2 id="all">All conversions: image, PDF, document, video &amp; audio converter</h2>
+<p class="mut">Every converter below works both ways where possible. Choose one, then drop your file.</p>
+<div class="grid">
+<a href="#convert"><h3>🖼 Image to PDF</h3><span>JPG to PDF, PNG to PDF, WebP to PDF. Merge many images into one PDF.</span></a>
+<a href="#convert"><h3>📄 PDF to Image</h3><span>PDF to JPG, PDF to PNG, PDF to WebP, one picture per page.</span></a>
+<a href="#convert"><h3>🔁 JPG to PNG</h3><span>PNG to JPG, WebP to JPG, JPG to WebP, WebP to PNG, SVG to PNG.</span></a>
+<a href="#convert"><h3>📝 PDF to Word</h3><span>Convert PDF to editable DOCX or plain TXT.</span></a>
+<a href="#convert"><h3>📃 Word to PDF</h3><span>DOCX to PDF, DOCX to TXT, DOCX to HTML.</span></a>
+<a href="#convert"><h3>📊 Excel to PDF</h3><span>XLSX, XLS or CSV to PDF.</span></a>
+<a href="#convert"><h3>🔀 Excel to CSV / JSON</h3><span>XLSX to CSV, CSV to XLSX, Excel to JSON, Excel to HTML.</span></a>
+<a href="#convert"><h3>🗒 Text to PDF / Word</h3><span>TXT to PDF and TXT to DOCX.</span></a>
+<a href="#convert"><h3>🎵 MP4 to MP3</h3><span>Extract audio from video. Also MP4 to WAV, OGG, AAC.</span></a>
+<a href="#convert"><h3>🎬 MP4 to MOV</h3><span>MOV to MP4, MP4 to WebM, AVI, MKV, and back.</span></a>
+<a href="#convert"><h3>🎧 Audio converter</h3><span>MP3 to WAV, WAV to MP3, OGG, AAC, M4A, FLAC.</span></a>
+<a href="#convert"><h3>🎞 Video to GIF</h3><span>Turn MP4, MOV or WebM clips into animated GIFs.</span></a>
+</div>
+<div class="kw" aria-label="Popular searches"><span>image to pdf converter</span><span>jpg to png</span><span>png to jpg</span><span>webp to jpg</span><span>mp4 to mp3</span><span>mp4 to mov</span><span>mov to mp4</span><span>pdf to word</span><span>pdf to jpg</span><span>word to pdf</span><span>excel to pdf</span><span>csv to xlsx</span><span>mp3 to wav</span><span>video to gif</span></div>
+</section>
+
+<section aria-labelledby="why">
+<h2 id="why">Why choose Universal Converter?</h2>
+<div class="feat">
+<div class="box"><div class="ic">🔒</div><h3>Private by design</h3><p class="mut">Conversion runs on your device. Nothing is uploaded or stored.</p></div>
+<div class="box"><div class="ic">🧠</div><h3>Smart file detection</h3><p class="mut">Upload anything and see only the formats that are valid for it.</p></div>
+<div class="box"><div class="ic">📈</div><h3>Live progress</h3><p class="mut">A real percentage bar from 1% to 100%, then an automatic download.</p></div>
+<div class="box"><div class="ic">📚</div><h3>Batch images to PDF</h3><p class="mut">Select several photos and get one combined PDF.</p></div>
+<div class="box"><div class="ic">🎥</div><h3>Video &amp; audio engine</h3><p class="mut">FFmpeg in WebAssembly handles MP4, MOV, WebM, MP3 and more.</p></div>
+<div class="box"><div class="ic">🆓</div><h3>Free forever</h3><p class="mut">No account, no watermark, no daily limits.</p></div>
+</div>
+</section>
+
+<section aria-labelledby="faq">
+<h2 id="faq">Frequently asked questions</h2>
+<details><summary>Are my files uploaded to a server?</summary><p>No. Universal Converter works inside your browser, so your files never leave your device.</p></details>
+<details><summary>How do I convert MP4 to MP3?</summary><p>Drop the MP4, choose MP3 and wait for 100%. The audio downloads automatically.</p></details>
+<details><summary>How do I convert JPG to PNG or PNG to JPG?</summary><p>Upload the image, pick PNG, JPG or WebP, and the converted image downloads automatically.</p></details>
+<details><summary>Can I convert PDF to Word, Excel or PowerPoint?</summary><p>PDF to Word (text) works. PDF to Excel and PowerPoint need server-side layout analysis, so they are not offered, to avoid broken results.</p></details>
+<details><summary>Why is video conversion slower?</summary><p>Video is re-encoded on your own device. Large files take longer, and the engine (about 30 MB) downloads once on first use.</p></details>
+<details><summary>Is Universal Converter free?</summary><p>Yes. No sign-up, no watermark.</p></details>
+</section>
+<footer>© Universal Converter · Part of <a href="/" style="color:inherit">Image Compress</a> · Your files never leave your browser</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.min.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const $=s=>document.querySelector(s);
+let files=[],kind='',ext='';
+const MAP={
+ image:['jpg','png','webp','pdf'],
+ pdf:['docx','txt','png','jpg','webp'],
+ doc:['pdf','txt','html'],
+ sheet:['pdf','csv','xlsx','json','html'],
+ text:['pdf','docx'],
+ video:['mp4','mov','webm','avi','mkv','gif','mp3','wav','ogg','aac'],
+ audio:['mp3','wav','ogg','aac','m4a','flac']};
+const EXT={image:'jpg jpeg png webp gif bmp svg avif',pdf:'pdf',doc:'docx',sheet:'xlsx xls csv ods',text:'txt md',video:'mp4 mov webm avi mkv m4v 3gp flv wmv',audio:'mp3 wav ogg aac m4a flac opus wma'};
+function detect(f){
+ const e=(f.name.split('.').pop()||'').toLowerCase();
+ for(const k in EXT)if(EXT[k].split(' ').includes(e))return[k,e];
+ const t=f.type;
+ if(t.startsWith('image/'))return['image',t.split('/')[1]];
+ if(t.startsWith('video/'))return['video',e];
+ if(t.startsWith('audio/'))return['audio',e];
+ return['',e];
+}
+const norm=e=>e==='jpeg'?'jpg':e;
+const drop=$('#drop'),inp=$('#file');
+drop.onclick=()=>inp.click();
+drop.onkeydown=e=>{if(e.key==='Enter'||e.key===' ')inp.click()};
+inp.onchange=()=>take([...inp.files]);
+['dragover','dragenter'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.add('o')}));
+['dragleave','drop'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.remove('o')}));
+drop.addEventListener('drop',e=>take([...e.dataTransfer.files]));
+$('#reset').onclick=reset;
+function reset(){files=[];inp.value='';$('#step2').classList.add('hide');$('#step3').classList.add('hide');drop.classList.remove('hide')}
+function take(fs){
+ if(!fs.length)return;
+ [kind,ext]=detect(fs[0]);ext=norm(ext);
+ if(!kind){alert('Sorry, this file type is not supported yet.');return}
+ files=kind==='image'?fs.filter(f=>detect(f)[0]==='image'):[fs[0]];
+ $('#fname').textContent=files.length>1?files.length+' images':files[0].name;
+ $('#fmeta').textContent='· '+kind.toUpperCase()+' · '+(files.reduce((a,f)=>a+f.size,0)/1048576).toFixed(2)+' MB';
+ const box=$('#opts');box.innerHTML='';
+ MAP[kind].filter(t=>t!==ext).forEach(t=>{const b=document.createElement('button');b.className='chip';b.textContent=t;b.onclick=()=>run(t);box.appendChild(b)});
+ $('#note').textContent=kind==='video'||kind==='audio'?'Video/audio engine (~30 MB) loads the first time you convert.':kind==='pdf'?'PDF to Word extracts text; complex layouts are simplified.':'';
+ drop.classList.add('hide');$('#step2').classList.remove('hide');
+}
+let last=0;
+function P(n,m){n=Math.max(0,Math.min(100,Math.round(n)));if(n<last&&n<100)n=last;last=n;$('#fill').style.width=n+'%';$('#pct').textContent=n+'%';if(m)$('#msg').textContent=m}
+function save(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}
+const base=f=>f.name.replace(/\.[^.]+$/,'');
+const MIME={jpg:'image/jpeg',png:'image/png',webp:'image/webp'};
+const tick=()=>new Promise(r=>setTimeout(r,0));
+
+async function run(t){
+ $('#step2').classList.add('hide');$('#step3').classList.remove('hide');
+ last=0;P(1,'Starting…');$('#status').innerHTML='<b>Converting to '+t.toUpperCase()+'…</b>';
+ try{
+  let out;
+  if(kind==='image')out=t==='pdf'?await img2pdf():await img2img(t);
+  else if(kind==='pdf')out=t==='docx'?await pdf2docx():t==='txt'?await pdf2txt():await pdf2img(t);
+  else if(kind==='doc')out=await doc2x(t);
+  else if(kind==='sheet')out=await sheet2x(t);
+  else if(kind==='text')out=await txt2x(t);
+  else out=await ff(t);
+  P(100,'Done! Your download has started.');
+  save(out.blob,out.name);
+  $('#status').innerHTML='<b>Finished ✓</b> <button class="chip" style="text-transform:none" onclick="reset()">Convert another file</button>';
+ }catch(e){console.error(e);$('#status').innerHTML='<b>Conversion failed.</b> <button class="chip" style="text-transform:none" onclick="reset()">Try again</button>';$('#msg').textContent=String(e.message||e)}
+}
+function loadImg(f){return new Promise((ok,no)=>{const i=new Image(),u=URL.createObjectURL(f);i.onload=()=>{URL.revokeObjectURL(u);ok(i)};i.onerror=()=>no(new Error('Cannot read image: '+f.name));i.src=u})}
+function toCanvas(i,bg){const c=document.createElement('canvas');c.width=i.naturalWidth||i.width;c.height=i.naturalHeight||i.height;const x=c.getContext('2d');if(bg){x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height)}x.drawImage(i,0,0);return c}
+const blobOf=(c,t,q)=>new Promise(r=>c.toBlob(r,MIME[t],q));
+async function img2img(t){
+ const f=files[0];P(20,'Reading image…');const i=await loadImg(f);
+ P(55,'Encoding…');const c=toCanvas(i,t==='jpg');const b=await blobOf(c,t,.92);
+ if(!b)throw new Error('Your browser cannot encode '+t.toUpperCase());
+ return{blob:b,name:base(f)+'.'+t};
+}
+async function img2pdf(){
+ const{jsPDF}=window.jspdf;let doc;
+ for(let n=0;n<files.length;n++){
+  P(5+n/files.length*90,'Adding image '+(n+1)+' of '+files.length);
+  const c=toCanvas(await loadImg(files[n]),true),w=c.width,h=c.height,o=w>h?'l':'p';
+  if(!doc)doc=new jsPDF({orientation:o,unit:'px',format:[w,h],compress:true});else doc.addPage([w,h],o);
+  doc.addImage(c.toDataURL('image/jpeg',.92),'JPEG',0,0,w,h);await tick();
+ }
+ return{blob:doc.output('blob'),name:(files.length>1?'images':base(files[0]))+'.pdf'};
+}
+async function openPdf(){return pdfjsLib.getDocument({data:await files[0].arrayBuffer()}).promise}
+async function pdf2img(t){
+ const pdf=await openPdf(),N=pdf.numPages,res=[];
+ for(let p=1;p<=N;p++){
+  P(p/N*92,'Rendering page '+p+' of '+N);
+  const pg=await pdf.getPage(p),vp=pg.getViewport({scale:2}),c=document.createElement('canvas');
+  c.width=vp.width;c.height=vp.height;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);
+  await pg.render({canvasContext:x,viewport:vp}).promise;res.push(await blobOf(c,t,.92));
+ }
+ const b=base(files[0]);
+ if(N===1)return{blob:res[0],name:b+'.'+t};
+ const z=new JSZip();res.forEach((r,i)=>z.file(b+'-page-'+(i+1)+'.'+t,r));
+ return{blob:await z.generateAsync({type:'blob'},m=>P(92+m.percent*.07)),name:b+'-pages.zip'};
+}
+async function pdfPages(){
+ const pdf=await openPdf(),N=pdf.numPages,out=[];
+ for(let p=1;p<=N;p++){
+  P(p/N*90,'Reading page '+p+' of '+N);
+  const tc=await(await pdf.getPage(p)).getTextContent();let line=[],y=null,ls=[];
+  tc.items.forEach(it=>{const yy=Math.round(it.transform[5]);if(y!==null&&Math.abs(yy-y)>3){ls.push(line.join(' '));line=[]}y=yy;line.push(it.str)});
+  ls.push(line.join(' '));out.push(ls);
+ }
+ return out;
+}
+async function pdf2txt(){const pg=await pdfPages();return{blob:new Blob([pg.map(l=>l.join('\n')).join('\n\n')],{type:'text/plain'}),name:base(files[0])+'.txt'}}
+async function pdf2docx(){
+ const pg=await pdfPages(),D=window.docx,kids=[];
+ pg.forEach((ls,i)=>{if(i)kids.push(new D.Paragraph({children:[new D.PageBreak()]}));ls.forEach(l=>kids.push(new D.Paragraph(l)))});
+ P(95,'Building Word file…');
+ return{blob:await D.Packer.toBlob(new D.Document({sections:[{children:kids}]})),name:base(files[0])+'.docx'};
+}
+function textPdf(lines,mono){
+ const{jsPDF}=window.jspdf,d=new jsPDF({unit:'pt',format:'a4'}),W=d.internal.pageSize.getWidth()-80,H=d.internal.pageSize.getHeight()-60;
+ d.setFont(mono?'courier':'helvetica');d.setFontSize(mono?9:11);let y=50,i=0;
+ for(const l of lines){
+  for(const s of d.splitTextToSize(l||' ',W)){if(y>H){d.addPage();y=50}d.text(s,40,y);y+=mono?12:15}
+  if(++i%200===0)P(10+i/lines.length*80);
+ }
+ return d.output('blob');
+}
+async function doc2x(t){
+ const ab=await files[0].arrayBuffer(),b=base(files[0]);P(25,'Reading document…');
+ if(t==='html'){const r=await mammoth.convertToHtml({arrayBuffer:ab});return{blob:new Blob([r.value],{type:'text/html'}),name:b+'.html'}}
+ const r=await mammoth.extractRawText({arrayBuffer:ab});P(60,'Building output…');
+ if(t==='txt')return{blob:new Blob([r.value],{type:'text/plain'}),name:b+'.txt'};
+ return{blob:textPdf(r.value.split('\n')),name:b+'.pdf'};
+}
+async function sheet2x(t){
+ const wb=XLSX.read(await files[0].arrayBuffer(),{type:'array'}),b=base(files[0]);P(30,'Reading sheets…');
+ const ws=wb.Sheets[wb.SheetNames[0]];
+ if(t==='csv')return{blob:new Blob([XLSX.utils.sheet_to_csv(ws)],{type:'text/csv'}),name:b+'.csv'};
+ if(t==='json')return{blob:new Blob([JSON.stringify(XLSX.utils.sheet_to_json(ws),null,2)],{type:'application/json'}),name:b+'.json'};
+ if(t==='html')return{blob:new Blob([XLSX.utils.sheet_to_html(ws)],{type:'text/html'}),name:b+'.html'};
+ if(t==='xlsx'){const o=XLSX.write(wb,{bookType:'xlsx',type:'array'});return{blob:new Blob([o]),name:b+'.xlsx'}}
+ const lines=[];wb.SheetNames.forEach(n=>{lines.push('== '+n+' ==');XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,defval:''}).forEach(r=>lines.push(r.join('  |  ')))});
+ return{blob:textPdf(lines,true),name:b+'.pdf'};
+}
+async function txt2x(t){
+ const s=await files[0].text(),b=base(files[0]);P(40,'Reading text…');
+ if(t==='pdf')return{blob:textPdf(s.split('\n')),name:b+'.pdf'};
+ const D=window.docx;return{blob:await D.Packer.toBlob(new D.Document({sections:[{children:s.split('\n').map(l=>new D.Paragraph(l))}]})),name:b+'.docx'};
+}
+let FF=null;
+async function engine(){
+ if(FF)return FF;
+ P(2,'Downloading conversion engine (first time only)…');
+ await new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js';s.onload=ok;s.onerror=()=>no(new Error('Could not load engine'));document.head.appendChild(s)});
+ const B='https://cdn.jsdelivr.net/npm/@ffmpeg/',U=FFmpegUtil.toBlobURL;
+ const ff=new FFmpegWASM.FFmpeg();
+ await ff.load({
+  classWorkerURL:await U(B+'ffmpeg@0.12.10/dist/umd/814.ffmpeg.js','text/javascript'),
+  coreURL:await U(B+'core@0.12.6/dist/umd/ffmpeg-core.js','text/javascript'),
+  wasmURL:await U(B+'core@0.12.6/dist/umd/ffmpeg-core.wasm','application/wasm')});
+ return FF=ff;
+}
+const ARGS={
+ mp3:['-vn','-c:a','libmp3lame','-q:a','2'],wav:['-vn'],ogg:['-vn','-c:a','libvorbis'],aac:['-vn','-c:a','aac'],m4a:['-vn','-c:a','aac'],flac:['-vn','-c:a','flac'],
+ mp4:['-c:v','libx264','-preset','ultrafast','-c:a','aac'],mov:['-c:v','libx264','-preset','ultrafast','-c:a','aac'],
+ mkv:['-c:v','libx264','-preset','ultrafast','-c:a','aac'],webm:['-c:v','libvpx','-b:v','1M','-c:a','libvorbis'],
+ avi:['-c:v','mpeg4','-q:v','5','-c:a','libmp3lame'],gif:['-vf','fps=10,scale=480:-1:flags=lanczos','-an']};
+async function ff(t){
+ const e=await engine(),f=files[0],i='in.'+(ext||'bin'),o='out.'+t;
+ e.on('progress',({progress})=>P(10+Math.min(progress,1)*88,'Converting…'));
+ P(8,'Reading file…');await e.writeFile(i,new Uint8Array(await f.arrayBuffer()));
+ if(await e.exec(['-i',i,...ARGS[t],o])!==0)throw new Error('This file could not be converted to '+t.toUpperCase());
+ const d=await e.readFile(o);await e.deleteFile(i);await e.deleteFile(o);
+ const M={mp3:'audio/mpeg',wav:'audio/wav',ogg:'audio/ogg',mp4:'video/mp4',mov:'video/quicktime',webm:'video/webm',gif:'image/gif'};
+ return{blob:new Blob([d.buffer],{type:M[t]||'application/octet-stream'}),name:base(f)+'.'+t};
+}
+document.querySelectorAll('.grid a').forEach(a=>a.onclick=()=>setTimeout(()=>drop.focus(),400));
+</script>
+</body>
+</html>
