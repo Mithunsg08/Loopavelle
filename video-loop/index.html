@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Loopavelle — turn a few seconds into hours</title>
-<meta name="description" content="Loopavelle loops a short video into hours of seamless playback. 100% in your browser, no re-encoding, no quality loss, nothing uploaded.">
+<title>Video Loop — turn a few seconds into hours</title>
+<meta name="description" content="Video Loop loops a short video into hours of seamless playback. 100% in your browser, no re-encoding, no quality loss, nothing uploaded.">
 <meta name="theme-color" content="#8b7cf6">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b7cf6'/%3E%3Cstop offset='1' stop-color='%23f472b6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Cpath d='M20 26h20a8 8 0 0 1 0 16H26' fill='none' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M26 20l-6 6 6 6' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -129,7 +129,7 @@ footer{margin-top:22px;text-align:center;color:var(--muted);font-weight:600;font
       <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 27h22a9 9 0 0 1 0 18H26"/><path d="M26 19l-8 8 8 8"/></svg>
     </div>
     <div>
-      <h1><span>Loopavelle</span></h1>
+      <h1><span>Video Loop</span></h1>
       <div class="tag">A few gentle seconds, stretched into hours.</div>
     </div>
   </header>
@@ -213,7 +213,7 @@ footer{margin-top:22px;text-align:center;color:var(--muted);font-weight:600;font
 
 <!-- ============ ENGINE: lossless MP4 looping (no re-encode) ============ -->
 <script id="engine">
-const Loopavelle = (() => {
+const Video Loop = (() => {
   'use strict';
   const TE = new TextEncoder();
   const cc = s => TE.encode(s);
@@ -594,7 +594,7 @@ const Loopavelle = (() => {
 
   return { analyze, build, estimate, loopsFor };
 })();
-if (typeof module !== 'undefined') module.exports = Loopavelle;
+if (typeof module !== 'undefined') module.exports = Video Loop;
 </script>
 
 <!-- ============ APP / UI ============ -->
@@ -622,7 +622,7 @@ if (typeof module !== 'undefined') module.exports = Loopavelle;
   };
   const fmtH = h => (Math.round(h * 100) / 100).toString();
   const MSG = {
-    NOT_MP4: "That doesn't look like an MP4 or MOV file. Loopavelle works with .mp4, .mov and .m4v clips.",
+    NOT_MP4: "That doesn't look like an MP4 or MOV file. Video Loop works with .mp4, .mov and .m4v clips.",
     FRAGMENTED: "This is a streaming-style (fragmented) MP4. Please export or re-save it as a regular MP4 and try again.",
     NO_TRACKS: "I couldn't find any video or audio inside this file.",
     UNSUPPORTED: "This file uses a rare internal layout that isn't supported yet. A standard H.264 MP4 will work.",
@@ -648,7 +648,7 @@ if (typeof module !== 'undefined') module.exports = Loopavelle;
     }
     err.textContent = 'Reading your video…'; err.classList.add('info'); err.hidden = false;
     try {
-      S = await Loopavelle.analyze(f); file = f; err.hidden = true;
+      S = await Video Loop.analyze(f); file = f; err.hidden = true;
     } catch (e) { err.classList.remove('info'); showErr(err, e); S = null; input.value = ''; return; }
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     previewUrl = URL.createObjectURL(f);
@@ -701,7 +701,7 @@ if (typeof module !== 'undefined') module.exports = Loopavelle;
       if (!invalid && hours > MAX_H) { warn.textContent = 'Please choose between ' + MIN_H + ' and ' + MAX_H + ' hours.'; warn.hidden = false; }
       return;
     }
-    const est = Loopavelle.estimate(S, hours * 3600, seamOn());
+    const est = Video Loop.estimate(S, hours * 3600, seamOn());
     $('#sLen').textContent = fmtDur(est.seconds);
     $('#sLoops').textContent = est.loops.toLocaleString();
     $('#sSize').textContent = '≈ ' + fmtBytes(est.bytes);
@@ -724,7 +724,7 @@ if (typeof module !== 'undefined') module.exports = Loopavelle;
         try { pcm = await decodePcm(file, S); }
         catch (e) { note = ' (Your browser could not read the audio, so the original sound was kept and may pause briefly at each loop.)'; }
       }
-      const r = await Loopavelle.build(S, hours * 3600, async (p, label) => {
+      const r = await Video Loop.build(S, hours * 3600, async (p, label) => {
         $('#fill').style.width = Math.round(6 + p * 94) + '%'; $('#stage').textContent = label; await sleep(160);
       }, pcm);
       if (outUrl) URL.revokeObjectURL(outUrl);
