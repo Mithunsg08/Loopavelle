@@ -213,7 +213,7 @@ footer{margin-top:22px;text-align:center;color:var(--muted);font-weight:600;font
 
 <!-- ============ ENGINE: lossless MP4 looping (no re-encode) ============ -->
 <script id="engine">
-const Video Loop = (() => {
+const VideoLoop = (() => {
   'use strict';
   const TE = new TextEncoder();
   const cc = s => TE.encode(s);
@@ -594,7 +594,7 @@ const Video Loop = (() => {
 
   return { analyze, build, estimate, loopsFor };
 })();
-if (typeof module !== 'undefined') module.exports = Video Loop;
+if (typeof module !== 'undefined') module.exports = VideoLoop;
 </script>
 
 <!-- ============ APP / UI ============ -->
@@ -648,7 +648,7 @@ if (typeof module !== 'undefined') module.exports = Video Loop;
     }
     err.textContent = 'Reading your video…'; err.classList.add('info'); err.hidden = false;
     try {
-      S = await Video Loop.analyze(f); file = f; err.hidden = true;
+      S = await VideoLoop.analyze(f); file = f; err.hidden = true;
     } catch (e) { err.classList.remove('info'); showErr(err, e); S = null; input.value = ''; return; }
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     previewUrl = URL.createObjectURL(f);
@@ -701,7 +701,7 @@ if (typeof module !== 'undefined') module.exports = Video Loop;
       if (!invalid && hours > MAX_H) { warn.textContent = 'Please choose between ' + MIN_H + ' and ' + MAX_H + ' hours.'; warn.hidden = false; }
       return;
     }
-    const est = Video Loop.estimate(S, hours * 3600, seamOn());
+    const est = VideoLoop.estimate(S, hours * 3600, seamOn());
     $('#sLen').textContent = fmtDur(est.seconds);
     $('#sLoops').textContent = est.loops.toLocaleString();
     $('#sSize').textContent = '≈ ' + fmtBytes(est.bytes);
@@ -724,7 +724,7 @@ if (typeof module !== 'undefined') module.exports = Video Loop;
         try { pcm = await decodePcm(file, S); }
         catch (e) { note = ' (Your browser could not read the audio, so the original sound was kept and may pause briefly at each loop.)'; }
       }
-      const r = await Video Loop.build(S, hours * 3600, async (p, label) => {
+      const r = await VideoLoop.build(S, hours * 3600, async (p, label) => {
         $('#fill').style.width = Math.round(6 + p * 94) + '%'; $('#stage').textContent = label; await sleep(160);
       }, pcm);
       if (outUrl) URL.revokeObjectURL(outUrl);
