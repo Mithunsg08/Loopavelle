@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calculator – Free Online Calculator, Tip, Fuel Cost, EMI, GST &amp; More</title>
+<meta name="description" content="Calculator is a free, private calculator suite: scientific calculator, tip &amp; bill split, fuel cost, percentage, discount, EMI loan, GST/VAT, BMI and age calculators. No sign-up, no tracking, everything runs in your browser.">
+<meta name="keywords" content="online calculator, scientific calculator, tip calculator, fuel cost calculator, trip cost calculator, EMI calculator, GST calculator, percentage calculator, discount calculator, BMI calculator, age calculator">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#07070b">
+<!-- TODO: replace with your real GitHub Pages / custom domain URL -->
+<link rel="canonical" href="https://YOUR-USERNAME.github.io/calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Calculator">
+<meta property="og:title" content="Calculator – Premium everyday calculators">
+<meta property="og:description" content="Scientific calculator, tip splitter, fuel cost, EMI, GST, discount, BMI and more. Free, instant and 100% in your browser.">
+<meta property="og:url" content="https://YOUR-USERNAME.github.io/calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Calculator – Premium everyday calculators">
+<meta name="twitter:description" content="Nine everyday calculators in one refined page. Free, fast, private.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f5dfa8'/%3E%3Cstop offset='1' stop-color='%23c99a45'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2312121a'/%3E%3Crect x='1.5' y='1.5' width='61' height='61' rx='15' fill='none' stroke='url(%23g)' stroke-width='3'/%3E%3Cpath d='M32 18v28M18 32h28' stroke='url(%23g)' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Calculator",
+      "url": "https://YOUR-USERNAME.github.io/calculator/",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Free online calculator suite: scientific calculator, tip calculator, fuel cost calculator, percentage, discount, EMI, GST, BMI and age calculators.",
+      "featureList": ["Scientific calculator","Tip and bill split calculator","Fuel and trip cost calculator","Percentage calculator","Discount calculator","EMI loan calculator","GST and VAT calculator","BMI calculator","Age calculator"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is this calculator really free and private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every calculation runs in your browser. Nothing you type is sent to a server, stored, or tracked." } },
+        { "@type": "Question", "name": "How do I calculate the fuel cost of a trip?", "acceptedAnswer": { "@type": "Answer", "text": "Divide the distance by your vehicle's mileage to get the fuel needed, then multiply by the fuel price. The fuel cost calculator does this for km/L, L/100km and MPG, handles round trips and splits the cost between passengers." } },
+        { "@type": "Question", "name": "How do I calculate a tip and split the bill?", "acceptedAnswer": { "@type": "Answer", "text": "Multiply the bill by the tip percentage, add it to the bill, then divide by the number of people. The tip calculator also offers a round-up option." } },
+        { "@type": "Question", "name": "How is EMI calculated?", "acceptedAnswer": { "@type": "Answer", "text": "EMI = P × r × (1+r)^n / ((1+r)^n − 1), where P is the loan amount, r is the monthly interest rate and n is the number of monthly instalments." } },
+        { "@type": "Question", "name": "How do I add or remove GST or VAT from a price?", "acceptedAnswer": { "@type": "Answer", "text": "To add tax, multiply the net price by (1 + rate). To remove tax from a gross price, divide it by (1 + rate). The GST calculator does both and shows the CGST/SGST split." } }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#07070b;
+  --panel:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));
+  --surface:rgba(255,255,255,.04); --surface2:rgba(255,255,255,.075);
+  --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.16);
+  --ink:#f4f1ea; --muted:#8f8c9c; --soft:#b9b5c4;
+  --accent:#e6c27a; --accent2:#f7e3b0; --accent3:#b98a3e; --accent-ink:#1b1306;
+  --track:rgba(255,255,255,.14); --card-solid:#0f0f15; --field:rgba(255,255,255,.045);
+  --glow1:rgba(230,194,122,.13); --glow2:rgba(110,120,255,.10);
+  --shadow:0 30px 80px -30px rgba(0,0,0,.9),0 1px 0 rgba(255,255,255,.05) inset;
+  --radius:26px;
+}
+[data-theme="light"]{
+  --bg:#f5f2ea;
+  --panel:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.7));
+  --surface:rgba(0,0,0,.03); --surface2:rgba(0,0,0,.06);
+  --line:rgba(30,20,0,.09); --line2:rgba(30,20,0,.18);
+  --ink:#17140f; --muted:#7a7568; --soft:#4d4839;
+  --accent:#a8762a; --accent2:#c99a45; --accent3:#8a5d17; --accent-ink:#fff;
+  --track:rgba(30,20,0,.14); --card-solid:#fff; --field:rgba(255,255,255,.9);
+  --glow1:rgba(201,154,69,.18); --glow2:rgba(120,130,255,.10);
+  --shadow:0 30px 70px -35px rgba(80,55,10,.35),0 1px 0 rgba(255,255,255,.8) inset;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;color-scheme:dark}
+html[data-theme="light"]{color-scheme:light}
+body{
+  font-family:"Inter","SF Pro Display","Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.55;min-height:100vh;
+  -webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1,"cv11" 1;overflow-x:hidden;
+}
+body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(90px)}
+body::before{width:60vw;height:50vh;left:-10vw;top:-15vh;background:var(--glow1)}
+body::after{width:55vw;height:55vh;right:-15vw;bottom:-20vh;background:var(--glow2)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 0 8px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:650;font-size:1.15rem;letter-spacing:.02em;text-decoration:none;color:var(--ink)}
+.brand svg{width:36px;height:36px}
+.ctrls{display:flex;gap:8px;align-items:center}
+select,input,button{font:inherit;color:inherit}
+.pill{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;backdrop-filter:blur(12px);font-size:.9rem;transition:.2s}
+.pill:hover{border-color:var(--line2)}
+select.pill option{background:var(--card-solid);color:var(--ink)}
+:is(button,input,select,summary,a):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hero{text-align:center;padding:44px 0 34px}
+.eyebrow{display:inline-block;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);padding:7px 14px;border:1px solid var(--line2);border-radius:999px;background:var(--surface)}
+.hero h1{font-size:clamp(2.2rem,6.4vw,4.1rem);line-height:1.05;letter-spacing:-.04em;font-weight:700;margin-top:20px}
+.grad{background:linear-gradient(100deg,var(--accent2),var(--accent) 45%,var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:560px;margin:16px auto 0;font-size:1.05rem}
+.badges{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:22px;color:var(--soft);font-size:.85rem}
+.badges span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle;box-shadow:0 0 10px var(--accent)}
+nav.tabs{position:sticky;top:10px;z-index:5;display:flex;gap:4px;overflow-x:auto;padding:6px;border-radius:999px;background:color-mix(in srgb,var(--bg) 72%,transparent);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(140%);box-shadow:var(--shadow);scrollbar-width:none;max-width:max-content;margin:0 auto}
+nav.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:0;background:transparent;padding:10px 18px;border-radius:999px;cursor:pointer;font-weight:550;font-size:.92rem;color:var(--muted);white-space:nowrap;transition:.25s}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{background:linear-gradient(180deg,var(--accent2),var(--accent) 60%,var(--accent3));color:var(--accent-ink);font-weight:650;box-shadow:0 6px 22px -6px var(--accent),0 1px 0 rgba(255,255,255,.4) inset}
+main{margin:26px 0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,4.5vw,42px);box-shadow:var(--shadow);backdrop-filter:blur(20px);animation:in .45s cubic-bezier(.2,.7,.2,1);position:relative}
+.panel::before{content:"";position:absolute;left:12%;right:12%;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.55}
+.panel[hidden]{display:none}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel h2{font-size:1.6rem;letter-spacing:-.025em;font-weight:650}
+.panel .lead{color:var(--muted);margin:6px 0 26px;max-width:60ch}
+.cols{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+@media(max-width:780px){.cols{grid-template-columns:1fr}}
+.stack{display:grid;gap:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label.f{display:grid;gap:7px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+label.f input,label.f select{background:var(--field);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:1.05rem;letter-spacing:0;text-transform:none;color:var(--ink);width:100%;font-weight:550;transition:.2s}
+label.f input:hover,label.f select:hover{border-color:var(--line2)}
+label.f input:focus,label.f select:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent);outline:0}
+label.f select option{background:var(--card-solid);color:var(--ink)}
+input[type=range]{accent-color:var(--accent);width:100%}
+input[type=date]{color-scheme:inherit}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--field);border-radius:999px;padding:8px 15px;cursor:pointer;font-weight:550;font-size:.88rem;color:var(--soft);transition:.2s}
+.chip:hover{border-color:var(--line2);color:var(--ink)}
+.chip.on{background:color-mix(in srgb,var(--accent) 16%,transparent);border-color:var(--accent);color:var(--accent2)}
+[data-theme="light"] .chip.on{color:var(--accent3)}
+.check{display:flex;gap:10px;align-items:center;font-weight:500;font-size:.95rem;cursor:pointer;color:var(--soft)}
+.check input{accent-color:var(--accent);width:18px;height:18px}
+.result{border-radius:22px;padding:26px;background:linear-gradient(150deg,color-mix(in srgb,var(--accent) 12%,transparent),var(--surface) 55%);border:1px solid color-mix(in srgb,var(--accent) 28%,var(--line))}
+.result .k{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.result .big{font-size:clamp(2.1rem,6vw,3rem);font-weight:700;letter-spacing:-.035em;line-height:1.1;margin:6px 0 18px;word-break:break-word;background:linear-gradient(100deg,var(--ink),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="light"] .result .big{background:linear-gradient(100deg,var(--ink),var(--accent3));-webkit-background-clip:text;background-clip:text}
+.kv{display:grid;gap:2px}
+.kv div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-weight:600}
+.kv span:first-child{color:var(--muted);font-weight:450}
+.note{font-size:.8rem;color:var(--muted);margin-top:14px}
+.disp{background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.15));border:1px solid var(--line);border-radius:20px;padding:16px 20px;text-align:right;box-shadow:inset 0 2px 12px rgba(0,0,0,.35)}
+[data-theme="light"] .disp{background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(245,240,228,.9));box-shadow:inset 0 2px 10px rgba(80,55,10,.1)}
+.disp input{width:100%;border:0;background:transparent;text-align:right;font-size:1.9rem;font-weight:600;outline:0;letter-spacing:-.02em}
+.disp .out{min-height:2rem;font-size:1.1rem;color:var(--accent);font-weight:600}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.keys.fn{grid-template-columns:repeat(5,1fr);margin-bottom:10px}
+.key{border:1px solid var(--line);background:linear-gradient(180deg,var(--surface2),var(--surface));border-radius:16px;padding:16px 0;font-size:1.15rem;font-weight:550;cursor:pointer;transition:.15s;box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 6px 14px -8px rgba(0,0,0,.6)}
+.key:hover{border-color:var(--line2);transform:translateY(-1px)}
+.key:active{transform:scale(.96)}
+.key.op{color:var(--accent)}
+.key.eq{background:linear-gradient(180deg,var(--accent2),var(--accent) 60%,var(--accent3));color:var(--accent-ink);border:0;font-weight:700;box-shadow:0 10px 26px -10px var(--accent),0 1px 0 rgba(255,255,255,.45) inset}
+.key.sm{font-size:.85rem;padding:11px 0;color:var(--soft);letter-spacing:.03em}
+.key.danger{color:#ff7a7a}
+.hist{margin-top:14px;display:grid;gap:4px;font-size:.92rem;color:var(--muted)}
+.hist button{all:unset;cursor:pointer;display:flex;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:12px;transition:.15s}
+.hist button:hover{background:var(--surface2)}
+.hist b{color:var(--ink)}
+.donut{width:128px;height:128px;border-radius:50%;margin:0 auto 16px;position:relative}
+.donut::after{content:"";position:absolute;inset:20px;background:var(--card-solid);border-radius:50%;box-shadow:0 0 0 1px var(--line)}
+.legend{display:flex;gap:18px;justify-content:center;font-size:.8rem;color:var(--muted);margin-bottom:16px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.gauge{height:8px;border-radius:99px;background:linear-gradient(90deg,#5b9bd5,#4fc3a1,#e6c27a,#e0645c);position:relative;margin:8px 0 16px;opacity:.9}
+.gauge b{position:absolute;top:-6px;width:4px;height:20px;border-radius:4px;background:var(--ink);transform:translateX(-2px);transition:left .3s;box-shadow:0 0 0 3px var(--bg)}
+section.seo{margin:56px 0}
+section.seo h2{font-size:1.5rem;margin-bottom:18px;letter-spacing:-.025em;font-weight:650}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:10px;transition:.2s}
+.faq details[open]{border-color:var(--line2)}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{color:var(--muted);margin-top:10px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.grid3 a{display:block;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;transition:.25s;position:relative;overflow:hidden}
+.grid3 a:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 45%,var(--line));box-shadow:0 20px 40px -24px var(--accent)}
+.grid3 small{display:block;color:var(--accent);font-size:.72rem;letter-spacing:.2em;margin-bottom:10px;font-weight:600}
+.grid3 b{display:block;margin-bottom:4px;font-weight:600}
+.grid3 span{color:var(--muted);font-size:.9rem}
+footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./" aria-label="Calculator home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7e3b0"/><stop offset="1" stop-color="#b98a3e"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="#12121a"/><rect x="1.5" y="1.5" width="61" height="61" rx="16.5" fill="none" stroke="url(#lg)" stroke-width="2.5"/><path d="M32 18v28M18 32h28" stroke="url(#lg)" stroke-width="6" stroke-linecap="round"/></svg>
+      Calculator
+    </a>
+    <div class="ctrls">
+      <label class="sr" for="cur">Currency</label>
+      <select id="cur" class="pill" title="Currency">
+        <option>INR</option><option>USD</option><option>EUR</option><option>GBP</option><option>AUD</option><option>CAD</option><option>AED</option><option>JPY</option>
+      </select>
+      <button id="theme" class="pill" aria-label="Toggle light or dark theme" title="Toggle theme">☀</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow">Free · Private · Instant</span>
+    <h1>Every calculation,<br><span class="grad">perfectly refined.</span></h1>
+    <p>Scientific calculator, tip splitter, fuel cost, EMI, GST and more. Pick a tool, enter a few numbers, done.</p>
+    <div class="badges"><span>Runs in your browser</span><span>No sign-up</span><span>Nothing stored</span></div>
+  </section>
+
+  <nav class="tabs" role="tablist" aria-label="Calculators" id="tabs"></nav>
+
+  <main id="main">
+
+    <!-- CALCULATOR -->
+    <article class="panel" id="p-calc" role="tabpanel" hidden>
+      <h2>Online Scientific Calculator</h2>
+      <p class="lead">Type with your keyboard or tap the keys. Brackets, powers, percentages, roots, logs and trigonometry.</p>
+      <div class="cols">
+        <div>
+          <div class="disp">
+            <label class="sr" for="c-in">Expression</label>
+            <input id="c-in" inputmode="none" autocomplete="off" spellcheck="false" placeholder="0" aria-label="Expression">
+            <div class="out" id="c-out" aria-live="polite"></div>
+          </div>
+          <div style="height:14px"></div>
+          <div class="keys fn">
+            <button class="key sm" data-k="sin(">sin</button><button class="key sm" data-k="cos(">cos</button><button class="key sm" data-k="tan(">tan</button><button class="key sm" data-k="log(">log</button><button class="key sm" data-k="ln(">ln</button>
+            <button class="key sm" data-k="√(">√</button><button class="key sm" data-k="π">π</button><button class="key sm" data-k="e">e</button><button class="key sm" data-k="^">xʸ</button><button class="key sm" id="deg" aria-pressed="true">DEG</button>
+          </div>
+          <div class="keys">
+            <button class="key danger" data-a="ac">AC</button><button class="key op" data-k="(">(</button><button class="key op" data-k=")">)</button><button class="key op" data-k="÷">÷</button>
+            <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button><button class="key op" data-k="×">×</button>
+            <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button><button class="key op" data-k="−">−</button>
+            <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button><button class="key op" data-k="+">+</button>
+            <button class="key" data-k="0">0</button><button class="key" data-k=".">.</button><button class="key op" data-a="del" aria-label="Backspace">⌫</button><button class="key eq" data-a="eq" aria-label="Equals">=</button>
+          </div>
+        </div>
+        <div>
+          <div class="result"><div class="k">Recent</div><div class="hist" id="hist"><span>Your calculations appear here.</span></div></div>
+          <p class="note">Tip: type 50% for 0.5, or 200+10% to add ten percent.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- TIP -->
+    <article class="panel" id="p-tip" role="tabpanel" hidden>
+      <h2>Tip Calculator &amp; Bill Splitter</h2>
+      <p class="lead">Enter the bill, choose a tip, split it between friends.</p>
+      <div class="cols">
+        <div class="stack">
+          <label class="f">Bill amount<input id="t-bill" type="number" inputmode="decimal" min="0" step="any" value="1200"></label>
+          <div class="chips" data-for="t-pct"><button class="chip" data-v="5">5%</button><button class="chip" data-v="10">10%</button><button class="chip" data-v="15">15%</button><button class="chip" data-v="18">18%</button><button class="chip" data-v="20">20%</button><button class="chip" data-v="25">25%</button></div>
+          <label class="f">Tip percentage · <span id="t-pctv">15%</span><input id="t-pct" type="range" min="0" max="40" step="1" value="15"></label>
+          <label class="f">Split between (people)<input id="t-ppl" type="number" inputmode="numeric" min="1" step="1" value="2"></label>
+          <label class="check"><input id="t-round" type="checkbox"> Round each share up to a whole number</label>
+        </div>
+        <div class="result">
+          <div class="k">Each person pays</div><div class="big" id="t-each">–</div>
+          <div class="kv"><div><span>Tip total</span><span id="t-tip">–</span></div><div><span>Bill + tip</span><span id="t-total">–</span></div><div><span>Tip per person</span><span id="t-tpp">–</span></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- FUEL -->
+    <article class="panel" id="p-fuel" role="tabpanel" hidden>
+      <h2>Fuel Cost &amp; Trip Cost Calculator</h2>
+      <p class="lead">Plan a drive: see how much fuel you need and what it costs, per person too.</p>
+      <div class="cols">
+        <div class="stack">
+          <div class="row2">
+            <label class="f">Distance<input id="f-dist" type="number" inputmode="decimal" min="0" step="any" value="350"></label>
+            <label class="f">Unit<select id="f-du"><option value="km">Kilometres</option><option value="mi">Miles</option></select></label>
+          </div>
+          <div class="row2">
+            <label class="f">Efficiency<input id="f-eff" type="number" inputmode="decimal" min="0" step="any" value="18"></label>
+            <label class="f">Efficiency unit<select id="f-eu"><option value="kml">km per litre</option><option value="l100">litres per 100 km</option><option value="mpg">miles per US gallon</option></select></label>
+          </div>
+          <div class="row2">
+            <label class="f">Fuel price<input id="f-price" type="number" inputmode="decimal" min="0" step="any" value="102"></label>
+            <label class="f">Price per<select id="f-pu"><option value="l">litre</option><option value="g">US gallon</option></select></label>
+          </div>
+          <div class="row2">
+            <label class="f">Sharing cost (people)<input id="f-ppl" type="number" inputmode="numeric" min="1" step="1" value="1"></label>
+            <label class="check" style="align-self:end;padding-bottom:14px"><input id="f-rt" type="checkbox"> Round trip</label>
+          </div>
+        </div>
+        <div class="result">
+          <div class="k">Total fuel cost</div><div class="big" id="f-cost">–</div>
+          <div class="kv"><div><span>Fuel needed</span><span id="f-fuel">–</span></div><div><span>Total distance</span><span id="f-td">–</span></div><div><span>Cost per km</span><span id="f-ckm">–</span></div><div><span>Cost per person</span><span id="f-pp">–</span></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PERCENT -->
+    <article class="panel" id="p-pct" role="tabpanel" hidden>
+      <h2>Percentage Calculator</h2>
+      <p class="lead">Three common percentage questions, answered instantly.</p>
+      <div class="stack">
+        <div class="result"><div class="k">What is X% of Y?</div>
+          <div class="row2" style="margin:14px 0"><label class="f">X (%)<input id="p1x" type="number" step="any" value="15"></label><label class="f">Y<input id="p1y" type="number" step="any" value="2400"></label></div>
+          <div class="big" id="p1r" style="margin:0">–</div></div>
+        <div class="result"><div class="k">X is what percent of Y?</div>
+          <div class="row2" style="margin:14px 0"><label class="f">X<input id="p2x" type="number" step="any" value="45"></label><label class="f">Y<input id="p2y" type="number" step="any" value="180"></label></div>
+          <div class="big" id="p2r" style="margin:0">–</div></div>
+        <div class="result"><div class="k">Percentage change from X to Y</div>
+          <div class="row2" style="margin:14px 0"><label class="f">From (X)<input id="p3x" type="number" step="any" value="80"></label><label class="f">To (Y)<input id="p3y" type="number" step="any" value="100"></label></div>
+          <div class="big" id="p3r" style="margin:0">–</div></div>
+      </div>
+    </article>
+
+    <!-- DISCOUNT -->
+    <article class="panel" id="p-disc" role="tabpanel" hidden>
+      <h2>Discount &amp; Sale Price Calculator</h2>
+      <p class="lead">See the real price after one or two discounts and tax.</p>
+      <div class="cols">
+        <div class="stack">
+          <label class="f">Original price<input id="d-price" type="number" inputmode="decimal" min="0" step="any" value="4999"></label>
+          <div class="chips" data-for="d-off"><button class="chip" data-v="10">10%</button><button class="chip" data-v="20">20%</button><button class="chip" data-v="30">30%</button><button class="chip" data-v="50">50%</button><button class="chip" data-v="70">70%</button></div>
+          <div class="row2">
+            <label class="f">Discount (%)<input id="d-off" type="number" inputmode="decimal" min="0" max="100" step="any" value="30"></label>
+            <label class="f">Extra discount (%)<input id="d-off2" type="number" inputmode="decimal" min="0" max="100" step="any" value="0"></label>
+          </div>
+          <label class="f">Tax (%) added after discount<input id="d-tax" type="number" inputmode="decimal" min="0" step="any" value="0"></label>
+        </div>
+        <div class="result">
+          <div class="k">You pay</div><div class="big" id="d-final">–</div>
+          <div class="kv"><div><span>You save</span><span id="d-save">–</span></div><div><span>Effective discount</span><span id="d-eff">–</span></div><div><span>Tax</span><span id="d-taxv">–</span></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- EMI -->
+    <article class="panel" id="p-emi" role="tabpanel" hidden>
+      <h2>EMI &amp; Loan Calculator</h2>
+      <p class="lead">Monthly instalment, total interest and total payment for any loan.</p>
+      <div class="cols">
+        <div class="stack">
+          <label class="f">Loan amount<input id="e-p" type="number" inputmode="decimal" min="0" step="any" value="1000000"></label>
+          <label class="f">Interest rate (% per year)<input id="e-r" type="number" inputmode="decimal" min="0" step="any" value="8.5"></label>
+          <div class="row2">
+            <label class="f">Tenure<input id="e-n" type="number" inputmode="numeric" min="1" step="1" value="5"></label>
+            <label class="f">In<select id="e-u"><option value="y">Years</option><option value="m">Months</option></select></label>
+          </div>
+        </div>
+        <div class="result">
+          <div class="donut" id="e-donut"></div>
+          <div class="legend"><span><i style="background:var(--accent)"></i>Principal</span><span><i style="background:var(--track)"></i>Interest</span></div>
+          <div class="k">Monthly EMI</div><div class="big" id="e-emi">–</div>
+          <div class="kv"><div><span>Total interest</span><span id="e-int">–</span></div><div><span>Total payment</span><span id="e-tot">–</span></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- GST -->
+    <article class="panel" id="p-gst" role="tabpanel" hidden>
+      <h2>GST / VAT Calculator</h2>
+      <p class="lead">Add tax to a price or pull it back out of a tax-inclusive total.</p>
+      <div class="cols">
+        <div class="stack">
+          <label class="f">Amount<input id="g-amt" type="number" inputmode="decimal" min="0" step="any" value="10000"></label>
+          <div class="chips" data-for="g-rate"><button class="chip" data-v="5">5%</button><button class="chip" data-v="12">12%</button><button class="chip" data-v="18">18%</button><button class="chip" data-v="28">28%</button></div>
+          <div class="row2">
+            <label class="f">Tax rate (%)<input id="g-rate" type="number" inputmode="decimal" min="0" step="any" value="18"></label>
+            <label class="f">Mode<select id="g-mode"><option value="add">Add tax</option><option value="rem">Remove tax</option></select></label>
+          </div>
+        </div>
+        <div class="result">
+          <div class="k" id="g-k">Total with tax</div><div class="big" id="g-total">–</div>
+          <div class="kv"><div><span>Net amount</span><span id="g-net">–</span></div><div><span>Tax</span><span id="g-tax">–</span></div><div><span>CGST (half)</span><span id="g-c">–</span></div><div><span>SGST (half)</span><span id="g-s">–</span></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- BMI -->
+    <article class="panel" id="p-bmi" role="tabpanel" hidden>
+      <h2>BMI Calculator</h2>
+      <p class="lead">A quick body mass index check. A guide only, not medical advice.</p>
+      <div class="cols">
+        <div class="stack">
+          <label class="f">Units<select id="b-u"><option value="m">Metric (cm, kg)</option><option value="i">Imperial (inches, lb)</option></select></label>
+          <label class="f"><span id="b-hl">Height (cm)</span><input id="b-h" type="number" inputmode="decimal" min="0" step="any" value="170"></label>
+          <label class="f"><span id="b-wl">Weight (kg)</span><input id="b-w" type="number" inputmode="decimal" min="0" step="any" value="65"></label>
+        </div>
+        <div class="result">
+          <div class="k">Your BMI</div><div class="big" id="b-r">–</div>
+          <div class="gauge"><b id="b-g" style="left:0"></b></div>
+          <div class="kv"><div><span>Category</span><span id="b-c">–</span></div></div>
+          <p class="note">Underweight below 18.5, healthy 18.5 to 24.9, overweight 25 to 29.9, obese 30 and above.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- AGE -->
+    <article class="panel" id="p-age" role="tabpanel" hidden>
+      <h2>Age Calculator</h2>
+      <p class="lead">Exact age in years, months and days, plus your next birthday.</p>
+      <div class="cols">
+        <div class="stack">
+          <label class="f">Date of birth<input id="a-dob" type="date" value="1995-06-15"></label>
+          <label class="f">Age at date<input id="a-to" type="date"></label>
+        </div>
+        <div class="result">
+          <div class="k">Age</div><div class="big" id="a-r">–</div>
+          <div class="kv"><div><span>Total days</span><span id="a-d">–</span></div><div><span>Total weeks</span><span id="a-w">–</span></div><div><span>Next birthday in</span><span id="a-n">–</span></div></div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <section class="seo" aria-labelledby="all-tools">
+    <h2 id="all-tools">All calculators</h2>
+    <div class="grid3">
+      <a href="#calc" data-go="calc"><small>01</small><b>Scientific calculator</b><span>Brackets, powers, roots, logs and trig.</span></a>
+      <a href="#tip" data-go="tip"><small>02</small><b>Tip calculator</b><span>Tip, total and bill split in one view.</span></a>
+      <a href="#fuel" data-go="fuel"><small>03</small><b>Fuel cost calculator</b><span>Trip fuel and cost in km/L, L/100km or MPG.</span></a>
+      <a href="#pct" data-go="pct"><small>04</small><b>Percentage calculator</b><span>Percent of, percent of total and change.</span></a>
+      <a href="#disc" data-go="disc"><small>05</small><b>Discount calculator</b><span>Stacked discounts plus tax.</span></a>
+      <a href="#emi" data-go="emi"><small>06</small><b>EMI calculator</b><span>Loan instalment and interest breakdown.</span></a>
+      <a href="#gst" data-go="gst"><small>07</small><b>GST / VAT calculator</b><span>Add or remove tax, with CGST/SGST split.</span></a>
+      <a href="#bmi" data-go="bmi"><small>08</small><b>BMI calculator</b><span>Metric and imperial.</span></a>
+      <a href="#age" data-go="age"><small>09</small><b>Age calculator</b><span>Exact age and next birthday.</span></a>
+    </div>
+  </section>
+
+  <section class="seo faq" aria-labelledby="faq-h">
+    <h2 id="faq-h">Frequently asked questions</h2>
+    <details><summary>Is this calculator really free and private?</summary><p>Yes. Every calculation runs in your browser. Nothing you type is sent to a server, stored or tracked.</p></details>
+    <details><summary>How do I calculate the fuel cost of a trip?</summary><p>Divide the distance by your vehicle's mileage to get the fuel needed, then multiply by the fuel price. The fuel cost calculator does this for km/L, L/100km and MPG, handles round trips and splits the cost between passengers.</p></details>
+    <details><summary>How do I calculate a tip and split the bill?</summary><p>Multiply the bill by the tip percentage, add it to the bill, then divide by the number of people. The tip calculator also offers a round-up option.</p></details>
+    <details><summary>How is EMI calculated?</summary><p>EMI = P × r × (1+r)<sup>n</sup> ÷ ((1+r)<sup>n</sup> − 1), where P is the loan amount, r is the monthly interest rate and n is the number of monthly instalments.</p></details>
+    <details><summary>How do I add or remove GST or VAT from a price?</summary><p>To add tax, multiply the net price by (1 + rate). To remove tax from a gross price, divide by (1 + rate). The GST calculator does both and shows the CGST/SGST split.</p></details>
+  </section>
+
+  <footer>
+    <p>Calculator · All calculations happen on your device.</p>
+    <p style="margin-top:4px">Results are estimates for convenience, not financial or medical advice.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)}, $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var id=function(x){return document.getElementById(x)};
+var val=function(x){var n=parseFloat(id(x).value);return isNaN(n)?0:n};
+var set=function(x,t){id(x).textContent=t};
+var cur="USD";
+function money(n){if(!isFinite(n))return "–";try{return new Intl.NumberFormat(undefined,{style:"currency",currency:cur,maximumFractionDigits:cur==="JPY"?0:2}).format(n)}catch(e){return n.toFixed(2)}}
+function num(n,d){if(!isFinite(n))return "–";return new Intl.NumberFormat(undefined,{maximumFractionDigits:d==null?2:d}).format(n)}
+
+/* ---------- tabs ---------- */
+var TOOLS=[["calc","Calculator","Online Scientific Calculator"],["tip","Tip","Tip Calculator & Bill Splitter"],["fuel","Fuel cost","Fuel Cost & Trip Cost Calculator"],["pct","Percentage","Percentage Calculator"],["disc","Discount","Discount Calculator"],["emi","EMI","EMI & Loan Calculator"],["gst","GST / VAT","GST / VAT Calculator"],["bmi","BMI","BMI Calculator"],["age","Age","Age Calculator"]];
+var tabs=id("tabs");
+TOOLS.forEach(function(t){
+  var b=document.createElement("button");b.className="tab";b.setAttribute("role","tab");b.id="tab-"+t[0];b.setAttribute("aria-controls","p-"+t[0]);b.textContent=t[1];b.onclick=function(){show(t[0],true)};tabs.appendChild(b);
+});
+var BASE_TITLE=document.title;
+function show(k,push){
+  if(!TOOLS.some(function(t){return t[0]===k}))k="calc";
+  TOOLS.forEach(function(t){var on=t[0]===k;id("p-"+t[0]).hidden=!on;id("tab-"+t[0]).setAttribute("aria-selected",on)});
+  var t=TOOLS.filter(function(t){return t[0]===k})[0];
+  document.title=(k==="calc"&&!push&&!location.hash)?BASE_TITLE:t[2]+" – Calculator";
+  if(push){try{history.replaceState(null,"","#"+k)}catch(e){}}
+  var tb=id("tab-"+k);if(tb.scrollIntoView)tb.scrollIntoView({block:"nearest",inline:"center"});
+  render();
+}
+$$("[data-go]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();show(a.getAttribute("data-go"),true);window.scrollTo({top:0,behavior:"smooth"})})});
+
+/* ---------- theme + currency ---------- */
+var themeBtn=id("theme");
+function setTheme(t){document.documentElement.setAttribute("data-theme",t);themeBtn.textContent=t==="dark"?"☀":"☾";var m=$('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="dark"?"#07070b":"#f5f2ea")}
+var saved=null;try{saved=localStorage.getItem("calc-theme")}catch(e){}
+setTheme(saved==="light"?"light":"dark");
+themeBtn.onclick=function(){var n=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";setTheme(n);try{localStorage.setItem("calc-theme",n)}catch(e){}};
+var lang=(navigator.language||"en-US");
+var guess=/-IN$/i.test(lang)?"INR":/-GB$/i.test(lang)?"GBP":/-(DE|FR|ES|IT|NL|IE|PT|AT|BE)$/i.test(lang)?"EUR":/-AU$/i.test(lang)?"AUD":/-CA$/i.test(lang)?"CAD":/-AE$/i.test(lang)?"AED":/^ja/i.test(lang)?"JPY":"USD";
+var cs=id("cur");var sc=null;try{sc=localStorage.getItem("calc-cur")}catch(e){}
+cur=sc||guess;cs.value=cur;
+cs.onchange=function(){cur=cs.value;try{localStorage.setItem("calc-cur",cur)}catch(e){}render()};
+
+/* ---------- chips ---------- */
+$$(".chips").forEach(function(box){
+  box.addEventListener("click",function(e){
+    var c=e.target.closest(".chip");if(!c)return;
+    var inp=id(box.getAttribute("data-for"));inp.value=c.getAttribute("data-v");
+    inp.dispatchEvent(new Event("input",{bubbles:true}));
+  });
+});
+function syncChips(){$$(".chips").forEach(function(box){var v=parseFloat(id(box.getAttribute("data-for")).value);Array.prototype.forEach.call(box.children,function(c){c.classList.toggle("on",parseFloat(c.getAttribute("data-v"))===v)})})}
+
+/* ---------- scientific calculator ---------- */
+var deg=true,hist=[];
+function calcEval(src){
+  var s=src.replace(/×/g,"*").replace(/÷/g,"/").replace(/[−–]/g,"-").replace(/π/g,"pi").replace(/√/g,"sqrt").replace(/\s+/g,"").toLowerCase();
+  var i=0;
+  var rad=function(x){return deg?x*Math.PI/180:x};
+  var F={sqrt:Math.sqrt,sin:function(x){return Math.sin(rad(x))},cos:function(x){return Math.cos(rad(x))},tan:function(x){return Math.tan(rad(x))},log:Math.log10,ln:Math.log,abs:Math.abs};
+  function peek(){return s.charAt(i)}
+  function expr(){var a=term();while(peek()==="+"||peek()==="-"){var o=s.charAt(i++);var b=term();if(s.charAt(i-1)==="%")b=a*b;a=o==="+"?a+b:a-b}return a}
+  function term(){var a=unary();for(;;){var c=peek();if(c==="*"||c==="/"){i++;var b=unary();a=c==="*"?a*b:a/b}else if(c==="("||/[a-z]/.test(c)){a*=unary()}else break}return a}
+  function unary(){if(peek()==="-"){i++;return -unary()}if(peek()==="+"){i++;return unary()}return power()}
+  function power(){var a=post();if(peek()==="^"){i++;a=Math.pow(a,unary())}return a}
+  function post(){var a=prim();while(peek()==="%"){i++;a/=100}return a}
+  function prim(){
+    if(peek()==="("){i++;var a=expr();if(peek()!==")")throw 0;i++;return a}
+    var m=/^(\d+\.?\d*|\.\d+)/.exec(s.slice(i));if(m){i+=m[0].length;return parseFloat(m[0])}
+    m=/^[a-z]+/.exec(s.slice(i));
+    if(m){var n=m[0];
+      if(n==="pi"){i+=2;return Math.PI}
+      if(n.charAt(0)==="e"&&!F[n]){i+=1;return Math.E}
+      if(!F[n])throw 0;i+=n.length;if(peek()!=="(")throw 0;i++;var v=expr();if(peek()!==")")throw 0;i++;return F[n](v)}
+    throw 0;
+  }
+  var r=expr();if(i<s.length||!isFinite(r))throw 0;return Number(r.toPrecision(12));
+}
+var cin=id("c-in"),cout=id("c-out");
+function preview(){var t=cin.value.trim();if(!t){cout.textContent="";return}try{cout.textContent="= "+num(calcEval(t),10)}catch(e){cout.textContent=""}}
+function commit(){var t=cin.value.trim();if(!t)return;try{var r=calcEval(t);hist.unshift([t,r]);hist=hist.slice(0,6);cin.value=String(r);cout.textContent="";renderHist()}catch(e){cout.textContent="Check your expression"}}
+function renderHist(){var h=id("hist");h.innerHTML="";if(!hist.length){h.innerHTML="<span>Your calculations appear here.</span>";return}hist.forEach(function(x){var b=document.createElement("button");var a=document.createElement("span");a.textContent=x[0];var c=document.createElement("b");c.textContent=num(x[1],10);b.appendChild(a);b.appendChild(c);b.onclick=function(){cin.value=String(x[1]);preview()};h.appendChild(b)})}
+$("#p-calc").addEventListener("click",function(e){
+  var b=e.target.closest(".key");if(!b)return;
+  if(b.id==="deg"){deg=!deg;b.textContent=deg?"DEG":"RAD";b.setAttribute("aria-pressed",deg);preview();return}
+  var a=b.getAttribute("data-a"),k=b.getAttribute("data-k");
+  if(a==="ac"){cin.value="";cout.textContent=""}
+  else if(a==="del"){cin.value=cin.value.slice(0,-1);preview()}
+  else if(a==="eq"){commit()}
+  else if(k){cin.value+=k;preview()}
+});
+cin.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();commit()}});
+cin.addEventListener("input",preview);
+
+/* ---------- renderers ---------- */
+function rTip(){
+  var bill=val("t-bill"),p=val("t-pct"),n=Math.max(1,Math.round(val("t-ppl"))||1);
+  set("t-pctv",p+"%");
+  var tip=bill*p/100,total=bill+tip,each=total/n;
+  var r=id("t-round").checked;
+  if(r)each=Math.ceil(each-1e-9);
+  var adj=each*n;
+  set("t-each",money(each));set("t-tip",money(r?adj-bill:tip));set("t-total",money(r?adj:total));set("t-tpp",money((r?adj-bill:tip)/n));
+}
+function rFuel(){
+  var d=val("f-dist"),du=id("f-du").value,eff=val("f-eff"),eu=id("f-eu").value,pr=val("f-price"),pu=id("f-pu").value,n=Math.max(1,Math.round(val("f-ppl"))||1);
+  var km=du==="mi"?d*1.609344:d; if(id("f-rt").checked)km*=2;
+  var kml=eu==="kml"?eff:eu==="l100"?(eff>0?100/eff:0):eff*1.609344/3.785411784;
+  var ppl=pu==="g"?pr/3.785411784:pr;
+  var litres=kml>0?km/kml:NaN,cost=litres*ppl;
+  set("f-cost",money(cost));
+  set("f-fuel",isFinite(litres)?num(litres)+" L ("+num(litres/3.785411784)+" gal)":"–");
+  set("f-td",num(du==="mi"?km/1.609344:km,1)+" "+(du==="mi"?"mi":"km"));
+  set("f-ckm",isFinite(cost)&&km>0?money(cost/km):"–");
+  set("f-pp",money(cost/n));
+}
+function rPct(){
+  set("p1r",num(val("p1x")/100*val("p1y"),4));
+  set("p2r",val("p2y")?num(val("p2x")/val("p2y")*100,4)+"%":"–");
+  var f=val("p3x"),t=val("p3y");
+  set("p3r",f?((t-f)/Math.abs(f)*100>=0?"+":"")+num((t-f)/Math.abs(f)*100,4)+"%":"–");
+}
+function rDisc(){
+  var p=val("d-price"),a=val("d-off"),b=val("d-off2"),t=val("d-tax");
+  var after=p*(1-a/100)*(1-b/100),tax=after*t/100,fin=after+tax;
+  set("d-final",money(fin));set("d-save",money(p-after));set("d-eff",p?num((1-after/p)*100,2)+"%":"–");set("d-taxv",money(tax));
+}
+function rEmi(){
+  var P=val("e-p"),r=val("e-r")/1200,n=Math.max(1,Math.round(val("e-n")))*(id("e-u").value==="y"?12:1);
+  var emi=r===0?P/n:P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  var tot=emi*n,int=tot-P;
+  set("e-emi",money(emi));set("e-int",money(int));set("e-tot",money(tot));
+  var dg=tot>0?P/tot*360:0;id("e-donut").style.background="conic-gradient(var(--accent) 0 "+dg+"deg, var(--track) "+dg+"deg 360deg)";
+}
+function rGst(){
+  var a=val("g-amt"),r=val("g-rate")/100,add=id("g-mode").value==="add";
+  var net=add?a:a/(1+r),tax=net*r,tot=net+tax;
+  set("g-k",add?"Total with tax":"Original (tax-inclusive) amount");
+  set("g-total",money(add?tot:a));set("g-net",money(net));set("g-tax",money(tax));set("g-c",money(tax/2));set("g-s",money(tax/2));
+}
+function rBmi(){
+  var im=id("b-u").value==="i";
+  set("b-hl",im?"Height (inches)":"Height (cm)");set("b-wl",im?"Weight (lb)":"Weight (kg)");
+  var h=val("b-h"),w=val("b-w");var hm=im?h*0.0254:h/100,kg=im?w*0.45359237:w;
+  if(!hm||!kg){set("b-r","–");set("b-c","–");return}
+  var b=kg/(hm*hm);set("b-r",num(b,1));
+  set("b-c",b<18.5?"Underweight":b<25?"Healthy weight":b<30?"Overweight":"Obese");
+  id("b-g").style.left=Math.max(0,Math.min(100,(b-15)/(40-15)*100))+"%";
+}
+function rAge(){
+  var d=id("a-dob").value,t=id("a-to").value;if(!d||!t){set("a-r","–");return}
+  var a=new Date(d+"T00:00:00"),b=new Date(t+"T00:00:00");
+  if(b<a){set("a-r","Date is before birth");set("a-d","–");set("a-w","–");set("a-n","–");return}
+  var y=b.getFullYear()-a.getFullYear(),m=b.getMonth()-a.getMonth(),dd=b.getDate()-a.getDate();
+  if(dd<0){m--;dd+=new Date(b.getFullYear(),b.getMonth(),0).getDate()}
+  if(m<0){y--;m+=12}
+  set("a-r",y+"y "+m+"m "+dd+"d");
+  var days=Math.round((b-a)/864e5);set("a-d",num(days,0));set("a-w",num(Math.floor(days/7),0));
+  var nb=new Date(b.getFullYear(),a.getMonth(),a.getDate());if(nb<=b)nb=new Date(b.getFullYear()+1,a.getMonth(),a.getDate());
+  var left=Math.round((nb-b)/864e5);set("a-n",left===0?"Today":left+" days");
+}
+function render(){rTip();rFuel();rPct();rDisc();rEmi();rGst();rBmi();rAge();syncChips()}
+document.addEventListener("input",render);document.addEventListener("change",render);
+
+/* ---------- init ---------- */
+(function(){var d=new Date();var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");id("a-to").value=iso;id("a-dob").max=iso})();
+show((location.hash||"#calc").slice(1),false);
+window.addEventListener("hashchange",function(){show(location.hash.slice(1),false)});
+})();
+</script>
+</body>
+</html>
