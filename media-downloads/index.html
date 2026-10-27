@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Media Downloads – Free Public Video, Audio & Image Downloader</title>
+<meta name="description" content="Paste a link and download public videos, audio and images in your preferred quality. Private media is never touched. No sign-up, no tracking, privacy first.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/media-downloads">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Media Downloads – Free Public Media Downloader">
+<meta property="og:description" content="Paste a link, pick a quality, download. Public media only – privacy first.">
+<meta property="og:url" content="https://YOUR-DOMAIN.com/media-downloads">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#6d5efc">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬇️</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebApplication","name":"Media Downloads","url":"https://YOUR-DOMAIN.com/media-downloads","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Download public videos, audio and images from a link. Private media is never accessed."},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I download private media?","acceptedAnswer":{"@type":"Answer","text":"No. Media Downloads only works with public links. If a link is private, we tell you so and do not attempt to access it."}},
+{"@type":"Question","name":"Do you store my links or downloads?","acceptedAnswer":{"@type":"Answer","text":"No. Links are processed only to fetch the public file, and history lives in your browser tab until you refresh."}},
+{"@type":"Question","name":"Which formats are supported?","acceptedAnswer":{"@type":"Answer","text":"Video (MP4, WebM), audio (MP3, M4A) and images (JPG, PNG, WebP), depending on what the public source offers."}},
+{"@type":"Question","name":"Is it free?","acceptedAnswer":{"@type":"Answer","text":"Yes, Media Downloads is free with no sign-up."}}]}]}
+</script>
+<style>
+:root{--bg:#f6f5ff;--card:#fff;--ink:#16132b;--mute:#6b6885;--line:#e4e2f5;--brand:#6d5efc;--brand2:#22d3ee;--ok:#12a150;--warn:#d9480f;--shadow:0 20px 50px -20px rgba(80,60,200,.35)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d0b1c;--card:#16132b;--ink:#f1efff;--mute:#9a97b8;--line:#2a2650;--shadow:0 20px 50px -20px #000}}
+:root[data-theme=dark]{--bg:#0d0b1c;--card:#16132b;--ink:#f1efff;--mute:#9a97b8;--line:#2a2650;--shadow:0 20px 50px -20px #000}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(600px 300px at 15% 0,rgba(109,94,252,.25),transparent),radial-gradient(500px 300px at 90% 10%,rgba(34,211,238,.2),transparent)}
+a{color:var(--brand)}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.logo{font-weight:800;font-size:1.2rem;display:flex;gap:10px;align-items:center}
+.logo i{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:#fff;font-style:normal}
+button{font:inherit;cursor:pointer}
+.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:8px 12px}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin:30px 0 12px;text-align:center;letter-spacing:-.02em}
+h1 span{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{text-align:center;color:var(--mute);max-width:620px;margin:0 auto 28px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+textarea{width:100%;min-height:58px;resize:vertical;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:14px;padding:14px;font:inherit;outline:none}
+textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(109,94,252,.2)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.row select{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:10px}
+.go{flex:1;min-width:160px;border:0;border-radius:12px;padding:13px 22px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--brand),#8b5cf6)}
+.go:disabled{opacity:.6}
+.hint{font-size:.85rem;color:var(--mute);margin:10px 2px 0}
+.res{margin-top:16px;display:grid;gap:14px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;gap:14px;flex-wrap:wrap;animation:in .3s}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.item img{width:140px;height:80px;object-fit:cover;border-radius:10px;background:var(--line)}
+.meta{flex:1;min-width:200px}.meta b{display:block;word-break:break-word}
+.meta small{color:var(--mute);word-break:break-all}
+.dls{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.dl{text-decoration:none;border-radius:10px;padding:8px 12px;font-size:.9rem;font-weight:600;color:#fff;background:var(--brand)}
+.dl.a{background:#0891b2}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;border-radius:99px;padding:2px 10px;margin-bottom:6px}
+.private{border-color:var(--warn)}.private .tag{background:rgba(217,72,15,.12);color:var(--warn)}
+.public .tag{background:rgba(18,161,80,.12);color:var(--ok)}
+.err .tag{background:var(--line);color:var(--mute)}
+.spin{width:16px;height:16px;border:2px solid var(--line);border-top-color:var(--brand);border-radius:50%;animation:s .7s linear infinite;display:inline-block;vertical-align:-3px}
+@keyframes s{to{transform:rotate(1turn)}}
+section{margin:60px 0}
+h2{font-size:1.6rem;margin:0 0 16px;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.card h3{margin:0 0 6px;font-size:1.05rem}.card p{margin:0;color:var(--mute);font-size:.93rem}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:10px}
+summary{font-weight:600;cursor:pointer}details p{color:var(--mute);margin:8px 0 0}
+footer{text-align:center;color:var(--mute);font-size:.85rem;padding:30px 0 40px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo"><i>⬇</i> Media Downloads</div>
+  <button class="ghost" id="theme" aria-label="Toggle theme">🌓</button>
+</header>
+
+<main>
+<h1>Download public media <span>in one paste</span></h1>
+<p class="sub">Paste a link, choose your quality, and save. Only public media is fetched. Private media is never accessed — we put your privacy first.</p>
+
+<div class="box">
+  <label for="urls" class="hint" style="margin:0 0 8px;display:block">Paste one link, or several (one per line)</label>
+  <textarea id="urls" placeholder="https://example.com/video-or-image-link" rows="2"></textarea>
+  <div class="row">
+    <select id="type" aria-label="Preferred type">
+      <option value="auto">Auto detect</option><option value="video">Video</option><option value="audio">Audio only</option><option value="image">Image</option>
+    </select>
+    <select id="quality" aria-label="Preferred quality">
+      <option value="best">Best quality</option><option value="1080">1080p</option><option value="720">720p</option><option value="480">480p</option>
+    </select>
+    <button class="ghost" id="paste" type="button">📋 Paste</button>
+    <button class="ghost" id="clear" type="button">Clear</button>
+    <button class="go" id="go" type="button">Download</button>
+  </div>
+  <p class="hint">🔒 No sign-up. No tracking. Results stay in this tab only and vanish on refresh.</p>
+</div>
+
+<div class="res" id="res" aria-live="polite"></div>
+
+<section>
+  <h2>Why Media Downloads?</h2>
+  <div class="grid">
+    <div class="card"><h3>🔒 Privacy first</h3><p>Private links are detected and refused. We never ask for logins or cookies.</p></div>
+    <div class="card"><h3>⚡ Advanced options</h3><p>Pick video, audio-only or image, with multiple quality levels per link.</p></div>
+    <div class="card"><h3>📦 Batch mode</h3><p>Paste many links at once and get every result in a single list.</p></div>
+    <div class="card"><h3>🆓 Free forever</h3><p>No accounts, no watermarks, no limits on how often you use it.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>How it works</h2>
+  <div class="grid">
+    <div class="card"><h3>1. Paste</h3><p>Drop a public media link into the box.</p></div>
+    <div class="card"><h3>2. Choose</h3><p>Select type and quality, then press Download.</p></div>
+    <div class="card"><h3>3. Save</h3><p>Tap a format button and the file saves to your device.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Frequently asked questions</h2>
+  <details><summary>Can I download private media?</summary><p>No. If a link is private we say so and stop. We focus on privacy, so we never try to bypass it. Ask the owner to make it public, or try another public link.</p></details>
+  <details><summary>Do you store my links or files?</summary><p>No. Links are used only to find the public file, and your result list lives in your browser tab until you refresh.</p></details>
+  <details><summary>Which formats are supported?</summary><p>Video (MP4, WebM), audio (MP3, M4A) and images (JPG, PNG, WebP), depending on what the public source offers.</p></details>
+  <details><summary>Is it legal to download media?</summary><p>Only download content you own, that is in the public domain, or that you have permission to save. You are responsible for respecting copyright and each site's terms.</p></details>
+</section>
+</main>
+
+<footer>© <span id="y"></span> Media Downloads · Public media only · Respect creators' rights</footer>
+</div>
+
+<script>
+/* Backend contract: POST {API} with {url,type,quality}
+   -> {status:"public"|"private"|"unsupported"|"error", title, thumbnail, duration, source,
+       formats:[{label, ext, url, size, kind:"video"|"audio"|"image"}]} */
+const API = "/api/media-downloads/resolve";
+const $ = s => document.querySelector(s), res = $("#res");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const DIRECT = /\.(mp4|webm|mov|mp3|m4a|wav|ogg|jpe?g|png|webp|gif)(\?.*)?$/i;
+$("#y").textContent = new Date().getFullYear();
+
+$("#theme").onclick = () => {
+  const d = document.documentElement, dark = getComputedStyle(d).getPropertyValue("--bg").trim() === "#0d0b1c";
+  d.dataset.theme = dark ? "light" : "dark";
+};
+$("#paste").onclick = async () => {
+  try { $("#urls").value = (await navigator.clipboard.readText()).trim(); } catch { $("#urls").focus(); }
+};
+$("#clear").onclick = () => { $("#urls").value = ""; res.innerHTML = ""; };
+
+function card(cls, tag, body, extra = "") {
+  const el = document.createElement("div");
+  el.className = "item " + cls;
+  el.innerHTML = `<div class="meta"><span class="tag">${tag}</span>${body}</div>${extra}`;
+  res.prepend(el);
+  return el;
+}
+
+function render(el, url, d) {
+  if (d.status === "private") {
+    el.className = "item private";
+    el.innerHTML = `<div class="meta"><span class="tag">🔒 PRIVATE MEDIA</span><b>This is private media, so we can't get it for you.</b>
+      <p style="margin:6px 0;color:var(--mute)">We focus on privacy and never access protected content. Try a public link, or ask the owner to make it public.</p><small>${esc(url)}</small></div>`;
+    return;
+  }
+  if (d.status !== "public" || !d.formats?.length) {
+    el.className = "item err";
+    el.innerHTML = `<div class="meta"><span class="tag">COULDN'T FETCH</span><b>${d.status === "unsupported" ? "This link isn't supported yet." : "We couldn't find downloadable public media here."}</b><small>${esc(url)}</small></div>`;
+    return;
+  }
+  const btns = d.formats.map(f => `<a class="dl ${f.kind === "audio" ? "a" : ""}" href="${esc(f.url)}" download rel="noopener nofollow" target="_blank">${esc(f.label)} · ${esc(f.ext).toUpperCase()}${f.size ? " · " + esc(f.size) : ""}</a>`).join("");
+  el.className = "item public";
+  el.innerHTML = `${d.thumbnail ? `<img src="${esc(d.thumbnail)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ""}
+    <div class="meta"><span class="tag">✅ PUBLIC</span><b>${esc(d.title || "Media file")}</b>
+    <small>${esc(d.source || new URL(url).hostname)}${d.duration ? " · " + esc(d.duration) : ""}</small><div class="dls">${btns}</div></div>`;
+}
+
+async function resolve(url) {
+  const el = card("", "⏳ CHECKING", `<span class="spin"></span> Checking if this media is public…<br><small>${esc(url)}</small>`);
+  const type = $("#type").value, quality = $("#quality").value;
+  try {
+    const r = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url, type, quality }) });
+    if (!r.ok && r.status !== 403 && r.status !== 401) throw new Error("api");
+    const d = r.ok ? await r.json() : { status: "private" };
+    render(el, url, d);
+  } catch {
+    if (DIRECT.test(url)) {
+      const ext = url.match(DIRECT)[1].toLowerCase();
+      const kind = /mp3|m4a|wav|ogg/.test(ext) ? "audio" : /jpe?g|png|webp|gif/.test(ext) ? "image" : "video";
+      render(el, url, { status: "public", title: decodeURIComponent(url.split("/").pop().split("?")[0]), formats: [{ label: "Original", ext, url, kind }] });
+    } else {
+      render(el, url, { status: "error" });
+    }
+  }
+}
+
+$("#go").onclick = async () => {
+  const links = [...new Set($("#urls").value.split(/\s+/).filter(Boolean))];
+  if (!links.length) { $("#urls").focus(); return; }
+  $("#go").disabled = true;
+  for (const u of links) {
+    try { new URL(u); if (!/^https?:/i.test(u)) throw 0; }
+    catch { card("err", "INVALID LINK", `<b>That doesn't look like a valid link.</b><small>${esc(u)}</small>`); continue; }
+    await resolve(u);
+  }
+  $("#go").disabled = false;
+};
+</script>
+</body>
+</html>
