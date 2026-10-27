@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Galleonwick Compass – Free Online Pirate Compass with Bearing & Distance</title>
+<meta name="description" content="Galleonwick is a free online compass with an old pirate ship look. Get your live heading, set a course to any coordinates, and see bearing, distance and turn direction. 100% private, runs in your browser.">
+<meta name="keywords" content="online compass, pirate compass, digital compass, phone compass, bearing calculator, heading, treasure map compass, navigation tool, free compass">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#2a170b">
+<!-- Replace YOUR-USERNAME/YOUR-REPO with your GitHub Pages address -->
+<link rel="canonical" href="https://YOUR-USERNAME.github.io/YOUR-REPO/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Galleonwick Compass – Pirate Compass with Bearing & Distance">
+<meta property="og:description" content="Live heading, course setting and distance to any coordinates. A free pirate-style compass that runs privately in your browser.">
+<meta property="og:url" content="https://YOUR-USERNAME.github.io/YOUR-REPO/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Galleonwick Compass">
+<meta name="twitter:description" content="Free pirate-style online compass with bearing and distance. Private, in-browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23b8862b'/%3E%3Cpath d='M50 12l9 38-9 38-9-38z' fill='%23fff3d6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebApplication","name":"Galleonwick Compass","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A free pirate-themed online compass with live heading, bearing and distance to any coordinates. Runs entirely in your browser."},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How does the online compass work?","acceptedAnswer":{"@type":"Answer","text":"It reads your device's orientation sensor in the browser to show your heading. On devices without a sensor you can steer the dial by dragging it."}},
+{"@type":"Question","name":"Is my location sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs client-side in your browser. Your location and heading never leave your device."}},
+{"@type":"Question","name":"How do I find the bearing to a destination?","acceptedAnswer":{"@type":"Answer","text":"Enter the destination latitude and longitude, press Set Course, and the compass shows the bearing, the distance and which way to turn."}},
+{"@type":"Question","name":"Why is my compass reading off?","acceptedAnswer":{"@type":"Answer","text":"Phone compasses can be disturbed by magnets and metal. Move away from them and wave your device in a figure eight to recalibrate."}}
+]}]}
+</script>
+<style>
+:root{--wood:#2a170b;--wood2:#43260f;--brass:#d6a43a;--brass2:#8a5f16;--parch:#f3e3b8;--parch2:#dcc38a;--ink:#3b2410;--red:#a3281b;--sea:#0f3a45}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'IM Fell English',Georgia,serif;color:var(--parch);background:radial-gradient(1200px 600px at 50% -10%,#1d6b78 0,transparent 60%),linear-gradient(#0b2a33,#07191f 60%,#2a170b);min-height:100vh;line-height:1.6}
+body:before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0 2px,transparent 2px 6px);pointer-events:none}
+.wrap{max-width:980px;margin:0 auto;padding:20px 18px 60px}
+header{text-align:center;padding:26px 0 8px}
+h1,h2,h3,.brand{font-family:'Pirata One',serif;font-weight:400;letter-spacing:.04em}
+h1{font-size:clamp(2.4rem,7vw,4.2rem);margin:.1em 0;color:var(--brass);text-shadow:0 3px 0 #5a3a0c,0 8px 24px rgba(0,0,0,.6)}
+.tag{font-style:italic;color:var(--parch2);max-width:620px;margin:0 auto}
+.steps{display:flex;justify-content:center;gap:10px;margin:24px 0;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;padding:8px 16px;border:2px solid var(--brass2);border-radius:40px;background:rgba(42,23,11,.7);color:var(--parch2);font-family:'Pirata One';font-size:1.1rem}
+.step b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--brass2);color:var(--wood)}
+.step.on{background:var(--brass);color:var(--wood);border-color:#fff3d6}
+.step.on b{background:var(--wood);color:var(--brass)}
+.grid{display:grid;gap:26px;grid-template-columns:1fr;align-items:start}
+@media(min-width:860px){.grid{grid-template-columns:1.05fr 1fr}}
+.panel{background:linear-gradient(145deg,var(--parch),var(--parch2));color:var(--ink);border:6px solid var(--wood2);border-radius:14px;padding:22px;box-shadow:0 0 0 2px var(--brass2),0 22px 50px rgba(0,0,0,.55),inset 0 0 60px rgba(120,80,20,.35)}
+.panel h2{margin:0 0 6px;font-size:1.8rem;color:var(--red)}
+.dialbox{display:grid;place-items:center;padding:14px;border-radius:50%;background:radial-gradient(circle,#5a3513,#25130a);border:5px solid var(--brass);box-shadow:0 20px 50px rgba(0,0,0,.6),inset 0 0 40px #000;max-width:440px;margin:0 auto;touch-action:none}
+svg{display:block;width:100%;height:auto}
+#rose{transition:transform .12s linear;transform-origin:200px 200px}
+.read{display:flex;justify-content:center;gap:18px;margin-top:16px;text-align:center}
+.read div{background:var(--wood);color:var(--brass);padding:8px 18px;border-radius:10px;border:2px solid var(--brass2);min-width:110px}
+.read .n{font-family:'Pirata One';font-size:2rem;line-height:1}
+.read small{color:var(--parch2);display:block;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase}
+button{font-family:'Pirata One';font-size:1.25rem;letter-spacing:.05em;padding:11px 22px;border-radius:10px;border:2px solid var(--wood);background:linear-gradient(var(--brass),var(--brass2));color:var(--wood);cursor:pointer;box-shadow:0 4px 0 var(--wood),0 8px 14px rgba(0,0,0,.35);transition:transform .08s}
+button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--wood)}
+button.ghost{background:transparent;color:var(--wood);box-shadow:none;border-color:var(--brass2)}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+label{display:block;font-weight:700;margin:12px 0 4px}
+input[type=number],input[type=text]{width:100%;padding:10px 12px;font:inherit;font-size:1.05rem;border:2px solid var(--brass2);border-radius:8px;background:#fff8e3;color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--red)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hidden{display:none}
+.msg{min-height:1.6em;font-style:italic;margin:10px 0 0}
+.big{font-family:'Pirata One';font-size:1.7rem;color:var(--red);margin:8px 0}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.stats div{background:rgba(42,23,11,.12);border-radius:8px;padding:8px 12px}
+.stats small{display:block;text-transform:uppercase;letter-spacing:.08em;font-size:.72rem}
+.stats strong{font-family:'Pirata One';font-size:1.5rem}
+section.info{margin-top:44px}
+section.info h2{color:var(--brass);font-size:2rem;text-align:center}
+.cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:rgba(42,23,11,.75);border:2px solid var(--brass2);border-radius:12px;padding:16px}
+.card h3{margin:.1em 0;color:var(--brass);font-size:1.4rem}
+details{background:rgba(42,23,11,.75);border:2px solid var(--brass2);border-radius:10px;margin:10px 0;padding:10px 16px}
+summary{cursor:pointer;font-family:'Pirata One';font-size:1.25rem;color:var(--brass)}
+footer{text-align:center;margin-top:40px;color:var(--parch2);font-size:.9rem}
+@media(prefers-reduced-motion:reduce){#rose{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand" aria-hidden="true">⚓ ☠ ⚓</div>
+  <h1>Galleonwick Compass</h1>
+  <p class="tag">A free pirate's compass for your phone or computer. Find your heading, set a course to any coordinates, and sail true. Everything stays aboard your own device.</p>
+</header>
+
+<nav class="steps" aria-label="Voyage steps">
+  <div class="step on" id="s1"><b>1</b>Hoist</div>
+  <div class="step" id="s2"><b>2</b>Set Course</div>
+  <div class="step" id="s3"><b>3</b>Sail</div>
+</nav>
+
+<main class="grid">
+  <section class="panel" aria-label="Compass">
+    <h2>Ship's Compass</h2>
+    <div class="dialbox" id="dialbox">
+      <svg viewBox="0 0 400 400" role="img" aria-label="Compass dial showing current heading" id="dial">
+        <defs>
+          <radialGradient id="face" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fbefc8"/><stop offset="1" stop-color="#d9bd7c"/></radialGradient>
+        </defs>
+        <circle cx="200" cy="200" r="196" fill="#8a5f16"/>
+        <circle cx="200" cy="200" r="186" fill="url(#face)" stroke="#43260f" stroke-width="4"/>
+        <g id="rose"></g>
+        <!-- fixed lubber line -->
+        <path d="M200 6 L212 34 L188 34Z" fill="#a3281b" stroke="#43260f" stroke-width="2"/>
+        <circle cx="200" cy="200" r="9" fill="#43260f" stroke="#d6a43a" stroke-width="3"/>
+      </svg>
+    </div>
+    <div class="read">
+      <div><span class="n" id="deg">0°</span><small>Heading</small></div>
+      <div><span class="n" id="card">N</span><small>Point</small></div>
+    </div>
+    <p class="msg" id="msg" role="status" aria-live="polite">Press the button to wake the compass.</p>
+  </section>
+
+  <section class="panel" aria-label="Controls">
+    <div id="p1">
+      <h2>Step 1 · Hoist the Compass</h2>
+      <p>Allow your device's motion sensor so the dial follows your heading. On a computer, drag the dial or use the slider to steer.</p>
+      <div class="row"><button id="start">Hoist the Compass ⚓</button><button class="ghost" id="manual">Steer by hand</button></div>
+      <label for="slider" class="hidden" id="slbl">Manual heading</label>
+      <input type="range" id="slider" min="0" max="359" value="0" class="hidden" aria-label="Manual heading">
+    </div>
+
+    <div id="p2" class="hidden">
+      <h2>Step 2 · Set Your Course</h2>
+      <p>Where is the treasure? Enter coordinates, or just lock a bearing.</p>
+      <div class="two">
+        <div><label for="tlat">Treasure latitude</label><input id="tlat" type="number" step="any" placeholder="e.g. 13.0827" inputmode="decimal"></div>
+        <div><label for="tlng">Treasure longitude</label><input id="tlng" type="number" step="any" placeholder="e.g. 80.2707" inputmode="decimal"></div>
+      </div>
+      <div class="row">
+        <button id="locate" class="ghost">📍 Find my position</button>
+        <button id="setcourse">Set Course</button>
+        <button id="lockhead" class="ghost">Lock current heading</button>
+      </div>
+      <p class="msg" id="msg2"></p>
+    </div>
+
+    <div id="p3" class="hidden">
+      <h2>Step 3 · Sail!</h2>
+      <div class="big" id="turn">Steady as she goes</div>
+      <div class="stats">
+        <div><small>Bearing to target</small><strong id="brg">—</strong></div>
+        <div><small>Distance</small><strong id="dist">—</strong></div>
+      </div>
+      <p>The red X on the dial is your treasure. Turn until it sits under the red pointer at the top.</p>
+      <div class="row"><button class="ghost" id="newcourse">Plot a new course</button></div>
+    </div>
+  </section>
+</main>
+
+<section class="info" aria-labelledby="why">
+  <h2 id="why">Why sailors love Galleonwick</h2>
+  <div class="cards">
+    <article class="card"><h3>Live heading</h3><p>A smooth, jitter-free digital compass that reads your device's sensor and shows degrees and compass points.</p></article>
+    <article class="card"><h3>Bearing &amp; distance</h3><p>Enter any latitude and longitude and get the great-circle bearing and distance in kilometres and nautical miles.</p></article>
+    <article class="card"><h3>Private by design</h3><p>No servers, no tracking, no accounts. Your position and heading never leave your browser.</p></article>
+  </div>
+</section>
+
+<section class="info" aria-labelledby="faq">
+  <h2 id="faq">Ship's Log: Questions</h2>
+  <details><summary>How does the online compass work?</summary><p>It reads your device's orientation sensor in the browser to show your heading. On devices without a sensor you can steer the dial by dragging it.</p></details>
+  <details><summary>Is my location sent to a server?</summary><p>No. Everything runs client-side in your browser. Your location and heading never leave your device.</p></details>
+  <details><summary>How do I find the bearing to a destination?</summary><p>Enter the destination latitude and longitude, press Set Course, and the compass shows the bearing, the distance and which way to turn.</p></details>
+  <details><summary>Why is my compass reading off?</summary><p>Phone compasses can be disturbed by magnets and metal. Move away from them and wave your device in a figure eight to recalibrate. Readings are magnetic north as reported by your device.</p></details>
+</section>
+
+<footer><p>© <span id="yr"></span> Galleonwick Compass · Fair winds and following seas.</p></footer>
+</div>
+<noscript><p style="text-align:center;padding:20px">Galleonwick Compass needs JavaScript to read your device's sensors. Please enable it, matey.</p></noscript>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const NS="http://www.w3.org/2000/svg";
+$('yr').textContent=new Date().getFullYear();
+
+/* ---- build the compass rose ---- */
+const rose=$('rose');
+function el(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(p||rose).appendChild(e);return e}
+for(let i=0;i<360;i+=5){
+  const major=i%90===0,mid=i%45===0,ten=i%10===0;
+  const len=major?22:mid?16:ten?11:6;
+  el('line',{x1:200,y1:20,x2:200,y2:20+len,stroke:'#43260f','stroke-width':major?3:ten?1.6:1,transform:`rotate(${i} 200 200)`});
+  if(ten&&i%30===0&&!major){const t=el('text',{x:200,y:58,'text-anchor':'middle','font-size':11,fill:'#5a3513','font-family':'IM Fell English',transform:`rotate(${i} 200 200)`});t.textContent=i}
+}
+// star points
+function star(angle,len,w,fill){el('polygon',{points:`200,${200-len} ${200+w},200 200,${200+len*0.35} ${200-w},200`,fill,stroke:'#43260f','stroke-width':1.5,transform:`rotate(${angle} 200 200)`})}
+[45,135,225,315].forEach(a=>star(a,112,13,'#d6a43a'));
+[0,90,180,270].forEach(a=>star(a,150,17,a===0?'#a3281b':'#8a5f16'));
+el('circle',{cx:200,cy:200,r:104,fill:'none',stroke:'#8a5f16','stroke-width':1.5,'stroke-dasharray':'3 5'});
+[['N',0],['E',90],['S',180],['W',270]].forEach(([l,a])=>{const t=el('text',{x:200,y:92,'text-anchor':'middle','font-size':30,'font-family':'Pirata One',fill:l==='N'?'#a3281b':'#2a170b',transform:`rotate(${a} 200 200)`});t.textContent=l});
+[['NE',45],['SE',135],['SW',225],['NW',315]].forEach(([l,a])=>{const t=el('text',{x:200,y:80,'text-anchor':'middle','font-size':16,'font-family':'Pirata One',fill:'#5a3513',transform:`rotate(${a} 200 200)`});t.textContent=l});
+// treasure X marker (rotates with rose)
+const mark=el('g',{id:'mark',visibility:'hidden'});
+el('circle',{cx:200,cy:128,r:14,fill:'#fff3d6',stroke:'#a3281b','stroke-width':2},mark);
+el('path',{d:'M192 120 L208 136 M208 120 L192 136',stroke:'#a3281b','stroke-width':4,'stroke-linecap':'round'},mark);
+
+/* ---- state ---- */
+let heading=0,smooth=null,sensorOn=false,manual=false;
+let myPos=null,target=null,courseBearing=null;
+const pts=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+const norm=d=>((d%360)+360)%360;
+
+function render(h){
+  heading=norm(h);
+  rose.style.transform=`rotate(${-heading}deg)`;
+  $('deg').textContent=Math.round(heading)%360+'°';
+  $('card').textContent=pts[Math.round(heading/22.5)%16];
+  $('dial').setAttribute('aria-label','Compass heading '+Math.round(heading)+' degrees '+pts[Math.round(heading/22.5)%16]);
+  updateTurn();
+}
+
+/* ---- steps ---- */
+function go(n){
+  ['p1','p2','p3'].forEach((id,i)=>$(id).classList.toggle('hidden',i!==n-1));
+  ['s1','s2','s3'].forEach((id,i)=>$(id).classList.toggle('on',i<n));
+}
+
+/* ---- sensor ---- */
+function onOrient(e){
+  if(manual)return;
+  let h=null;
+  if(typeof e.webkitCompassHeading==='number')h=e.webkitCompassHeading;
+  else if(e.alpha!=null&&(e.absolute||e.type==='deviceorientationabsolute'))h=360-e.alpha+((screen.orientation&&screen.orientation.angle)||0);
+  if(h==null)return;
+  h=norm(h);
+  if(smooth==null)smooth=h;
+  else{let d=((h-smooth+540)%360)-180;smooth=norm(smooth+d*0.25)}
+  if(!sensorOn){sensorOn=true;$('msg').textContent='Compass awake. Fair winds, captain!';go(2)}
+  render(smooth);
+}
+async function start(){
+  try{
+    if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){
+      const r=await DeviceOrientationEvent.requestPermission();
+      if(r!=='granted'){$('msg').textContent='Permission denied. Use "Steer by hand" instead.';return}
+    }
+    window.addEventListener('deviceorientationabsolute',onOrient,true);
+    window.addEventListener('deviceorientation',onOrient,true);
+    $('msg').textContent='Listening for the stars… move your device.';
+    setTimeout(()=>{if(!sensorOn)$('msg').textContent='No sensor found on this device. Try "Steer by hand".'},2500);
+  }catch(err){$('msg').textContent='Sensor unavailable. Try "Steer by hand".'}
+}
+$('start').onclick=start;
+function enableManual(){
+  manual=true;$('slider').classList.remove('hidden');$('slbl').classList.remove('hidden');
+  $('msg').textContent='Drag the dial, or slide the heading, to steer.';go(2);
+}
+$('manual').onclick=enableManual;
+$('slider').oninput=e=>{manual=true;render(+e.target.value)};
+
+// drag to rotate
+let dragging=false;
+function angleFrom(ev){const r=$('dial').getBoundingClientRect();const cx=r.left+r.width/2,cy=r.top+r.height/2;return norm(Math.atan2(ev.clientX-cx,-(ev.clientY-cy))*180/Math.PI)}
+$('dialbox').addEventListener('pointerdown',e=>{if(sensorOn)return;dragging=true;manual=true;$('dialbox').setPointerCapture(e.pointerId);render(angleFrom(e));$('slider').value=Math.round(heading)%360});
+$('dialbox').addEventListener('pointermove',e=>{if(dragging){render(angleFrom(e));$('slider').value=Math.round(heading)%360}});
+['pointerup','pointercancel'].forEach(t=>$('dialbox').addEventListener(t,()=>dragging=false));
+
+/* ---- navigation maths ---- */
+const R=6371.0088,rad=x=>x*Math.PI/180,deg=x=>x*180/Math.PI;
+function bearing(a,b){const y=Math.sin(rad(b.lng-a.lng))*Math.cos(rad(b.lat));const x=Math.cos(rad(a.lat))*Math.sin(rad(b.lat))-Math.sin(rad(a.lat))*Math.cos(rad(b.lat))*Math.cos(rad(b.lng-a.lng));return norm(deg(Math.atan2(y,x)))}
+function distance(a,b){const dLa=rad(b.lat-a.lat),dLo=rad(b.lng-a.lng);const h=Math.sin(dLa/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
+function fmtDist(km){const nm=km/1.852;return (km<10?km.toFixed(2):km.toFixed(1))+' km · '+(nm<10?nm.toFixed(2):nm.toFixed(1))+' nm'}
+
+$('locate').onclick=()=>{
+  if(!navigator.geolocation){$('msg2').textContent='Geolocation is not supported here.';return}
+  $('msg2').textContent='Scanning the horizon…';
+  navigator.geolocation.getCurrentPosition(p=>{
+    myPos={lat:p.coords.latitude,lng:p.coords.longitude};
+    $('msg2').textContent='Position fixed: '+myPos.lat.toFixed(4)+', '+myPos.lng.toFixed(4);
+  },()=>{$('msg2').textContent='Could not fix your position. Allow location access and try again.'},{enableHighAccuracy:true,timeout:15000});
+};
+$('setcourse').onclick=()=>{
+  const la=parseFloat($('tlat').value),ln=parseFloat($('tlng').value);
+  if(!isFinite(la)||!isFinite(ln)||Math.abs(la)>90||Math.abs(ln)>180){$('msg2').textContent='Enter a valid latitude (−90 to 90) and longitude (−180 to 180).';return}
+  if(!myPos){$('msg2').textContent='First press "Find my position" so we know where you stand.';return}
+  target={lat:la,lng:ln};
+  courseBearing=bearing(myPos,target);
+  $('dist').textContent=fmtDist(distance(myPos,target));
+  startSail();
+};
+$('lockhead').onclick=()=>{
+  courseBearing=heading;target=null;myPos=myPos;
+  $('dist').textContent='Open sea';
+  startSail();
+};
+function startSail(){
+  $('brg').textContent=Math.round(courseBearing)%360+'° '+pts[Math.round(courseBearing/22.5)%16];
+  mark.setAttribute('transform',`rotate(${courseBearing} 200 200)`);
+  mark.setAttribute('visibility','visible');
+  go(3);updateTurn();
+}
+function updateTurn(){
+  if(courseBearing==null)return;
+  const d=((courseBearing-heading+540)%360)-180,a=Math.abs(Math.round(d));
+  $('turn').textContent=a<=4?'On course, matey! ☠':'Turn '+a+'° to '+(d>0?'starboard ➜':'⬅ port');
+}
+$('newcourse').onclick=()=>{courseBearing=null;mark.setAttribute('visibility','hidden');go(2)};
+
+render(0);
+})();
+</script>
+</body>
+</html>
