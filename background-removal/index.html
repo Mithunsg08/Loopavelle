@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Background Removal – Remove Image Background Online Free | BG Removal</title>
+<meta name="description" content="Free background removal in your browser. Remove the background from any photo in seconds, download a transparent PNG. No upload, no sign-up, 100% private.">
+<meta name="keywords" content="background removal, remove background, background remover, transparent background, remove bg, cutout image, png maker">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/background-removal">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Background Removal – Free, Private, In Your Browser | BG Removal">
+<meta property="og:description" content="Remove image backgrounds instantly. Your photos never leave your device.">
+<meta property="og:url" content="https://YOUR-DOMAIN.com/background-removal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#e5266a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✂️%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"BG Removal","url":"https://YOUR-DOMAIN.com/background-removal","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Browser-based background removal tool. Images are processed on your device."},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my photo uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Background removal runs entirely in your browser, so your image never leaves your device."}},{"@type":"Question","name":"Is BG Removal free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free with no sign-up, no watermark and no limit on images."}},{"@type":"Question","name":"What format is the download?","acceptedAnswer":{"@type":"Answer","text":"You get a PNG with a transparent background, or a PNG with the solid color you choose."}},{"@type":"Question","name":"Which images work best?","acceptedAnswer":{"@type":"Answer","text":"Clear subjects such as people, products, pets and logos. Use the Solid background mode for images with a plain backdrop."}}]}]}</script>
+<style>
+:root{--bg:#f1f4ef;--surface:#fff;--ink:#16211b;--mute:#5b6a61;--line:#cdd6cf;--cut:#e5266a;--cut-ink:#fff}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0e1411;--surface:#161e19;--ink:#e9efea;--mute:#9aa8a0;--line:#2c3932;--cut:#ff4d8b;--cut-ink:#14040b}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0e1411;--surface:#161e19;--ink:#e9efea;--mute:#9aa8a0;--line:#2c3932;--cut:#ff4d8b;--cut-ink:#14040b}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;line-height:1.05;margin:0;letter-spacing:-.02em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cut);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.25rem}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0}
+.logo{font:800 1.3rem "Bricolage Grotesque",sans-serif;text-decoration:none;display:flex;gap:.5rem;align-items:center}
+.logo i{display:grid;place-items:center;width:2rem;height:2rem;border-radius:50% 50% 50% 0;background:var(--cut);color:var(--cut-ink);font-style:normal;font-size:1rem}
+nav a{margin-left:1.2rem;text-decoration:none;color:var(--mute);font-weight:500}
+nav a:hover{color:var(--ink)}
+.hero{padding:2.2rem 0 1.4rem;max-width:760px}
+h1{font-size:clamp(2.5rem,7.5vw,5rem);font-weight:800}
+h1 u{text-decoration:none;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--cut) 35%,transparent) 62%)}
+.lede{font-size:1.2rem;color:var(--mute);max-width:56ch;margin:1.1rem 0 0}
+.tool{margin:1.6rem 0 3rem}
+.drop{display:grid;place-items:center;text-align:center;min-height:300px;padding:2rem;background:var(--surface);border:2.5px dashed var(--cut);border-radius:28px;cursor:pointer;transition:background .2s,transform .2s}
+.drop.over{background:color-mix(in srgb,var(--cut) 10%,var(--surface));transform:scale(1.005)}
+.drop h2{font-size:clamp(1.5rem,4vw,2.2rem)}
+.drop p{color:var(--mute);margin:.5rem 0 0}
+.btn{display:inline-block;margin-top:1.2rem;background:var(--cut);color:var(--cut-ink);font:600 1rem "Instrument Sans",sans-serif;border:0;border-radius:999px;padding:.85rem 1.6rem;cursor:pointer;text-decoration:none}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.work{display:none;grid-template-columns:1fr 290px;gap:1.2rem;align-items:start}
+.work.on{display:grid}
+.stage{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);min-height:260px;background:#fff;display:grid;place-items:center}
+.stage.checker{background:conic-gradient(#d9dfda 25%,#fff 0 50%,#d9dfda 0 75%,#fff 0) 0 0/20px 20px}
+.stage canvas{display:block;max-width:100%;max-height:70vh;height:auto}
+.busy{position:absolute;inset:0;display:none;place-items:center;text-align:center;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(3px);font-weight:600}
+.busy.on{display:grid}
+.bar{width:220px;height:6px;border-radius:9px;background:var(--line);margin:.7rem auto 0;overflow:hidden}
+.bar b{display:block;height:100%;width:0;background:var(--cut);transition:width .2s}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:1.2rem}
+.panel h3{font-size:1.05rem;margin:0 0 .6rem}
+.seg{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.seg button{flex:1;min-width:0;font:500 .9rem "Instrument Sans",sans-serif;padding:.5rem .6rem;border-radius:12px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{border-color:var(--cut);background:color-mix(in srgb,var(--cut) 12%,transparent);font-weight:600}
+.sw{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.1rem;align-items:center}
+.sw button,.sw input{width:2.2rem;height:2.2rem;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0;background:none}
+.sw button[aria-pressed="true"]{outline:3px solid var(--cut);outline-offset:2px}
+.sw .t{background:conic-gradient(#d9dfda 25%,#fff 0 50%,#d9dfda 0 75%,#fff 0) 0 0/10px 10px}
+label.r{display:block;font-size:.9rem;color:var(--mute);margin-bottom:1.1rem}
+label.r input{width:100%;accent-color:var(--cut)}
+.note{font-size:.88rem;color:var(--mute);margin:.2rem 0 1rem}
+.panel .btn{width:100%;text-align:center;margin-top:.4rem}
+section.c{padding:2.6rem 0;border-top:1px solid var(--line)}
+section.c h2{font-size:clamp(1.8rem,4.5vw,2.8rem);margin-bottom:1rem}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding:0;list-style:none;margin:1.4rem 0 0;counter-reset:s}
+.steps li{counter-increment:s}
+.steps li::before{content:counter(s);display:block;font:800 2.6rem "Bricolage Grotesque",sans-serif;color:var(--cut)}
+.steps h3{font-size:1.25rem;margin:.2rem 0 .4rem}
+.steps p,.cols p,details p{color:var(--mute);margin:0}
+.cols{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem 2.4rem}
+.cols h3{font-size:1.2rem;margin-bottom:.35rem}
+details{border-bottom:1px solid var(--line);padding:1rem 0}
+summary{cursor:pointer;font:700 1.15rem "Bricolage Grotesque",sans-serif;list-style:none}
+summary::after{content:"+";float:right;color:var(--cut)}
+details[open] summary::after{content:"–"}
+details p{margin-top:.5rem;max-width:68ch}
+footer{padding:2rem 0 2.6rem;color:var(--mute);font-size:.95rem;border-top:1px solid var(--line)}
+@media (max-width:820px){.work.on{grid-template-columns:1fr}.steps,.cols{grid-template-columns:1fr}nav{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <a class="logo" href="/" aria-label="BG Removal home"><i>✂</i>BG Removal</a>
+  <nav aria-label="Main"><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="/image-compress">Image Compress</a></nav>
+</header>
+
+<main>
+<div class="hero">
+  <h1>Background removal that never leaves your <u>browser</u></h1>
+  <p class="lede">Drop in a photo and get a clean cutout with a transparent background in seconds. Free, no sign-up, no watermark. Your image stays on your device.</p>
+</div>
+
+<div class="tool" id="tool">
+  <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose an image to remove its background">
+    <div>
+      <h2>Drop an image here</h2>
+      <p>or paste from your clipboard. JPG, PNG and WebP.</p>
+      <button class="btn" type="button" id="pick">Choose image</button>
+      <input type="file" id="file" accept="image/png,image/jpeg,image/webp" hidden>
+    </div>
+  </div>
+
+  <div class="work" id="work">
+    <div>
+      <div class="seg" role="group" aria-label="View" style="max-width:280px">
+        <button type="button" id="vRes" aria-pressed="true">Result</button>
+        <button type="button" id="vOrg" aria-pressed="false">Original</button>
+      </div>
+      <div class="stage checker" id="stage">
+        <canvas id="cv" aria-label="Image preview"></canvas>
+        <div class="busy" id="busy" role="status"><div><span id="msg">Removing background…</span><div class="bar"><b id="prog"></b></div></div></div>
+      </div>
+    </div>
+    <aside class="panel" aria-label="Options">
+      <h3>Method</h3>
+      <div class="seg" role="group" aria-label="Method">
+        <button type="button" id="mAI" aria-pressed="true">Smart (AI)</button>
+        <button type="button" id="mCol" aria-pressed="false">Solid background</button>
+      </div>
+      <div id="tolBox" hidden><label class="r">Sensitivity<input type="range" id="tol" min="8" max="120" value="48"></label></div>
+      <p class="note" id="note">Smart mode finds people, products and pets automatically.</p>
+      <h3>Background</h3>
+      <div class="sw" id="sw">
+        <button type="button" class="t" data-c="" aria-pressed="true" aria-label="Transparent"></button>
+        <button type="button" data-c="#ffffff" style="background:#fff" aria-pressed="false" aria-label="White"></button>
+        <button type="button" data-c="#16211b" style="background:#16211b" aria-pressed="false" aria-label="Black"></button>
+        <input type="color" id="col" value="#e5266a" aria-label="Custom color">
+      </div>
+      <button class="btn" type="button" id="dl" disabled>Download PNG</button>
+      <button class="btn alt" type="button" id="again">New image</button>
+    </aside>
+  </div>
+</div>
+
+<section class="c" id="how">
+  <h2>Remove a background in three steps</h2>
+  <ol class="steps">
+    <li><h3>Add your photo</h3><p>Drag it in, choose a file or paste it. Nothing is uploaded.</p></li>
+    <li><h3>Let it cut</h3><p>The cutout is made on your device, usually in a few seconds.</p></li>
+    <li><h3>Download</h3><p>Save a transparent PNG, or pick a solid color first.</p></li>
+  </ol>
+</section>
+
+<section class="c">
+  <h2>Why use BG Removal</h2>
+  <div class="cols">
+    <div><h3>Private by design</h3><p>Because processing happens in your browser, your photos are never sent to a server or stored.</p></div>
+    <div><h3>Free without limits</h3><p>No account, no credits and no watermark. Remove as many backgrounds as you need.</p></div>
+    <div><h3>Made for real work</h3><p>Product photos, profile pictures, thumbnails, logos and design mockups all export as clean PNGs.</p></div>
+    <div><h3>Works on any device</h3><p>Use it on a phone, tablet or desktop in any modern browser.</p></div>
+  </div>
+</section>
+
+<section class="c" id="faq">
+  <h2>Background removal questions</h2>
+  <details><summary>Is my photo uploaded to a server?</summary><p>No. Background removal runs entirely in your browser, so your image never leaves your device.</p></details>
+  <details><summary>Is BG Removal free?</summary><p>Yes. It is free with no sign-up, no watermark and no limit on images.</p></details>
+  <details><summary>What format is the download?</summary><p>You get a PNG with a transparent background, or a PNG filled with the solid color you choose.</p></details>
+  <details><summary>Which images work best?</summary><p>Clear subjects such as people, products, pets and logos. If your image has a plain backdrop, try Solid background mode and adjust sensitivity.</p></details>
+</section>
+</main>
+
+<footer>© <span id="yr">2026</span> BG Removal. Background removal in your browser. <a href="/">Home</a></footer>
+</div>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var drop=$('drop'),file=$('file'),work=$('work'),cv=$('cv'),ctx=cv.getContext('2d'),stage=$('stage');
+var orig=null,cut=null,bgc='',view='res',mode='ai',aiFail=false,token=0;
+$('yr').textContent=new Date().getFullYear();
+
+function busy(on,m,p){$('busy').classList.toggle('on',on);if(m)$('msg').textContent=m;$('prog').style.width=(p||0)+'%'}
+function pressed(btns,el){btns.forEach(function(b){b.setAttribute('aria-pressed',b===el)})}
+
+function load(f){
+  if(!f||!/^image\//.test(f.type))return;
+  var url=URL.createObjectURL(f),img=new Image();
+  img.onload=function(){
+    var s=Math.min(1,2000/Math.max(img.width,img.height));
+    orig=document.createElement('canvas');orig.width=Math.round(img.width*s);orig.height=Math.round(img.height*s);
+    orig.getContext('2d').drawImage(img,0,0,orig.width,orig.height);
+    URL.revokeObjectURL(url);
+    drop.style.display='none';work.classList.add('on');
+    run();
+  };
+  img.src=url;
+}
+
+function run(){
+  var t=++token;cut=null;$('dl').disabled=true;draw();
+  if(mode==='ai'&&!aiFail){
+    busy(true,'Loading the AI model…',5);
+    orig.toBlob(function(b){
+      import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/+esm').then(function(m){
+        return m.removeBackground(b,{output:{format:'image/png'},progress:function(k,c,tot){if(t===token)busy(true,k.indexOf('fetch')===0?'Downloading model (first time only)…':'Removing background…',tot?Math.round(c/tot*100):30)}});
+      }).then(function(out){return createImageBitmap(out)}).then(function(bm){
+        if(t!==token)return;
+        cut=document.createElement('canvas');cut.width=bm.width;cut.height=bm.height;cut.getContext('2d').drawImage(bm,0,0);
+        done();
+      }).catch(function(){
+        aiFail=true;$('note').textContent='The AI model could not load here, so Solid background mode was used instead.';
+        setMode('col');
+      });
+    },'image/png');
+  }else{colorCut();done()}
+}
+
+function colorCut(){
+  var w=orig.width,h=orig.height,d=orig.getContext('2d').getImageData(0,0,w,h),px=d.data,tol=+$('tol').value;
+  var r=0,g=0,b=0,n=0,i,x,y;
+  function add(p){r+=px[p];g+=px[p+1];b+=px[p+2];n++}
+  for(x=0;x<w;x++){add(x*4);add(((h-1)*w+x)*4)}
+  for(y=0;y<h;y++){add(y*w*4);add((y*w+w-1)*4)}
+  r/=n;g/=n;b/=n;
+  var seen=new Uint8Array(w*h),q=new Int32Array(w*h),qh=0,qt=0;
+  function ok(k){var p=k*4,dr=px[p]-r,dg=px[p+1]-g,db=px[p+2]-b;return Math.sqrt(dr*dr+dg*dg+db*db)<tol}
+  function push(k){if(!seen[k]&&ok(k)){seen[k]=1;q[qt++]=k}}
+  for(x=0;x<w;x++){push(x);push((h-1)*w+x)}
+  for(y=0;y<h;y++){push(y*w);push(y*w+w-1)}
+  while(qh<qt){var k=q[qh++],cx=k%w,cy=(k/w)|0;
+    if(cx>0)push(k-1);if(cx<w-1)push(k+1);if(cy>0)push(k-w);if(cy<h-1)push(k+w)}
+  var a=new Float32Array(w*h);
+  for(i=0;i<a.length;i++)a[i]=seen[i]?0:1;
+  for(y=1;y<h-1;y++)for(x=1;x<w-1;x++){i=y*w+x;
+    px[i*4+3]=Math.round(255*(a[i]*4+a[i-1]+a[i+1]+a[i-w]+a[i+w])/8)}
+  for(i=0;i<a.length;i++)if(seen[i])px[i*4+3]=0;
+  cut=document.createElement('canvas');cut.width=w;cut.height=h;cut.getContext('2d').putImageData(d,0,0);
+}
+
+function done(){busy(false);$('dl').disabled=false;draw()}
+
+function draw(){
+  var src=(view==='org'||!cut)?orig:cut;if(!src)return;
+  cv.width=src.width;cv.height=src.height;ctx.clearRect(0,0,cv.width,cv.height);
+  if(view==='res'&&cut&&bgc){ctx.fillStyle=bgc;ctx.fillRect(0,0,cv.width,cv.height)}
+  ctx.drawImage(src,0,0);
+  stage.classList.toggle('checker',view==='res'&&!bgc);
+}
+
+function setMode(m){
+  mode=m;pressed([$('mAI'),$('mCol')],m==='ai'?$('mAI'):$('mCol'));
+  $('tolBox').hidden=m!=='col';
+  if(m==='col'&&!aiFail)$('note').textContent='Best for logos and products on a plain backdrop. Adjust sensitivity until the edges look clean.';
+  if(m==='ai'&&!aiFail)$('note').textContent='Smart mode finds people, products and pets automatically.';
+  if(orig)run();
+}
+
+$('pick').onclick=function(e){e.stopPropagation();file.click()};
+drop.onclick=function(){file.click()};
+drop.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();file.click()}};
+file.onchange=function(){load(file.files[0])};
+['dragenter','dragover'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('over')})});
+['dragleave','drop'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove('over')})});
+drop.addEventListener('drop',function(e){load(e.dataTransfer.files[0])});
+document.addEventListener('paste',function(e){var it=[].slice.call(e.clipboardData.items).filter(function(i){return i.type.indexOf('image')===0})[0];if(it)load(it.getAsFile())});
+$('mAI').onclick=function(){setMode('ai')};
+$('mCol').onclick=function(){setMode('col')};
+var tm;$('tol').oninput=function(){clearTimeout(tm);tm=setTimeout(function(){if(orig&&mode==='col'){colorCut();done()}},120)};
+$('vRes').onclick=function(){view='res';pressed([$('vRes'),$('vOrg')],$('vRes'));draw()};
+$('vOrg').onclick=function(){view='org';pressed([$('vRes'),$('vOrg')],$('vOrg'));draw()};
+var sws=[].slice.call($('sw').querySelectorAll('button'));
+sws.forEach(function(b){b.onclick=function(){bgc=b.dataset.c;pressed(sws,b);draw()}});
+$('col').oninput=function(){bgc=this.value;pressed(sws,null);draw()};
+$('dl').onclick=function(){
+  if(!cut)return;var c=document.createElement('canvas');c.width=cut.width;c.height=cut.height;var x=c.getContext('2d');
+  if(bgc){x.fillStyle=bgc;x.fillRect(0,0,c.width,c.height)}x.drawImage(cut,0,0);
+  c.toBlob(function(b){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='bg-removed.png';a.click();setTimeout(function(){URL.revokeObjectURL(a.href)},2000)},'image/png');
+};
+$('again').onclick=function(){token++;orig=cut=null;file.value='';work.classList.remove('on');drop.style.display='grid';busy(false)};
+})();
+</script>
+</body>
+</html>
