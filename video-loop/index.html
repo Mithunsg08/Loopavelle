@@ -187,7 +187,7 @@ footer{margin-top:22px;text-align:center;color:var(--muted);font-weight:600;font
       </div>
       <div class="warn" id="warn" hidden></div>
       <div class="msg" id="err2" role="alert" hidden></div>
-      <button class="btn" id="go" type="button">Create &amp; download ✨</button>
+      <button class="btn" id="go" type="button">Create loop ✨</button>
     </section>
 
     <!-- STEP 3 : working / done -->
@@ -201,7 +201,7 @@ footer{margin-top:22px;text-align:center;color:var(--muted);font-weight:600;font
         <div class="bar"><i id="fill"></i></div>
         <div class="stage" id="stage">Getting ready</div>
         <div id="doneBtns" hidden>
-          <button class="btn" id="again" type="button" style="margin-top:14px">Download again</button>
+          <button class="btn" id="downloadBtn" type="button" style="margin-top:14px">Download Video 💾</button>
           <button class="btn ghost" id="another" type="button">Make another loop</button>
         </div>
       </div>
@@ -384,7 +384,6 @@ const VideoLoop = (() => {
       period = Math.max(period, t.mediaTotal / t.ts);
     }
     if (!(maxEnd > minOff) || maxEnd > file.size + 1) throw fail('BAD');
-    // Keep every track on the same loop length so audio and video never drift apart.
     for (const t of S.tracks) {
       t.periodTicks = Math.max(t.mediaTotal, Math.round(period * t.ts));
       t.sttsPad = padLast(t.stts, t.periodTicks - t.mediaTotal);
@@ -522,12 +521,11 @@ const VideoLoop = (() => {
     return mk('stsd', [new Uint8Array([0, 0, 0, 0, 0, 0, 0, 1]), e]);
   }
 
-  // Fit the decoded audio to EXACTLY one video loop and make its edges continuous.
   function fitPcm(at, pcm, Na) {
     const ch = pcm.channels.length, sr = pcm.sampleRate, len = pcm.channels[0].length;
     let lead = 0;
     const first = at.elst && at.elst.find(e => e.mt >= 0), mt = first ? first.mt : 0;
-    if (mt > 0) {   // some decoders don't remove the encoder delay; detect it by length
+    if (mt > 0) {
       const full = at.mediaTotal / at.ts * sr, trimmed = (at.mediaTotal - mt) / at.ts * sr;
       if (Math.abs(len - full) < Math.abs(len - trimmed)) lead = Math.round(mt / at.ts * sr);
     }
@@ -538,7 +536,6 @@ const VideoLoop = (() => {
       const x = pcm.channels[c], b = new Float32Array(Na);
       for (let i = 0; i < Na; i++) b[i] = i < avail ? x[lead + i] : 0;
       if (F > 0) {
-        // the audio that naturally follows the end is blended into the start -> no jump at the seam
         for (let i = 0; i < F; i++) { const w = (i + 1) / (F + 1) * Math.PI / 2; b[i] = x[lead + Na + i] * Math.cos(w) + b[i] * Math.sin(w); }
       } else if (Math.abs(b[0] - b[Na - 1]) > 0.01) {
         const f = Math.min(48, Math.floor(Na / 8));
@@ -734,17 +731,24 @@ if (typeof module !== 'undefined') module.exports = VideoLoop;
       $('#orb').className = 'orb ok';
       $('#orbSvg').innerHTML = '<path d="M17 33l10 10 20-22"/>';
       $('#t3').textContent = 'All done! 🎉';
-      $('#s3').textContent = fmtDur(r.seconds) + ' of seamless looping · ' + r.loops.toLocaleString() + ' loops · ' + fmtBytes(r.bytes) + ' — your download has started.' + note;
+      $('#s3').textContent = fmtDur(r.seconds) + ' of seamless looping · ' + r.loops.toLocaleString() + ' loops · ' + fmtBytes(r.bytes) + ' — ready to download.' + note;
       $('#stage').textContent = 'Saved as ' + outName;
       $('#doneBtns').hidden = false;
-      save();
     } catch (e) {
       show(2); showErr($('#err2'), e);
     }
     busy = false;
   });
-  function save() { const a = document.createElement('a'); a.href = outUrl; a.download = outName; document.body.appendChild(a); a.click(); a.remove(); }
-  $('#again').addEventListener('click', () => outUrl && save());
+  function save() { 
+    if (!outUrl) return; 
+    const a = document.createElement('a'); 
+    a.href = outUrl; 
+    a.download = outName; 
+    document.body.appendChild(a); 
+    a.click(); 
+    a.remove(); 
+  }
+  $('#downloadBtn').addEventListener('click', () => save());
   $('#another').addEventListener('click', () => {
     if (outUrl) { URL.revokeObjectURL(outUrl); outUrl = null; }
     input.value = ''; S = null; file = null; show(1);
