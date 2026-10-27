@@ -72,9 +72,9 @@ section{padding:72px 0}
 .sec-head p{color:var(--muted);margin:14px 0 0}
 
 /* tools */
-.tools{display:grid;grid-template-columns:1.3fr 1fr;gap:24px}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .card{background:var(--panel);border:2px solid var(--ink);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column}
-.card.featured{background:var(--ink);color:#fff;box-shadow:8px 8px 0 var(--blue)}
+.card.featured{grid-column:span 3;background:var(--ink);color:#fff;box-shadow:8px 8px 0 var(--blue)}
 .card h3{font-size:2rem;font-weight:800}
 .tag{align-self:flex-start;font-size:.85rem;font-weight:600;padding:4px 12px;border-radius:999px;background:var(--signal);color:var(--ink);margin-bottom:18px}
 .card.featured .tag{background:var(--signal)}
@@ -114,8 +114,9 @@ footer{padding:40px 0 56px;border-top:2px solid var(--ink);color:var(--muted)}
 footer a{text-decoration:none;font-weight:500}
 footer a:hover{color:var(--ink)}
 
-@media (max-width:860px){
+@media (max-width:960px){
   .hero-grid,.tools{grid-template-columns:1fr}
+  .card.featured{grid-column:span 1}
   .steps{grid-template-columns:1fr}
   .step+.step{border-left:0;border-top:2px solid var(--ink)}
   nav{gap:16px;font-size:.95rem}
@@ -204,10 +205,11 @@ footer a:hover{color:var(--ink)}
     <div class="wrap">
       <div class="sec-head">
         <h2>The tools</h2>
-        <p>Two tools so far. Each one opens in your browser and works on files you pick from your own device.</p>
+        <p>Four tools so far. Each one opens in your browser and works on files you pick from your own device.</p>
       </div>
 
       <div class="tools">
+        <!-- Featured Tool: OpsReveal -->
         <article class="card featured">
           <span class="tag">Featured</span>
           <h3>OpsReveal</h3>
@@ -238,9 +240,10 @@ footer a:hover{color:var(--ink)}
           <div class="note">Prices as listed on opsreveal.preventloss.org. Check that page for current terms.</div>
         </article>
 
+        <!-- Tool: video Loop -->
         <article class="card">
           <span class="tag">Free</span>
-          <h3>Loopavelle</h3>
+          <h3>Video Loop</h3>
           <p>Turn a short video clip into a loop that runs for hours, then download it. Works with clips of a few seconds or any longer length.</p>
           <ul>
             <li>Choose how long the final loop should run</li>
@@ -248,13 +251,53 @@ footer a:hover{color:var(--ink)}
             <li>Download the finished video</li>
             <li>No account and no cost</li>
           </ul>
-          <div class="plans" aria-label="Loopavelle pricing">
+          <div class="plans" aria-label="Video Loop pricing">
             <div class="plan">
               <div><b>Free</b><small>Every feature, no account</small></div>
               <div class="amt free">$0</div>
             </div>
           </div>
-          <a class="btn primary" href="heytools/loopavelle">Open Loopavelle</a>
+          <a class="btn primary" href="heytools/video-loop">Open video Loop</a>
+        </article>
+
+        <!-- Tool: Image Compressor -->
+        <article class="card">
+          <span class="tag">Free</span>
+          <h3>Image Compressor</h3>
+          <p>Compress PNG, JPEG, and WebP images instantly in your browser without sacrificing noticeable visual quality.</p>
+          <ul>
+            <li>Batch compression directly in RAM</li>
+            <li>Adjustable quality settings</li>
+            <li>No file uploads or server storage</li>
+            <li>Completely free, no account needed</li>
+          </ul>
+          <div class="plans" aria-label="Image Compressor pricing">
+            <div class="plan">
+              <div><b>Free</b><small>Unlimited compressions, no account</small></div>
+              <div class="amt free">$0</div>
+            </div>
+          </div>
+          <a class="btn primary" href="/image-compress">Open Image Compressor</a>
+        </article>
+
+        <!-- Tool: Image to PDF Converter -->
+        <article class="card">
+          <span class="tag">Free</span>
+          <h3>Image to PDF</h3>
+          <p>Combine multiple PNG, JPG, or WebP images into a single clean PDF document right inside your browser.</p>
+          <ul>
+            <li>Rearrange and reorder pages easily</li>
+            <li>Client-side PDF generation in RAM</li>
+            <li>Fast, secure, and fully private</li>
+            <li>No watermarks or registration required</li>
+          </ul>
+          <div class="plans" aria-label="Image to PDF pricing">
+            <div class="plan">
+              <div><b>Free</b><small>Unlimited conversions, no account</small></div>
+              <div class="amt free">$0</div>
+            </div>
+          </div>
+          <a class="btn primary" href="/image-to-pdf-converter">Open Image to PDF</a>
         </article>
       </div>
     </div>
@@ -288,7 +331,7 @@ footer a:hover{color:var(--ink)}
 <footer>
   <div class="wrap foot">
     <div>&copy; <span id="yr">2026</span> HeyTools. Built to run on your device.</div>
-    <div><a href="https://opsreveal.preventloss.org/" target="_blank" rel="noopener">OpsReveal</a> &nbsp;&nbsp; <a href="/loopavelle">Loopavelle</a></div>
+    <div><a href="https://opsreveal.preventloss.org/" target="_blank" rel="noopener">OpsReveal</a> &nbsp;&nbsp; <a href="/loopavelle">Loopavelle</a> &nbsp;&nbsp; <a href="/image-compress">Image Compressor</a> &nbsp;&nbsp; <a href="/image-to-pdf-converter">Image to PDF</a></div>
   </div>
 </footer>
 <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
