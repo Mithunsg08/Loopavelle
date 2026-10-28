@@ -1,642 +1,247 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="auto">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Chronofern – World Clock & Stopwatch | Free Online Time Zone Converter</title>
-<meta name="description" content="Chronofern is a free, beautiful world clock and precision stopwatch. Compare time zones with a time-travel slider, track lap times to the hundredth of a second, and keep everything private in your browser.">
-<meta name="keywords" content="world clock, time zone converter, stopwatch online, lap timer, current time in cities, meeting planner time zones, online stopwatch with laps, 24 hour clock">
-<meta name="author" content="Chronofern">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<meta name="theme-color" content="#14122b" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#fdf6ee" media="(prefers-color-scheme: light)">
-<!-- TODO: replace with your real GitHub Pages URL after publishing -->
-<link rel="canonical" href="https://YOUR-USERNAME.github.io/chronofern/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff9a8b'/%3E%3Cstop offset='1' stop-color='%236a5cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23g)'/%3E%3Cpath d='M32 14v18l12 8' stroke='white' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World Clock – Current Time in Every Country &amp; Online Stopwatch</title>
+<meta name="description" content="World Clock shows the live time in every country and city, USA time by default, with a time-travel slider for planning meetings and a precision online stopwatch with laps, copy and CSV export.">
+<meta name="keywords" content="world clock, current time, USA time, time zones, time zone converter, online stopwatch, lap timer, stop clock">
+<meta name="theme-color" content="#120b1f">
+<link rel="canonical" href="/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Chronofern – World Clock & Stopwatch">
-<meta property="og:description" content="Compare time zones with a time-travel slider and time laps to 1/100 s. Free, private, runs entirely in your browser.">
-<meta property="og:url" content="https://YOUR-USERNAME.github.io/chronofern/">
-<meta property="og:site_name" content="Chronofern">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Chronofern – World Clock & Stopwatch">
-<meta name="twitter:description" content="Beautiful world clock with time-travel slider and a precision lap stopwatch. 100% in your browser.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebApplication",
-      "name": "Chronofern",
-      "alternateName": "Chronofern World Clock & Stopwatch",
-      "url": "https://YOUR-USERNAME.github.io/chronofern/",
-      "description": "A free world clock with time zone comparison and a precision stopwatch with lap times. Runs entirely in the browser.",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "Any (web browser)",
-      "browserRequirements": "Requires JavaScript",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "featureList": ["World clock with 400+ time zones", "Time-travel slider for meeting planning", "12 and 24 hour formats", "Stopwatch with lap and split times", "Best and worst lap highlighting", "CSV export", "Dark and light themes", "No tracking, no sign-up"]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "How do I compare time zones for a meeting?", "acceptedAnswer": {"@type": "Answer", "text": "Add the cities you need, then drag the time-travel slider. Every city updates instantly so you can find an hour that works for everyone."}},
-        {"@type": "Question", "name": "How accurate is the online stopwatch?", "acceptedAnswer": {"@type": "Answer", "text": "The stopwatch displays hundredths of a second and keeps running accurately even if the tab is in the background, because it measures against the system clock."}},
-        {"@type": "Question", "name": "Does the world clock handle daylight saving time?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Chronofern uses your browser's built-in IANA time zone database, so daylight saving changes are applied automatically for every city."}},
-        {"@type": "Question", "name": "Is my data stored on a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser. Your cities and settings are saved only in your own device's local storage."}},
-        {"@type": "Question", "name": "Can I export my lap times?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Copy laps to the clipboard or download them as a CSV file with one click."}}
-      ]
-    }
-  ]
-}
-</script>
-
+<meta property="og:title" content="World Clock – Live Time in Every Country">
+<meta property="og:description" content="Live world clock with USA time by default, time-travel slider and a precision lap stopwatch.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌍%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"World Clock","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Live world clock for every country with USA time by default, a time-travel slider and an online lap stopwatch."},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the current time in the USA?","acceptedAnswer":{"@type":"Answer","text":"World Clock shows New York (Eastern Time) by default, with live Central, Mountain, Pacific, Alaska and Hawaii clocks right below. Daylight saving time is handled automatically."}},{"@type":"Question","name":"Can I see the time in any country?","acceptedAnswer":{"@type":"Answer","text":"Yes. Search any country or city, add it to your list and it is saved in your browser."}},{"@type":"Question","name":"How do I plan a meeting across time zones?","acceptedAnswer":{"@type":"Answer","text":"Drag the time-travel slider to move every clock forward or backward and see the same moment in all your cities."}},{"@type":"Question","name":"How do I export stopwatch laps?","acceptedAnswer":{"@type":"Answer","text":"Press Lap while the stopwatch runs, then use Copy to copy the laps or CSV to download them as a spreadsheet file."}}]}]}</script>
 <style>
-:root{
-  --bg:#14122b; --bg2:#1d1a3f; --ink:#f4f1ff; --muted:#a9a3cf; --card:rgba(255,255,255,.07); --card-b:rgba(255,255,255,.14);
-  --accent:#ff9a8b; --accent2:#8b7bff; --accent3:#5ee6c0; --danger:#ff6b8b; --shadow:0 20px 60px -20px rgba(0,0,0,.6);
-  --blob1:#ff7eb3; --blob2:#6a5cff; --blob3:#2fd8c0; --face:rgba(255,255,255,.05);
-  --r:22px;
-}
-:root[data-theme="light"]{
-  --bg:#fdf6ee; --bg2:#f6e9ff; --ink:#2a2347; --muted:#6f6892; --card:rgba(255,255,255,.7); --card-b:rgba(90,70,160,.14);
-  --accent:#ff7a6b; --accent2:#6a5cff; --accent3:#18b894; --danger:#e5395f; --shadow:0 20px 50px -22px rgba(90,70,160,.35);
-  --blob1:#ffc2a8; --blob2:#cbbfff; --blob3:#a6f0dc; --face:rgba(255,255,255,.6);
-}
-@media (prefers-color-scheme: light){
-  :root[data-theme="auto"]{
-    --bg:#fdf6ee; --bg2:#f6e9ff; --ink:#2a2347; --muted:#6f6892; --card:rgba(255,255,255,.7); --card-b:rgba(90,70,160,.14);
-    --accent:#ff7a6b; --accent2:#6a5cff; --accent3:#18b894; --danger:#e5395f; --shadow:0 20px 50px -22px rgba(90,70,160,.35);
-    --blob1:#ffc2a8; --blob2:#cbbfff; --blob3:#a6f0dc; --face:rgba(255,255,255,.6);
-  }
-}
+:root{--bg1:#120b1f;--bg2:#2a1740;--g1:rgba(255,120,120,.28);--g2:rgba(90,110,255,.30);--card:rgba(255,255,255,.07);--bd:rgba(255,255,255,.13);--tx:#f6f2ff;--mu:#b3a8d1;--ac:linear-gradient(135deg,#ff9a8b,#8b7bff);--c1:#ff9a8b;--c2:#8b7bff;--go:linear-gradient(135deg,#2dd4bf,#38bdf8);--hand:#fff;--chip:rgba(255,255,255,.1);--best:#2dd4bf;--worst:#ff7a90;color-scheme:dark}
+[data-theme=light]{--bg1:#fff4ef;--bg2:#eef0ff;--g1:rgba(255,160,140,.35);--g2:rgba(130,140,255,.30);--card:rgba(255,255,255,.72);--bd:rgba(80,60,140,.14);--tx:#1d1537;--mu:#6b6190;--hand:#1d1537;--chip:rgba(80,60,140,.08);--best:#0d9488;--worst:#e11d48;color-scheme:light}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
-body{
-  font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,sans-serif; color:var(--ink);
-  background:linear-gradient(160deg,var(--bg),var(--bg2)); min-height:100vh; overflow-x:hidden; line-height:1.5;
-}
-.mono,.digits{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
-.aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.aurora i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.38;animation:drift 22s ease-in-out infinite alternate}
-.aurora i:nth-child(1){width:46vmax;height:46vmax;background:var(--blob1);top:-14vmax;left:-10vmax}
-.aurora i:nth-child(2){width:40vmax;height:40vmax;background:var(--blob2);bottom:-14vmax;right:-8vmax;animation-delay:-8s}
-.aurora i:nth-child(3){width:30vmax;height:30vmax;background:var(--blob3);top:30%;left:48%;animation-delay:-14s;opacity:.25}
-@keyframes drift{to{transform:translate(6vmax,4vmax) scale(1.12)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
-.wrap{max-width:1120px;margin:0 auto;padding:20px 20px 60px}
-header.top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:6px 0 18px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;box-shadow:0 8px 24px -8px var(--accent2)}
-.brand b{font-size:1.45rem;font-weight:700;letter-spacing:-.02em}
-.brand small{display:block;color:var(--muted);font-size:.78rem;margin-top:-4px}
-.tools{display:flex;gap:8px;align-items:center}
-.chip{border:1px solid var(--card-b);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;font:500 .85rem 'Outfit',sans-serif;cursor:pointer;backdrop-filter:blur(14px);transition:.2s}
-.chip:hover{transform:translateY(-1px);border-color:var(--accent2)}
-.chip[aria-pressed="true"]{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
-
-.tabs{display:inline-flex;padding:5px;border-radius:999px;background:var(--card);border:1px solid var(--card-b);backdrop-filter:blur(14px);margin-bottom:22px}
-.tabs button{border:0;background:none;color:var(--muted);font:600 .98rem 'Outfit',sans-serif;padding:10px 24px;border-radius:999px;cursor:pointer;transition:.25s}
-.tabs button[aria-selected="true"]{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 8px 24px -10px var(--accent2)}
-
-h1{font-size:clamp(1.9rem,4.6vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:8px}
-h1 span{background:linear-gradient(120deg,var(--accent),var(--accent2) 60%,var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{color:var(--muted);max-width:640px;margin-bottom:22px;font-size:1.05rem}
-
-.glass{background:var(--card);border:1px solid var(--card-b);border-radius:var(--r);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+body{font-family:Outfit,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--tx);min-height:100vh;background:radial-gradient(900px 500px at 0% 0%,var(--g1),transparent 60%),radial-gradient(900px 600px at 100% 100%,var(--g2),transparent 60%),linear-gradient(160deg,var(--bg1),var(--bg2));background-attachment:fixed;line-height:1.5}
+.wrap{max-width:1180px;margin:auto;padding:20px 20px 40px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:52px;height:52px;border-radius:16px;background:var(--ac);display:grid;place-items:center;box-shadow:0 10px 30px rgba(139,123,255,.4)}
+.brand b{font-size:1.5rem;font-weight:700;display:block;line-height:1.1}.brand span{color:var(--mu);font-size:.85rem}
+.ctl{display:flex;gap:8px}
+.chip{border:1px solid var(--bd);background:var(--chip);color:var(--tx);font:inherit;font-weight:500;border-radius:99px;padding:9px 16px;cursor:pointer;transition:.2s}
+.chip:hover{transform:translateY(-1px)}.chip.on{background:var(--ac);border-color:transparent;color:#fff}
+.tabs{display:inline-flex;margin:22px 0 6px;padding:5px;border:1px solid var(--bd);background:var(--card);border-radius:99px;backdrop-filter:blur(14px)}
+.tab{border:0;background:none;color:var(--mu);font:inherit;font-weight:600;padding:11px 24px;border-radius:99px;cursor:pointer;transition:.25s}
+.tab[aria-selected=true]{background:var(--ac);color:#fff;box-shadow:0 8px 24px rgba(139,123,255,.35)}
+h1{font-size:clamp(2rem,5.2vw,3.6rem);font-weight:800;letter-spacing:-1.5px;line-height:1.08;margin:18px 0 10px}
+h1 em{font-style:normal;background:var(--ac);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--mu);max-width:640px;font-size:1.05rem}
+h2{font-size:1.2rem;margin:34px 0 14px;font-weight:700}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:28px;padding:26px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.hero{display:flex;align-items:center;gap:40px;margin-top:26px;flex-wrap:wrap}
+.analog{width:min(290px,70vw);flex:none}
+.analog svg{width:100%;height:auto;display:block}
+.hinfo{flex:1;min-width:260px}
+.city{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--mu);font-size:1.25rem;font-weight:600}
+.badge{font-size:.8rem;font-weight:500;padding:4px 12px;border-radius:99px;background:var(--chip);border:1px solid var(--bd)}
+.big{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:clamp(2.8rem,9vw,6rem);font-weight:700;letter-spacing:-3px;line-height:1.1;margin:6px 0;font-variant-numeric:tabular-nums}
+.big small{font-size:.28em;color:var(--c1);letter-spacing:0;margin-left:8px}
+.date{font-size:1.15rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+@media(max-width:800px){.two{grid-template-columns:1fr}}
+.step{font-weight:700;margin-bottom:14px}.step span{color:var(--mu);font-weight:500}
+input[type=search]{width:100%;background:var(--chip);border:1px solid var(--bd);border-radius:16px;color:var(--tx);font:inherit;padding:14px 16px;outline:0}
+input[type=search]:focus{border-color:var(--c2)}
+#res{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+#res button{font-size:.85rem;padding:7px 13px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.now{color:var(--c1);font-weight:700}
+input[type=range]{width:100%;margin:16px 0 8px;accent-color:#a58bff;height:6px;cursor:pointer}
+.sel{width:100%;background:var(--chip);color:var(--tx);border:1px solid var(--bd);border-radius:14px;padding:11px;font:inherit;margin-top:14px}
+.sel option,.sel optgroup{background:#241638;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.mini{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:16px 18px;cursor:pointer;transition:.2s;backdrop-filter:blur(14px)}
+.mini:hover{transform:translateY(-3px);border-color:var(--c2)}
+.mini.act{border-color:var(--c1)}
+.mini .n{font-weight:600;padding-right:22px}.mini .t{font-family:"JetBrains Mono",monospace;font-size:1.7rem;font-weight:700;font-variant-numeric:tabular-nums;margin:2px 0}
+.mini .m{color:var(--mu);font-size:.8rem}
+.x{position:absolute;top:8px;right:10px;border:0;background:none;color:var(--mu);cursor:pointer;font-size:1rem}
+.empty{color:var(--mu)}
+.sw{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:18px;margin-top:26px;align-items:start}
+@media(max-width:820px){.sw{grid-template-columns:1fr}}
+.ringbox{position:relative;max-width:360px;margin:0 auto}
+.ringbox svg{width:100%;display:block;transform:rotate(-90deg)}
+.ring-in{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.sbig{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:clamp(2.2rem,8vw,3.2rem);letter-spacing:-2px;font-variant-numeric:tabular-nums}
+.sbig small{font-size:.5em;color:var(--c1);letter-spacing:0}
+.slap{color:var(--mu);font-size:.95rem}
+.btns{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+.btn{border:1px solid var(--bd);background:var(--chip);color:var(--tx);font:inherit;font-weight:700;padding:14px 28px;border-radius:99px;cursor:pointer;min-width:104px;transition:.2s}
+.btn:hover:not(:disabled){transform:translateY(-2px)}.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.go{background:var(--go);border:0;color:#04251f}.btn.pause{background:var(--ac);border:0;color:#fff}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.stat{flex:1;min-width:90px;background:var(--chip);border-radius:16px;padding:10px 14px}
+.stat small{color:var(--mu);display:block;font-size:.75rem}.stat b{font-family:"JetBrains Mono",monospace;font-size:.95rem}
+.laps{max-height:380px;overflow:auto;border-radius:16px}
+table{width:100%;border-collapse:collapse;font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;font-size:.95rem}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--bd)}th:first-child,td:first-child{text-align:left}
+th{font:600 .75rem Outfit,sans-serif;color:var(--mu);position:sticky;top:0;background:var(--bg2)}
+.best{color:var(--best);font-weight:700}.worst{color:var(--worst);font-weight:700}
+.hint{color:var(--mu);font-size:.8rem;margin-top:12px}
+details{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}details p{color:var(--mu);margin-top:8px}
+footer{text-align:center;color:var(--mu);font-size:.85rem;margin-top:40px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);background:var(--ac);color:#fff;padding:10px 22px;border-radius:99px;font-weight:600;transition:.3s;opacity:0}
+.toast.show{transform:translate(-50%,0);opacity:1}
 [hidden]{display:none!important}
-
-/* World clock */
-.hero{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:center;padding:26px;margin-bottom:20px}
-.analog{width:100%;max-width:240px;aspect-ratio:1;justify-self:center}
-.analog .face{fill:var(--face);stroke:var(--card-b);stroke-width:2}
-.analog .tick{stroke:var(--muted);stroke-width:2;stroke-linecap:round}
-.analog .tick.big{stroke:var(--ink);stroke-width:3.5}
-.analog .h,.analog .m{stroke:var(--ink);stroke-linecap:round}
-.analog .h{stroke-width:6}.analog .m{stroke-width:4}
-.analog .s{stroke:var(--accent);stroke-width:2.2;stroke-linecap:round}
-.analog .hub{fill:var(--accent)}
-.hero .city{font-size:1.1rem;color:var(--muted);font-weight:500;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.hero .big{font-size:clamp(2.6rem,8vw,5rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin:4px 0}
-.hero .big small{font-size:.35em;color:var(--accent);margin-left:6px;font-weight:600}
-.hero .date{font-size:1.1rem}
-.badge{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--card-b);padding:3px 10px;border-radius:999px;font-size:.8rem;color:var(--muted)}
-
-.controls{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-bottom:20px}
-.panel{padding:18px 20px}
-.panel h2{font-size:1rem;font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.searchbox{position:relative}
-.searchbox input{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--card-b);background:var(--face);color:var(--ink);font:400 1rem 'Outfit',sans-serif;outline:none;transition:.2s}
-.searchbox input:focus{border-color:var(--accent2);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent2) 25%,transparent)}
-.results{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;border-radius:16px;overflow:hidden;background:var(--bg2);border:1px solid var(--card-b);box-shadow:var(--shadow);max-height:320px;overflow-y:auto}
-.results button{display:flex;width:100%;justify-content:space-between;gap:10px;padding:11px 16px;background:none;border:0;color:var(--ink);font:400 .95rem 'Outfit',sans-serif;cursor:pointer;text-align:left}
-.results button:hover,.results button:focus{background:color-mix(in srgb,var(--accent2) 22%,transparent);outline:none}
-.results em{font-style:normal;color:var(--muted);font-size:.82rem}
-.hint{color:var(--muted);font-size:.85rem;margin-top:8px}
-
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--accent2),var(--accent));outline:none;margin:12px 0 6px}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:4px solid var(--accent2);cursor:grab;box-shadow:0 4px 14px rgba(0,0,0,.3)}
-input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:4px solid var(--accent2);cursor:grab}
-.travel-label{font-weight:600;color:var(--accent)}
-
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
-.card{position:relative;padding:18px 18px 16px;border-radius:var(--r);background:var(--card);border:1px solid var(--card-b);backdrop-filter:blur(14px);cursor:pointer;transition:.25s;overflow:hidden;text-align:left;color:inherit;font-family:inherit}
-.card:hover{transform:translateY(-3px);border-color:var(--accent2)}
-.card.active{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 40%,transparent),var(--shadow)}
-.card::before{content:"";position:absolute;inset:0;opacity:.18;pointer-events:none;background:linear-gradient(135deg,#ffd27a,#ff9a8b)}
-.card.night::before{background:linear-gradient(135deg,#2a2f7a,#6a5cff)}
-.card.dusk::before{background:linear-gradient(135deg,#ff7eb3,#ffb36b)}
-.card>*{position:relative}
-.card .name{font-weight:600;font-size:1.12rem;padding-right:28px}
-.card .sub{color:var(--muted);font-size:.82rem}
-.card .time{font-size:2.1rem;font-weight:700;letter-spacing:-.02em;margin:8px 0 2px}
-.card .time small{font-size:.45em;color:var(--accent);margin-left:4px}
-.card .meta{display:flex;justify-content:space-between;color:var(--muted);font-size:.82rem}
-.card .icon{position:absolute;right:16px;top:14px;font-size:1.3rem}
-.rm{position:absolute!important;right:12px;bottom:12px;width:28px;height:28px;border-radius:50%;border:1px solid var(--card-b);background:var(--card);color:var(--muted);cursor:pointer;opacity:0;transition:.2s;font-size:1rem;line-height:1}
-.card:hover .rm,.rm:focus{opacity:1}
-.rm:hover{color:var(--danger);border-color:var(--danger)}
-@media (hover:none){.rm{opacity:.8}}
-
-/* Stopwatch */
-.sw{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:24px;align-items:start}
-.dial{padding:26px;text-align:center}
-.ringwrap{position:relative;width:100%;max-width:340px;margin:0 auto;aspect-ratio:1}
-.ringwrap svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring-bg{fill:none;stroke:var(--card-b);stroke-width:10}
-.ring-fg{fill:none;stroke:url(#swg);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .08s linear}
-.readout{position:absolute;inset:0;display:grid;place-content:center;gap:2px}
-.readout .t{font-size:clamp(2.1rem,8vw,3.1rem);font-weight:700;letter-spacing:-.02em}
-.readout .t small{font-size:.55em;color:var(--accent)}
-.readout .l{color:var(--muted);font-size:.9rem}
-.btns{display:flex;justify-content:center;gap:12px;margin-top:22px;flex-wrap:wrap}
-.btn{border:0;border-radius:999px;padding:14px 30px;font:600 1.05rem 'Outfit',sans-serif;cursor:pointer;transition:.2s;color:#fff;min-width:110px}
-.btn:active{transform:scale(.96)}
-.btn.go{background:linear-gradient(135deg,var(--accent3),#2aa6ff);color:#06231d}
-.btn.go.run{background:linear-gradient(135deg,var(--accent),var(--danger));color:#fff}
-.btn.sec{background:var(--card);border:1px solid var(--card-b);color:var(--ink)}
-.btn:disabled{opacity:.4;cursor:not-allowed}
-.kbd{color:var(--muted);font-size:.82rem;margin-top:14px}
-kbd{font-family:'JetBrains Mono',monospace;background:var(--card);border:1px solid var(--card-b);padding:1px 7px;border-radius:6px;font-size:.78rem}
-.laps{padding:20px}
-.laps h2{display:flex;justify-content:space-between;align-items:center;font-size:1.05rem;margin-bottom:10px;flex-wrap:wrap;gap:8px}
-.laps .acts{display:flex;gap:8px}
-.lap-head,.lap{display:grid;grid-template-columns:50px 1fr 1fr 1fr;gap:8px;padding:10px 6px;font-size:.95rem}
-.lap-head{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--card-b)}
-.lap{border-bottom:1px solid var(--card-b);animation:pop .3s ease}
-.lap.best{color:var(--accent3)}.lap.worst{color:var(--danger)}
-.lap .tag{font-size:.7rem;opacity:.85}
-@keyframes pop{from{opacity:0;transform:translateY(-6px)}}
-.lapbox{max-height:420px;overflow:auto}
-.empty{color:var(--muted);text-align:center;padding:36px 10px}
-
-/* content */
-section.info{margin-top:56px}
-section.info h2{font-size:1.6rem;letter-spacing:-.02em;margin-bottom:14px}
-.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:34px}
-.feat div{padding:20px;border-radius:var(--r);background:var(--card);border:1px solid var(--card-b)}
-.feat h3{font-size:1.05rem;margin-bottom:6px}.feat p{color:var(--muted);font-size:.93rem}
-details{background:var(--card);border:1px solid var(--card-b);border-radius:16px;padding:14px 18px;margin-bottom:10px}
-summary{cursor:pointer;font-weight:600}
-details p{color:var(--muted);margin-top:8px}
-footer{margin-top:50px;text-align:center;color:var(--muted);font-size:.88rem}
-.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);opacity:0;background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:999px;font-weight:500;transition:.3s;z-index:60;pointer-events:none}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-a{color:var(--accent2)}
-:focus-visible{outline:3px solid var(--accent2);outline-offset:2px}
-
-@media (max-width:820px){
-  .hero{grid-template-columns:1fr;text-align:center}.hero .city{justify-content:center}
-  .controls,.sw{grid-template-columns:1fr}
-}
 </style>
 </head>
 <body>
-<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
-
 <div class="wrap">
-  <header class="top">
-    <a class="brand" href="#world-clock" aria-label="Chronofern home">
-      <span class="logo" aria-hidden="true">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-      </span>
-      <span><b>Chronofern</b><small>World clock &amp; stopwatch</small></span>
-    </a>
-    <div class="tools" role="group" aria-label="Display settings">
-      <button class="chip" id="fmtBtn" aria-pressed="false" title="Toggle 24-hour time">24h</button>
-      <button class="chip" id="secBtn" aria-pressed="true" title="Show seconds">Seconds</button>
-      <button class="chip" id="themeBtn" aria-label="Switch theme" title="Switch theme">🌓</button>
-    </div>
-  </header>
+<header>
+ <div class="brand"><div class="logo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><b>World Clock</b><span>World clock &amp; stopwatch</span></div></div>
+ <div class="ctl"><button class="chip" id="b12">12h</button><button class="chip on" id="bsec">Seconds</button><button class="chip" id="bth" aria-label="Toggle dark and light theme">◐</button></div>
+</header>
+<nav class="tabs" role="tablist" aria-label="Tools">
+ <button class="tab" role="tab" id="tw" aria-selected="true">🌍 World Clock</button>
+ <button class="tab" role="tab" id="ts" aria-selected="false">⏱ Stopwatch</button>
+</nav>
 
-  <nav class="tabs" role="tablist" aria-label="Tools">
-    <button role="tab" id="tab-clock" aria-selected="true" aria-controls="panel-clock">🌍 World Clock</button>
-    <button role="tab" id="tab-sw" aria-selected="false" aria-controls="panel-sw">⏱ Stopwatch</button>
-  </nav>
+<main>
+<section id="pw" aria-labelledby="h-w">
+ <h1 id="h-w">Live <em>world clock</em> for every country</h1>
+ <p class="lead">See the current time in the USA and any city on Earth, then slide through the day to plan meetings across time zones. Daylight saving handled for you.</p>
+ <div class="card hero">
+  <div class="analog"><svg viewBox="0 0 200 200" role="img" aria-label="Analog clock"><circle cx="100" cy="100" r="96" fill="none" stroke="var(--bd)" stroke-width="3"/><g id="ticks"></g>
+   <line id="hh" x1="100" y1="100" x2="100" y2="58" stroke="var(--hand)" stroke-width="5" stroke-linecap="round"/><line id="hm" x1="100" y1="100" x2="100" y2="38" stroke="var(--hand)" stroke-width="3.5" stroke-linecap="round"/><line id="hs" x1="100" y1="112" x2="100" y2="30" stroke="#ff9a8b" stroke-width="1.8" stroke-linecap="round"/><circle cx="100" cy="100" r="5" fill="#ff9a8b"/></svg></div>
+  <div class="hinfo"><div class="city"><span id="hn">New York · USA</span><span class="badge" id="ho"></span><span class="badge" id="hy" hidden>Your time zone</span></div>
+   <div class="big" id="ht">--:--</div><div class="date" id="hd"></div>
+   <select class="sel" id="hsel" aria-label="Choose main time zone"></select></div>
+ </div>
+ <div class="two">
+  <div class="card"><div class="step">Step 1 · <span>Add a city or country</span></div>
+   <input type="search" id="q" placeholder="Try Tokyo, London, India, New York…" aria-label="Search city or country" autocomplete="off">
+   <div id="res"></div><div class="row" style="margin-top:14px"><button class="chip" id="loc">+ My local time</button></div></div>
+  <div class="card"><div class="row step"><div>Step 2 · <span>Time travel</span></div><span class="now" id="tl">Now</span></div>
+   <input type="range" id="sl" min="-720" max="720" step="15" value="0" aria-label="Time travel offset"><div class="row"><span class="hint" style="margin:0">Drag to see the same moment everywhere.</span><button class="chip" id="bk">Back to now</button></div></div>
+ </div>
+ <h2>United States time zones</h2><div class="grid" id="usa"></div>
+ <h2>Your cities</h2><div class="grid" id="mine"></div>
+</section>
 
-  <main>
-    <!-- WORLD CLOCK -->
-    <section id="panel-clock" role="tabpanel" aria-labelledby="tab-clock">
-      <h1>The <span>world clock</span> that feels like a breath of fresh air</h1>
-      <p class="lead">See the current time in any city, then slide through the day to plan meetings across time zones. Daylight saving handled for you.</p>
+<section id="ps" aria-labelledby="h-s" hidden>
+ <h1 id="h-s">A precision <em>stopwatch</em> with lap splits</h1>
+ <p class="lead">Smooth to the hundredth of a second, keeps counting in the background, and remembers your session if you reload.</p>
+ <div class="sw">
+  <div class="card"><div class="ringbox"><svg viewBox="0 0 200 200"><defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9a8b"/><stop offset="1" stop-color="#8b7bff"/></linearGradient></defs><circle cx="100" cy="100" r="90" fill="none" stroke="var(--bd)" stroke-width="10"/><circle id="arc" cx="100" cy="100" r="90" fill="none" stroke="url(#gr)" stroke-width="10" stroke-linecap="round" stroke-dasharray="565.5" stroke-dashoffset="565.5"/></svg>
+   <div class="ring-in"><div class="sbig" id="sd">00:00.<small>00</small></div><div class="slap" id="sl2">Lap 1 · 00:00.00</div></div></div>
+   <div class="btns"><button class="btn go" id="ss">Start</button><button class="btn" id="lap" disabled>Lap</button><button class="btn" id="rst">Reset</button></div>
+   <p class="hint" style="text-align:center">Shortcuts: Space start/pause · L lap · R reset</p></div>
+  <div class="card"><div class="row"><b style="font-size:1.15rem">Laps</b><div class="ctl"><button class="chip" id="cp">Copy</button><button class="chip" id="cv">CSV</button></div></div>
+   <div class="stats"><div class="stat"><small>Laps</small><b id="nN">0</b></div><div class="stat"><small>Best</small><b id="nB">–</b></div><div class="stat"><small>Worst</small><b id="nW">–</b></div><div class="stat"><small>Average</small><b id="nA">–</b></div></div>
+   <div class="empty" id="ne">No laps yet. Start the stopwatch and tap Lap.</div>
+   <div class="laps" id="lw" hidden><table><thead><tr><th>Lap</th><th>Lap time</th><th>Total</th></tr></thead><tbody id="lb"></tbody></table></div></div>
+ </div>
+</section>
 
-      <div class="glass hero" aria-live="off">
-        <svg class="analog" viewBox="0 0 220 220" role="img" aria-label="Analog clock for the selected city">
-          <circle class="face" cx="110" cy="110" r="104"/>
-          <g id="ticks"></g>
-          <line class="h" id="hh" x1="110" y1="110" x2="110" y2="62"/>
-          <line class="m" id="mh" x1="110" y1="110" x2="110" y2="36"/>
-          <line class="s" id="sh" x1="110" y1="124" x2="110" y2="28"/>
-          <circle class="hub" cx="110" cy="110" r="6"/>
-        </svg>
-        <div>
-          <div class="city"><span id="heroCity">—</span><span class="badge" id="heroOff">UTC</span><span class="badge" id="heroDiff"></span></div>
-          <div class="big digits"><span id="heroTime">--:--</span><small id="heroAp"></small></div>
-          <div class="date" id="heroDate">—</div>
-        </div>
-      </div>
-
-      <div class="controls">
-        <div class="glass panel">
-          <h2><label for="q">Step 1 · Add a city</label></h2>
-          <div class="searchbox">
-            <input id="q" type="search" placeholder="Try Tokyo, London, India, New York…" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="results">
-            <div class="results" id="results" role="listbox" hidden></div>
-          </div>
-          <p class="hint">Press <kbd>/</kbd> to search. Click any card to feature it above.</p>
-        </div>
-        <div class="glass panel">
-          <h2><label for="travel">Step 2 · Time travel</label><span class="travel-label" id="travelLabel">Now</span></h2>
-          <input id="travel" type="range" min="-720" max="720" step="15" value="0">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="hint" style="margin:0">Drag to see the same moment everywhere.</span>
-            <button class="chip" id="nowBtn">Back to now</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid" id="grid" aria-label="Your cities"></div>
-    </section>
-
-    <!-- STOPWATCH -->
-    <section id="panel-sw" role="tabpanel" aria-labelledby="tab-sw" hidden>
-      <h1>A <span>precision stopwatch</span> with lap splits</h1>
-      <p class="lead">Smooth to the hundredth of a second, keeps counting in the background, and remembers your session if you reload.</p>
-      <div class="sw">
-        <div class="glass dial">
-          <div class="ringwrap">
-            <svg viewBox="0 0 220 220" aria-hidden="true">
-              <defs><linearGradient id="swg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9a8b"/><stop offset=".55" stop-color="#8b7bff"/><stop offset="1" stop-color="#5ee6c0"/></linearGradient></defs>
-              <circle class="ring-bg" cx="110" cy="110" r="100"/>
-              <circle class="ring-fg" id="ring" cx="110" cy="110" r="100" stroke-dasharray="628.32" stroke-dashoffset="628.32"/>
-            </svg>
-            <div class="readout">
-              <div class="t digits" id="swTime" role="timer" aria-live="off">00:00.<small>00</small></div>
-              <div class="l" id="swLap">Lap 1 · 00:00.00</div>
-            </div>
-          </div>
-          <div class="btns">
-            <button class="btn go" id="goBtn">Start</button>
-            <button class="btn sec" id="lapBtn" disabled>Lap</button>
-            <button class="btn sec" id="resetBtn" disabled>Reset</button>
-          </div>
-          <p class="kbd"><kbd>Space</kbd> start/stop · <kbd>L</kbd> lap · <kbd>R</kbd> reset</p>
-        </div>
-        <div class="glass laps">
-          <h2>Laps <span class="acts"><button class="chip" id="copyBtn">Copy</button><button class="chip" id="csvBtn">CSV</button></span></h2>
-          <div class="lapbox" id="lapbox"></div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <section class="info" aria-labelledby="whyh">
-    <h2 id="whyh">Why Chronofern?</h2>
-    <div class="feat">
-      <div><h3>🌐 400+ time zones</h3><p>Powered by your browser's IANA database, so cities and daylight saving are always right.</p></div>
-      <div><h3>🕰 Time-travel slider</h3><p>Plan calls and launches by sliding up to 12 hours either way and watching every city update.</p></div>
-      <div><h3>⏱ Lap-accurate stopwatch</h3><p>Hundredth-second precision, best and worst lap highlights, and one-click CSV export.</p></div>
-      <div><h3>🔒 Private by design</h3><p>No servers, no accounts, no tracking. Your data never leaves your device.</p></div>
-    </div>
-
-    <h2>Frequently asked questions</h2>
-    <details><summary>How do I compare time zones for a meeting?</summary><p>Add the cities you need, then drag the time-travel slider. Every city updates instantly so you can find an hour that works for everyone.</p></details>
-    <details><summary>How accurate is the online stopwatch?</summary><p>The stopwatch displays hundredths of a second and keeps running accurately even if the tab is in the background, because it measures against the system clock.</p></details>
-    <details><summary>Does the world clock handle daylight saving time?</summary><p>Yes. Chronofern uses your browser's built-in IANA time zone database, so daylight saving changes are applied automatically for every city.</p></details>
-    <details><summary>Is my data stored on a server?</summary><p>No. Everything runs in your browser. Your cities and settings are saved only in your own device's local storage.</p></details>
-    <details><summary>Can I export my lap times?</summary><p>Yes. Copy laps to the clipboard or download them as a CSV file with one click.</p></details>
-  </section>
-
-  <footer>Made with care · Chronofern runs 100% in your browser · No cookies, no tracking</footer>
+<section aria-labelledby="faq"><h2 id="faq" style="margin-top:46px">Frequently asked questions</h2>
+ <details><summary>What is the current time in the USA?</summary><p>World Clock shows New York (Eastern Time) by default, with live Central, Mountain, Pacific, Alaska and Hawaii clocks right below. Daylight saving time is handled automatically.</p></details>
+ <details><summary>Can I see the time in any country?</summary><p>Yes. Search any country or city, add it to your list and it is saved in your browser.</p></details>
+ <details><summary>How do I plan a meeting across time zones?</summary><p>Drag the time-travel slider to move every clock forward or backward and see the same moment in all your cities.</p></details>
+ <details><summary>How do I export stopwatch laps?</summary><p>Press Lap while the stopwatch runs, then use Copy to copy the laps or CSV to download them as a spreadsheet file.</p></details>
+</section>
+</main>
+<footer>© World Clock · Free, private, runs entirely in your browser.</footer>
 </div>
-
-<div class="toast" id="toast" role="status"></div>
-
-<noscript><p style="padding:20px;text-align:center">Chronofern needs JavaScript to show live clocks and run the stopwatch. It never sends your data anywhere.</p></noscript>
+<div class="toast" id="toast"></div>
 
 <script>
-(()=>{
-'use strict';
-const $=s=>document.querySelector(s);
-const store={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
-const pad=(n,l=2)=>String(n).padStart(l,'0');
-const BASE_TITLE=document.title;
+const $=s=>document.querySelector(s),pad=(n,l=2)=>String(n).padStart(l,"0");
+const st={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const USA=[["America/New_York","New York · Eastern"],["America/Chicago","Chicago · Central"],["America/Denver","Denver · Mountain"],["America/Los_Angeles","Los Angeles · Pacific"],["America/Anchorage","Anchorage · Alaska"],["Pacific/Honolulu","Honolulu · Hawaii"]];
+const CO="Afghanistan|Asia/Kabul,Albania|Europe/Tirane,Algeria|Africa/Algiers,Argentina|America/Argentina/Buenos_Aires,Armenia|Asia/Yerevan,Australia|Australia/Sydney,Austria|Europe/Vienna,Azerbaijan|Asia/Baku,Bahrain|Asia/Bahrain,Bangladesh|Asia/Dhaka,Belarus|Europe/Minsk,Belgium|Europe/Brussels,Bolivia|America/La_Paz,Brazil|America/Sao_Paulo,Bulgaria|Europe/Sofia,Cambodia|Asia/Phnom_Penh,Cameroon|Africa/Douala,Canada|America/Toronto,Chile|America/Santiago,China|Asia/Shanghai,Colombia|America/Bogota,Costa Rica|America/Costa_Rica,Croatia|Europe/Zagreb,Cuba|America/Havana,Cyprus|Asia/Nicosia,Czechia|Europe/Prague,Denmark|Europe/Copenhagen,Dominican Republic|America/Santo_Domingo,Ecuador|America/Guayaquil,Egypt|Africa/Cairo,Estonia|Europe/Tallinn,Ethiopia|Africa/Addis_Ababa,Fiji|Pacific/Fiji,Finland|Europe/Helsinki,France|Europe/Paris,Georgia|Asia/Tbilisi,Germany|Europe/Berlin,Ghana|Africa/Accra,Greece|Europe/Athens,Guatemala|America/Guatemala,Hong Kong|Asia/Hong_Kong,Hungary|Europe/Budapest,Iceland|Atlantic/Reykjavik,India|Asia/Kolkata,Indonesia|Asia/Jakarta,Iran|Asia/Tehran,Iraq|Asia/Baghdad,Ireland|Europe/Dublin,Israel|Asia/Jerusalem,Italy|Europe/Rome,Jamaica|America/Jamaica,Japan|Asia/Tokyo,Jordan|Asia/Amman,Kazakhstan|Asia/Almaty,Kenya|Africa/Nairobi,Kuwait|Asia/Kuwait,Latvia|Europe/Riga,Lebanon|Asia/Beirut,Libya|Africa/Tripoli,Lithuania|Europe/Vilnius,Luxembourg|Europe/Luxembourg,Malaysia|Asia/Kuala_Lumpur,Maldives|Indian/Maldives,Mexico|America/Mexico_City,Morocco|Africa/Casablanca,Myanmar|Asia/Yangon,Nepal|Asia/Kathmandu,Netherlands|Europe/Amsterdam,New Zealand|Pacific/Auckland,Nigeria|Africa/Lagos,North Korea|Asia/Pyongyang,Norway|Europe/Oslo,Oman|Asia/Muscat,Pakistan|Asia/Karachi,Panama|America/Panama,Peru|America/Lima,Philippines|Asia/Manila,Poland|Europe/Warsaw,Portugal|Europe/Lisbon,Qatar|Asia/Qatar,Romania|Europe/Bucharest,Russia|Europe/Moscow,Saudi Arabia|Asia/Riyadh,Serbia|Europe/Belgrade,Singapore|Asia/Singapore,Slovakia|Europe/Bratislava,Slovenia|Europe/Ljubljana,South Africa|Africa/Johannesburg,South Korea|Asia/Seoul,Spain|Europe/Madrid,Sri Lanka|Asia/Colombo,Sudan|Africa/Khartoum,Sweden|Europe/Stockholm,Switzerland|Europe/Zurich,Syria|Asia/Damascus,Taiwan|Asia/Taipei,Tanzania|Africa/Dar_es_Salaam,Thailand|Asia/Bangkok,Tunisia|Africa/Tunis,Turkey|Europe/Istanbul,Uganda|Africa/Kampala,Ukraine|Europe/Kyiv,United Arab Emirates|Asia/Dubai,United Kingdom|Europe/London,United States|America/New_York,Uruguay|America/Montevideo,Uzbekistan|Asia/Tashkent,Venezuela|America/Caracas,Vietnam|Asia/Ho_Chi_Minh,Yemen|Asia/Aden,Zambia|Africa/Lusaka,Zimbabwe|Africa/Harare".split(",").map(x=>x.split("|"));
+let ALL=[];try{ALL=Intl.supportedValuesOf("timeZone")}catch(e){ALL=USA.map(u=>u[0]).concat(CO.map(c=>c[1]))}
+const lab=z=>z.split("/").pop().replace(/_/g," ");
+const LOCAL=Intl.DateTimeFormat().resolvedOptions().timeZone;
+const ENT=CO.map(([c,z])=>({n:c,z,k:c.toLowerCase()})).concat(ALL.map(z=>({n:lab(z)+" · "+z.split("/")[0],z,k:z.toLowerCase().replace(/_/g," ")})));
+let h12=st.get("h12",true),secs=st.get("secs",true),main=st.get("main","America/New_York"),mine=st.get("mine",["Europe/London","Asia/Kolkata","Asia/Tokyo"]),offm=0;
 
-/* ---------- settings ---------- */
-const S=Object.assign({h24:false,secs:true,theme:'auto'},store.get('cf.settings',{}));
-const saveS=()=>store.set('cf.settings',S);
-function applySettings(){
-  document.documentElement.dataset.theme=S.theme;
-  $('#fmtBtn').setAttribute('aria-pressed',S.h24);
-  $('#fmtBtn').textContent=S.h24?'24h':'12h';
-  $('#secBtn').setAttribute('aria-pressed',S.secs);
-}
-$('#fmtBtn').onclick=()=>{S.h24=!S.h24;saveS();applySettings();tick()};
-$('#secBtn').onclick=()=>{S.secs=!S.secs;saveS();applySettings();tick()};
-$('#themeBtn').onclick=()=>{
-  const dark=matchMedia('(prefers-color-scheme: dark)').matches;
-  const cur=S.theme==='auto'?(dark?'dark':'light'):S.theme;
-  S.theme=cur==='dark'?'light':'dark';saveS();applySettings();
-};
+/* theme */
+const root=document.documentElement;
+function theme(t){root.dataset.theme=t;st.set("theme",t);document.querySelector('meta[name=theme-color]').content=t=="light"?"#fff4ef":"#120b1f"}
+theme(st.get("theme",matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"));
+$("#bth").onclick=()=>theme(root.dataset.theme=="dark"?"light":"dark");
 
-/* ---------- toast ---------- */
-let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),1800)}
+/* time helpers */
+const dfc={};
+function P(z,ts){const f=dfc[z]||(dfc[z]=new Intl.DateTimeFormat("en-US",{timeZone:z,hourCycle:"h23",hour:"numeric",minute:"numeric",second:"numeric"}));const o={};f.formatToParts(ts).forEach(p=>o[p.type]=+p.value);return o}
+function T(z,ts){const p=P(z,ts);const h=p.hour%24;const hh=h12?(h%12||12):pad(h);return{h,m:p.minute,s:p.second,t:hh+":"+pad(p.minute)+(secs?":"+pad(p.second):""),ap:h12?(h<12?"AM":"PM"):""}}
+const D=(z,ts,o)=>new Date(ts).toLocaleDateString("en-US",Object.assign({timeZone:z},o));
+function OFF(z){try{return new Intl.DateTimeFormat("en-US",{timeZone:z,timeZoneName:"shortOffset"}).formatToParts(new Date()).find(p=>p.type=="timeZoneName").value.replace("GMT","UTC")||"UTC"}catch(e){return""}}
+const nm=z=>(USA.find(u=>u[0]==z)||[0,lab(z)])[1];
 
-/* ---------- time zones ---------- */
-const LOCAL=Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';
-let ZONES=[];
-try{ZONES=Intl.supportedValuesOf('timeZone')}catch{ZONES=['UTC','America/New_York','America/Chicago','America/Los_Angeles','America/Sao_Paulo','Europe/London','Europe/Paris','Europe/Berlin','Africa/Cairo','Africa/Johannesburg','Asia/Dubai','Asia/Kolkata','Asia/Singapore','Asia/Shanghai','Asia/Tokyo','Australia/Sydney','Pacific/Auckland']}
-if(!ZONES.includes('UTC'))ZONES.push('UTC');
-if(!ZONES.includes(LOCAL))ZONES.push(LOCAL);
-const ALIAS={
-'Asia/Kolkata':'india mumbai delhi bengaluru bangalore chennai hyderabad ist','Asia/Calcutta':'india mumbai delhi bengaluru',
-'America/New_York':'usa united states nyc new york eastern est edt washington miami boston','America/Chicago':'usa central cst texas dallas houston',
-'America/Denver':'usa mountain mst colorado','America/Los_Angeles':'usa pacific pst california san francisco seattle la',
-'Europe/London':'uk england britain gmt bst united kingdom','Asia/Dubai':'uae emirates abu dhabi','Asia/Tokyo':'japan jst osaka',
-'Asia/Shanghai':'china beijing','Asia/Hong_Kong':'hk','Asia/Singapore':'sg','Asia/Seoul':'korea south korea','Australia/Sydney':'australia melbourne aest canberra',
-'Europe/Paris':'france','Europe/Berlin':'germany','Europe/Madrid':'spain','Europe/Rome':'italy','Europe/Moscow':'russia','America/Toronto':'canada ontario',
-'America/Sao_Paulo':'brazil','America/Mexico_City':'mexico','Pacific/Auckland':'new zealand nz','Africa/Johannesburg':'south africa','Africa/Lagos':'nigeria',
-'Asia/Karachi':'pakistan','Asia/Dhaka':'bangladesh','Asia/Bangkok':'thailand','Asia/Jakarta':'indonesia','Asia/Riyadh':'saudi arabia','Europe/Istanbul':'turkey','UTC':'utc gmt zulu'
-};
-const nice=z=>z==='UTC'?'UTC':z.split('/').slice(-1)[0].replace(/_/g,' ');
-const region=z=>z==='UTC'?'Universal':z.split('/')[0].replace(/_/g,' ');
+/* analog ticks */
+let tk="";for(let i=0;i<60;i++){const a=i*6*Math.PI/180,big=i%5==0,r1=big?80:86;tk+=`<line x1="${100+Math.sin(a)*r1}" y1="${100-Math.cos(a)*r1}" x2="${100+Math.sin(a)*92}" y2="${100-Math.cos(a)*92}" stroke="var(--hand)" stroke-width="${big?3:1}" opacity="${big?1:.45}" stroke-linecap="round"/>`}
+$("#ticks").innerHTML=tk;
+const rot=(id,d)=>$(id).setAttribute("transform",`rotate(${d} 100 100)`);
 
-const fmtCache={};
-function parts(tz,date){
-  const f=fmtCache[tz]||(fmtCache[tz]=new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',second:'numeric',weekday:'short'}));
-  const o={};for(const p of f.formatToParts(date))o[p.type]=p.value;
-  return {y:+o.year,mo:+o.month,d:+o.day,h:+o.hour%24,mi:+o.minute,s:+o.second,wd:o.weekday};
-}
-function offsetMin(tz,date){const p=parts(tz,date);return Math.round((Date.UTC(p.y,p.mo-1,p.d,p.h,p.mi,p.s)-Math.floor(date.getTime()/1000)*1000)/60000)}
-function fmtOff(m){const s=m<0?'-':'+';m=Math.abs(m);return 'UTC'+s+pad(Math.floor(m/60))+':'+pad(m%60)}
-function diffText(m){
-  if(m===0)return 'Same time as you';
-  const a=Math.abs(m),h=Math.floor(a/60),mm=a%60;
-  return (h?h+'h ':'')+(mm?mm+'m ':'')+(m>0?'ahead':'behind');
-}
-function clockText(p){
-  let h=p.h,ap='';
-  if(!S.h24){ap=h>=12?'PM':'AM';h=h%12||12}else h=pad(h);
-  return {t:h+':'+pad(p.mi)+(S.secs?':'+pad(p.s):''),ap};
-}
-function dayDate(tz,date){return new Intl.DateTimeFormat('en-US',{timeZone:tz,weekday:'long',month:'long',day:'numeric'}).format(date)}
-function phase(h){return h>=7&&h<17?['day','☀️']:h>=17&&h<20||h>=5&&h<7?['dusk','🌇']:['night','🌙']}
+/* controls */
+$("#b12").textContent=h12?"12h":"24h";$("#bsec").classList.toggle("on",secs);
+$("#b12").onclick=()=>{h12=!h12;st.set("h12",h12);$("#b12").textContent=h12?"12h":"24h";draw()};
+$("#bsec").onclick=()=>{secs=!secs;st.set("secs",secs);$("#bsec").classList.toggle("on",secs);draw()};
+function opts(){const g=(t,a)=>`<optgroup label="${t}">${a}</optgroup>`;
+ $("#hsel").innerHTML=g("United States",USA.map(([z,n])=>`<option value="${z}">${n}</option>`).join(""))+g("Countries",CO.map(([c,z])=>`<option value="${z}">${c}</option>`).join(""))+g("All time zones",ALL.map(z=>`<option value="${z}">${z}</option>`).join(""));
+ $("#hsel").value=main}
+$("#hsel").onchange=e=>{main=e.target.value;st.set("main",main);draw()};
+$("#sl").oninput=e=>{offm=+e.target.value;draw()};
+$("#bk").onclick=()=>{offm=0;$("#sl").value=0;draw()};
+function add(z){if(!mine.includes(z)&&!USA.some(u=>u[0]==z)){mine.push(z);st.set("mine",mine)}main=z;st.set("main",z);opts();draw()}
+$("#loc").onclick=()=>add(LOCAL);
+$("#q").oninput=e=>{const q=e.target.value.trim().toLowerCase();if(!q){$("#res").innerHTML="";return}
+ const m=ENT.filter(x=>x.k.includes(q)).slice(0,14);$("#res").innerHTML=m.map(x=>`<button class="chip" data-z="${x.z}">+ ${x.n}</button>`).join("")||'<span class="empty">No match</span>'};
+$("#res").onclick=e=>{const z=e.target.dataset.z;if(z){add(z);$("#q").value="";$("#res").innerHTML=""}};
+function mini(z,rm,ts){const t=T(z,ts);return `<div class="mini ${z==main?"act":""}" data-z="${z}" tabindex="0"><div class="n">${nm(z)}</div>${rm?`<button class="x" data-rm="${z}" aria-label="Remove ${nm(z)}">✕</button>`:""}<div class="t">${t.t}<small style="font-size:.5em;color:var(--c1)"> ${t.ap}</small></div><div class="m">${D(z,ts,{weekday:"short",month:"short",day:"numeric"})} · ${OFF(z)}</div></div>`}
+function pick(e){const x=e.target.closest(".x");if(x){mine=mine.filter(z=>z!==x.dataset.rm);st.set("mine",mine);draw();return}const m=e.target.closest(".mini");if(m){main=m.dataset.z;st.set("main",main);$("#hsel").value=main;draw()}}
+$("#usa").onclick=$("#mine").onclick=pick;
 
-/* ---------- state ---------- */
-let cities=store.get('cf.cities',null);
-if(!Array.isArray(cities)||!cities.length){
-  cities=[LOCAL,'America/New_York','Europe/London','Asia/Dubai','Asia/Tokyo','Australia/Sydney'];
-  cities=[...new Set(cities)];
-}
-let featured=store.get('cf.featured',cities[0]);
-if(!cities.includes(featured))featured=cities[0];
-let shift=0;
-const saveC=()=>{store.set('cf.cities',cities);store.set('cf.featured',featured)};
+function draw(){const ts=Date.now()+offm*60000,t=T(main,ts);
+ $("#ht").innerHTML=t.t+(t.ap?`<small>${t.ap}</small>`:"");
+ $("#hd").textContent=D(main,ts,{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+ $("#hn").textContent=main=="America/New_York"?"New York · USA":nm(main).replace(" · "," · ");
+ $("#ho").textContent=OFF(main);$("#hy").hidden=main!=LOCAL;
+ rot("#hh",(t.h%12)*30+t.m*.5);rot("#hm",t.m*6+t.s*.1);rot("#hs",t.s*6);$("#hs").style.display=secs?"":"none";
+ const a=Math.abs(offm),l=offm==0?"Now":(offm>0?"+":"−")+Math.floor(a/60)+"h"+(a%60?" "+a%60+"m":"");$("#tl").textContent=l;
+ $("#usa").innerHTML=USA.map(([z])=>mini(z,false,ts)).join("");
+ $("#mine").innerHTML=mine.length?mine.map(z=>mini(z,true,ts)).join(""):'<p class="empty">No cities yet – search above to add one.</p>'}
+opts();draw();setInterval(draw,1000);
 
-/* ---------- analog face ---------- */
-(function(){
-  let h='';
-  for(let i=0;i<60;i++){
-    const big=i%5===0,a=i*6*Math.PI/180,r1=big?86:93,r2=100;
-    h+=`<line class="tick${big?' big':''}" x1="${110+Math.sin(a)*r1}" y1="${110-Math.cos(a)*r1}" x2="${110+Math.sin(a)*r2}" y2="${110-Math.cos(a)*r2}"/>`;
-  }
-  $('#ticks').innerHTML=h;
-})();
-const rot=(el,deg)=>el.setAttribute('transform',`rotate(${deg} 110 110)`);
+/* tabs */
+function tab(n){const w=n!="s";$("#pw").hidden=!w;$("#ps").hidden=w;$("#tw").setAttribute("aria-selected",w);$("#ts").setAttribute("aria-selected",!w);if(location.hash!=(w?"":"#stopwatch"))history.replaceState(null,"",w?location.pathname:"#stopwatch");document.title=w?"World Clock – Current Time in Every Country & Online Stopwatch":"Online Stopwatch with Laps – World Clock"}
+$("#tw").onclick=()=>tab("w");$("#ts").onclick=()=>tab("s");
+tab(location.hash=="#stopwatch"?"s":"w");
 
-/* ---------- render cards ---------- */
-const grid=$('#grid');
-function renderGrid(){
-  grid.innerHTML='';
-  cities.forEach(tz=>{
-    const c=document.createElement('div');
-    c.className='card';c.tabIndex=0;c.dataset.tz=tz;c.setAttribute('role','button');
-    c.setAttribute('aria-label','Feature '+nice(tz));
-    c.innerHTML=`<span class="icon"></span><div class="name">${nice(tz)}</div><div class="sub">${region(tz)}${tz===LOCAL?' · Your location':''}</div>
-      <div class="time digits"><span class="ct"></span><small class="ca"></small></div>
-      <div class="meta"><span class="cd"></span><span class="cdiff"></span></div>
-      <button class="rm" aria-label="Remove ${nice(tz)}" title="Remove">×</button>`;
-    c.onclick=e=>{if(e.target.closest('.rm'))return;featured=tz;saveC();tick()};
-    c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){if(e.target===c){e.preventDefault();featured=tz;saveC();tick()}}};
-    c.querySelector('.rm').onclick=e=>{
-      e.stopPropagation();
-      if(cities.length<=1){toast('Keep at least one city');return}
-      cities=cities.filter(x=>x!==tz);if(featured===tz)featured=cities[0];saveC();renderGrid();tick();
-    };
-    grid.appendChild(c);
-  });
-}
-
-function tick(){
-  const now=new Date(Date.now()+shift*60000);
-  const localOff=offsetMin(LOCAL,now);
-  grid.querySelectorAll('.card').forEach(c=>{
-    const tz=c.dataset.tz,p=parts(tz,now),ct=clockText(p),ph=phase(p.h);
-    c.querySelector('.ct').textContent=ct.t;
-    c.querySelector('.ca').textContent=ct.ap;
-    c.querySelector('.cd').textContent=p.wd+', '+p.d+'/'+p.mo;
-    c.querySelector('.cdiff').textContent=tz===LOCAL?fmtOff(offsetMin(tz,now)):diffText(offsetMin(tz,now)-localOff);
-    c.querySelector('.icon').textContent=ph[1];
-    c.classList.remove('day','dusk','night');c.classList.add(ph[0]);
-    c.classList.toggle('active',tz===featured);
-  });
-  const p=parts(featured,now),ct=clockText(p),off=offsetMin(featured,now);
-  $('#heroCity').textContent=nice(featured)+' · '+region(featured);
-  $('#heroOff').textContent=fmtOff(off);
-  $('#heroDiff').textContent=featured===LOCAL?'Your time zone':diffText(off-localOff);
-  $('#heroTime').textContent=ct.t;$('#heroAp').textContent=ct.ap;
-  $('#heroDate').textContent=dayDate(featured,now);
-  const ms=now.getMilliseconds();
-  const sec=p.s+ms/1000;
-  rot($('#sh'),sec*6);rot($('#mh'),(p.mi+sec/60)*6);rot($('#hh'),((p.h%12)+p.mi/60)*30);
-}
-setInterval(()=>{if(!$('#panel-clock').hidden)tick()},250);
-
-/* ---------- time travel ---------- */
-const tr=$('#travel');
-function setShift(v){
-  shift=v;
-  const a=Math.abs(v),h=Math.floor(a/60),m=a%60;
-  $('#travelLabel').textContent=v===0?'Now':(v>0?'+':'−')+(h?h+'h ':'')+(m?m+'m':'');
-  tick();
-}
-tr.oninput=()=>setShift(+tr.value);
-$('#nowBtn').onclick=()=>{tr.value=0;setShift(0)};
-
-/* ---------- city search ---------- */
-const q=$('#q'),res=$('#results');
-function search(term){
-  term=term.trim().toLowerCase().replace(/\s+/g,' ');
-  if(!term)return [];
-  const out=[];
-  for(const z of ZONES){
-    if(cities.includes(z))continue;
-    const hay=(nice(z)+' '+region(z)+' '+(ALIAS[z]||'')).toLowerCase();
-    if(hay.includes(term)){
-      const score=nice(z).toLowerCase().startsWith(term)?0:(ALIAS[z]||'').includes(term)?1:2;
-      out.push([score,z]);
-    }
-  }
-  return out.sort((a,b)=>a[0]-b[0]||nice(a[1]).localeCompare(nice(b[1]))).slice(0,8).map(x=>x[1]);
-}
-function showResults(){
-  const list=search(q.value),now=new Date();
-  if(!list.length){res.hidden=true;q.setAttribute('aria-expanded','false');
-    if(q.value.trim()){res.hidden=false;res.innerHTML='<button disabled>No match. Try a nearby major city.</button>'}return}
-  res.innerHTML='';
-  list.forEach(z=>{
-    const b=document.createElement('button');b.setAttribute('role','option');
-    const ct=clockText(parts(z,now));
-    b.innerHTML=`<span>${nice(z)} <em>${region(z)}</em></span><em>${ct.t} ${ct.ap} · ${fmtOff(offsetMin(z,now))}</em>`;
-    b.onclick=()=>addCity(z);
-    res.appendChild(b);
-  });
-  res.hidden=false;q.setAttribute('aria-expanded','true');
-}
-function addCity(z){
-  cities.push(z);featured=z;saveC();q.value='';res.hidden=true;q.setAttribute('aria-expanded','false');
-  renderGrid();tick();toast(nice(z)+' added');
-}
-q.oninput=showResults;
-q.onfocus=()=>{if(q.value)showResults()};
-q.onkeydown=e=>{
-  if(e.key==='Enter'){const l=search(q.value);if(l[0])addCity(l[0])}
-  if(e.key==='Escape'){res.hidden=true;q.blur()}
-  if(e.key==='ArrowDown'){const f=res.querySelector('button:not([disabled])');if(f){e.preventDefault();f.focus()}}
-};
-res.onkeydown=e=>{
-  const bs=[...res.querySelectorAll('button')],i=bs.indexOf(document.activeElement);
-  if(e.key==='ArrowDown'){e.preventDefault();(bs[i+1]||bs[0]).focus()}
-  if(e.key==='ArrowUp'){e.preventDefault();(bs[i-1]||q).focus()}
-};
-document.addEventListener('click',e=>{if(!e.target.closest('.searchbox'))res.hidden=true});
-
-/* ---------- stopwatch ---------- */
-const W=Object.assign({running:false,start:0,acc:0,laps:[]},store.get('cf.sw',{}));
-const saveW=()=>store.set('cf.sw',W);
-const elapsed=()=>W.acc+(W.running?Date.now()-W.start:0);
-function fmt(ms,split=false){
-  ms=Math.max(0,Math.floor(ms/10));
-  const cs=ms%100,s=Math.floor(ms/100)%60,m=Math.floor(ms/6000)%60,h=Math.floor(ms/360000);
-  const base=(h?h+':'+pad(m):pad(m))+':'+pad(s);
-  return split?[base,pad(cs)]:base+'.'+pad(cs);
-}
-let raf=0;
-function drawSW(){
-  const e=elapsed(),[b,cs]=fmt(e,true);
-  $('#swTime').innerHTML=b+'.<small>'+cs+'</small>';
-  const last=W.laps.length?W.laps[W.laps.length-1]:0;
-  $('#swLap').textContent='Lap '+(W.laps.length+1)+' · '+fmt(e-last);
-  $('#ring').style.strokeDashoffset=628.32*(1-((e%60000)/60000));
-  if(W.running)document.title=fmt(e)+' · Chronofern';
-}
-function loop(){drawSW();if(W.running)raf=requestAnimationFrame(loop)}
-function syncBtns(){
-  const go=$('#goBtn');
-  go.textContent=W.running?'Pause':(W.acc>0?'Resume':'Start');
-  go.classList.toggle('run',W.running);
-  $('#lapBtn').disabled=!W.running;
-  $('#resetBtn').disabled=W.running||(W.acc===0&&!W.laps.length);
-  if(!W.running)document.title=swActive()?(fmt(elapsed())+' · Chronofern'):pageTitle();
-}
-function toggleSW(){
-  if(W.running){W.acc+=Date.now()-W.start;W.running=false;cancelAnimationFrame(raf)}
-  else{W.start=Date.now();W.running=true;loop()}
-  saveW();syncBtns();drawSW();
-}
-function lapSW(){if(!W.running)return;W.laps.push(elapsed());saveW();renderLaps();drawSW()}
-function resetSW(){if(W.running)return;W.acc=0;W.laps=[];saveW();renderLaps();syncBtns();drawSW()}
-function lapRows(){return W.laps.map((t,i)=>({n:i+1,lap:t-(i?W.laps[i-1]:0),total:t}))}
-function renderLaps(){
-  const box=$('#lapbox'),rows=lapRows();
-  if(!rows.length){box.innerHTML='<div class="empty">No laps yet. Start the stopwatch and tap Lap.</div>';return}
-  let best=-1,worst=-1;
-  if(rows.length>1){
-    best=rows.reduce((a,r)=>r.lap<rows[a].lap?rows.indexOf(r):a,0);
-    worst=rows.reduce((a,r)=>r.lap>rows[a].lap?rows.indexOf(r):a,0);
-  }
-  box.innerHTML='<div class="lap-head"><span>#</span><span>Lap</span><span>Split</span><span>Total</span></div>'+
-    rows.slice().reverse().map(r=>{
-      const i=r.n-1,cls=i===best?'best':i===worst?'worst':'';
-      const prevTotal=i?rows[i-1].total:0;
-      return `<div class="lap digits ${cls}"><span>${r.n}</span><span>${fmt(r.lap)} ${cls?`<span class="tag">${cls==='best'?'▲ best':'▼ slow'}</span>`:''}</span><span>+${fmt(r.lap)}</span><span>${fmt(r.total)}</span></div>`;
-    }).join('');
-}
-$('#goBtn').onclick=toggleSW;$('#lapBtn').onclick=lapSW;$('#resetBtn').onclick=resetSW;
-function csv(){return 'Lap,Lap time,Total time\n'+lapRows().map(r=>`${r.n},${fmt(r.lap)},${fmt(r.total)}`).join('\n')}
-$('#copyBtn').onclick=async()=>{
-  if(!W.laps.length){toast('No laps to copy');return}
-  try{await navigator.clipboard.writeText(csv().replace(/,/g,'\t'));toast('Laps copied')}catch{toast('Copy not available')}
-};
-$('#csvBtn').onclick=()=>{
-  if(!W.laps.length){toast('No laps to export');return}
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([csv()],{type:'text/csv'}));a.download='chronofern-laps.csv';a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-};
-
-/* ---------- tabs / routing / SEO titles ---------- */
-const TITLES={
-  'world-clock':'Chronofern – World Clock & Stopwatch | Free Online Time Zone Converter',
-};
-const swActive=()=>!$('#panel-sw').hidden&&W.running;
-function pageTitle(){return location.hash==='#stopwatch'?'Online Stopwatch with Laps | Chronofern':TITLES['world-clock']}
-function route(){
-  const sw=location.hash==='#stopwatch';
-  $('#panel-clock').hidden=sw;$('#panel-sw').hidden=!sw;
-  $('#tab-clock').setAttribute('aria-selected',!sw);$('#tab-sw').setAttribute('aria-selected',sw);
-  if(!sw)tick();
-  syncBtns();
-  if(!W.running)document.title=pageTitle();
-}
-$('#tab-clock').onclick=()=>{location.hash='#world-clock'};
-$('#tab-sw').onclick=()=>{location.hash='#stopwatch'};
-addEventListener('hashchange',route);
-
-/* ---------- keyboard ---------- */
-addEventListener('keydown',e=>{
-  if(e.target.matches('input,textarea')||e.metaKey||e.ctrlKey||e.altKey)return;
-  const sw=!$('#panel-sw').hidden;
-  if(e.key==='/'&&!sw){e.preventDefault();q.focus();return}
-  if(!sw)return;
-  if(e.code==='Space'&&!e.target.closest('button')){e.preventDefault();toggleSW()}
-  else if(e.key==='l'||e.key==='L')lapSW();
-  else if(e.key==='r'||e.key==='R')resetSW();
-});
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&W.running){cancelAnimationFrame(raf);loop()}});
-
-/* ---------- init ---------- */
-applySettings();renderGrid();renderLaps();syncBtns();drawSW();route();tick();
-if(W.running)loop();
-})();
+/* stopwatch */
+let S=st.get("sw",{run:false,start:0,acc:0,lapAt:0,laps:[]});
+const now=()=>S.acc+(S.run?Date.now()-S.start:0),save=()=>st.set("sw",S);
+function f(ms,h){const c=Math.floor(ms/10)%100,s=Math.floor(ms/1000)%60,m=Math.floor(ms/60000)%60,hr=Math.floor(ms/3600000);return(hr||h?pad(hr)+":":"")+pad(m)+":"+pad(s)+"."+pad(c)}
+function sdraw(){const n=now(),x=f(n),i=x.lastIndexOf(".");$("#sd").innerHTML=x.slice(0,i+1)+"<small>"+x.slice(i+1)+"</small>";
+ $("#sl2").textContent="Lap "+(S.laps.length+1)+" · "+f(n-S.lapAt);$("#arc").style.strokeDashoffset=565.5*(1-(n%60000)/60000);
+ $("#ss").textContent=S.run?"Pause":(n?"Resume":"Start");$("#ss").className="btn "+(S.run?"pause":"go");$("#lap").disabled=!S.run;if(S.run)requestAnimationFrame(sdraw)}
+function sstart(){if(S.run){S.acc+=Date.now()-S.start;S.run=false}else{S.start=Date.now();S.run=true}save();sdraw()}
+function slap(){if(!S.run)return;const n=now();S.laps.push({l:n-S.lapAt,t:n});S.lapAt=n;save();lapsdraw();sdraw()}
+function sreset(){S={run:false,start:0,acc:0,lapAt:0,laps:[]};save();lapsdraw();sdraw()}
+function lapsdraw(){const L=S.laps.map(x=>x.l),b=Math.min(...L),w=Math.max(...L),k=L.length;$("#lw").hidden=!k;$("#ne").hidden=!!k;
+ $("#lb").innerHTML=S.laps.map((x,i)=>`<tr><td>${i+1}</td><td class="${k>1?(x.l==b?"best":x.l==w?"worst":""):""}">${f(x.l)}</td><td>${f(x.t)}</td></tr>`).reverse().join("");
+ $("#nN").textContent=k;$("#nB").textContent=k?f(b):"–";$("#nW").textContent=k?f(w):"–";$("#nA").textContent=k?f(L.reduce((a,c)=>a+c,0)/k):"–"}
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1600)}
+$("#cp").onclick=async()=>{if(!S.laps.length)return toast("No laps yet");const t="Lap\tLap time\tTotal\n"+S.laps.map((x,i)=>[i+1,f(x.l),f(x.t)].join("\t")).join("\n");
+ try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement("textarea");a.value=t;document.body.append(a);a.select();document.execCommand("copy");a.remove()}toast("Laps copied ✓")};
+$("#cv").onclick=()=>{if(!S.laps.length)return toast("No laps yet");const t="Lap,Lap Time,Total Time\n"+S.laps.map((x,i)=>[i+1,f(x.l),f(x.t)].join(",")).join("\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/csv"}));a.download="world-clock-laps.csv";document.body.append(a);a.click();a.remove();toast("CSV downloaded ✓")};
+$("#ss").onclick=sstart;$("#lap").onclick=slap;$("#rst").onclick=sreset;
+document.addEventListener("keydown",e=>{if($("#ps").hidden||/INPUT|SELECT|TEXTAREA|BUTTON/.test(e.target.tagName))return;
+ if(e.code=="Space"){e.preventDefault();sstart()}else if(e.key=="l"||e.key=="L")slap();else if(e.key=="r"||e.key=="R")sreset()});
+lapsdraw();sdraw();
 </script>
 </body>
 </html>
