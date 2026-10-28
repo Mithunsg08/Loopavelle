@@ -67,9 +67,15 @@ nav a:hover{color:var(--ink)}
 
 /* sections */
 section{padding:72px 0}
-.sec-head{max-width:40rem;margin-bottom:40px}
+.sec-head{max-width:40rem;margin-bottom:24px}
 .sec-head h2{font-size:clamp(2rem,4vw,3rem);font-weight:800}
 .sec-head p{color:var(--muted);margin:14px 0 0}
+
+/* category filters */
+.categories{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
+.cat-btn{background:var(--panel);border:2px solid var(--ink);padding:8px 16px;border-radius:999px;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .15s}
+.cat-btn:hover{background:var(--ink);color:#fff}
+.cat-btn.active{background:var(--ink);color:#fff;box-shadow:3px 3px 0 var(--blue)}
 
 /* tools - compact grid */
 .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -200,12 +206,22 @@ footer a:hover{color:var(--ink)}
     <div class="wrap">
       <div class="sec-head">
         <h2>The tools</h2>
-        <p>Thirteen tools so far. Each one opens in your browser and works securely on your device.</p>
+        <p>Fourteen tools so far. Each one opens in your browser and works securely on your device.</p>
+      </div>
+
+      <!-- Category Filter Bar -->
+      <div class="categories" role="group" aria-label="Tool categories">
+        <button class="cat-btn active" data-filter="all">All Tools</button>
+        <button class="cat-btn" data-filter="business">Business & Audit</button>
+        <button class="cat-btn" data-filter="media">Media & Video</button>
+        <button class="cat-btn" data-filter="image">Image & PDF</button>
+        <button class="cat-btn" data-filter="utility">Utilities & Security</button>
+        <button class="cat-btn" data-filter="games">Games & Fun</button>
       </div>
 
       <div class="tools">
         <!-- 1. Featured Tool: OpsReveal -->
-        <article class="card featured" style="background:var(--ink);color:#fff;box-shadow:6px 6px 0 var(--blue)">
+        <article class="card featured" data-category="business" style="background:var(--ink);color:#fff;box-shadow:6px 6px 0 var(--blue)">
           <span class="tag">Featured</span>
           <h3>OpsReveal</h3>
           <p>Retail loss prevention that audits store data inside the browser. Find vendor overcharges, aged stock, and sales losses.</p>
@@ -223,9 +239,23 @@ footer a:hover{color:var(--ink)}
           <div class="note">Check opsreveal.preventloss.org for current terms.</div>
         </article>
 
-        <!-- 2. Tool: Word Counter -->
-        <article class="card">
+        <!-- 2. Tool: Dice Roller -->
+        <article class="card" data-category="games">
           <span class="tag" style="background:var(--signal);color:var(--ink);">New</span>
+          <h3>Dice Roller</h3>
+          <p>Roll fair, realistic 3D dice for board games, RPGs, and quick decisions with five game modes[cite: 5].</p>
+          <div class="plans" aria-label="Dice Roller pricing">
+            <div class="plan">
+              <div><b>Free</b><small>Classic, D20, Yahtzee & more</small></div>
+              <div class="amt free">$0</div>
+            </div>
+          </div>
+          <a class="btn primary" href="https://mithunsg08.github.io/heytools/dice-roller/" target="_blank" rel="noopener">Open Dice Roller</a>
+        </article>
+
+        <!-- 3. Tool: Word Counter -->
+        <article class="card" data-category="utility">
+          <span class="tag">Free</span>
           <h3>Word Counter</h3>
           <p>Count words, characters, sentences, reading time, and check keyword density instantly as you type[cite: 4].</p>
           <div class="plans" aria-label="Word Counter pricing">
@@ -237,8 +267,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/word-counter/" target="_blank" rel="noopener">Open Word Counter</a>
         </article>
 
-        <!-- 3. Tool: World Clock & Stopwatch -->
-        <article class="card">
+        <!-- 4. Tool: World Clock & Stopwatch -->
+        <article class="card" data-category="utility">
           <span class="tag">Free</span>
           <h3>World Clock & Stopwatch</h3>
           <p>Check times across 400+ time zones, slide through the day for meetings, and time events with lap-accurate precision.</p>
@@ -251,8 +281,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/world-clock/" target="_blank" rel="noopener">Open World Clock</a>
         </article>
 
-        <!-- 4. Tool: Galleonwick Compass -->
-        <article class="card">
+        <!-- 5. Tool: Galleonwick Compass -->
+        <article class="card" data-category="games">
           <span class="tag">Free</span>
           <h3>Galleonwick Compass</h3>
           <p>A free pirate's compass for your phone or computer. Find headings, set courses to coordinates[cite: 3], and sail true.</p>
@@ -265,8 +295,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/compass/" target="_blank" rel="noopener">Open Compass</a>
         </article>
 
-        <!-- 5. Tool: Calculator Suite -->
-        <article class="card">
+        <!-- 6. Tool: Calculator Suite -->
+        <article class="card" data-category="utility">
           <span class="tag" style="background:var(--signal);color:var(--ink);">Popular</span>
           <h3>Calculator Suite</h3>
           <p>Scientific calculator, tip splitter, fuel cost, EMI, GST, VAT, BMI, age calculators and more[cite: 2].</p>
@@ -279,8 +309,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/calculator/" target="_blank" rel="noopener">Open Calculator</a>
         </article>
 
-        <!-- 6. Tool: Barcode & QR Generator -->
-        <article class="card">
+        <!-- 7. Tool: Barcode & QR Generator -->
+        <article class="card" data-category="utility">
           <span class="tag" style="background:var(--blue);color:#fff;">Free</span>
           <h3>Barcode & QR</h3>
           <p>Make scannable barcodes and QR codes in seconds. Download as high-res PNG or SVG instantly.</p>
@@ -293,8 +323,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/barcode-generate/" target="_blank" rel="noopener">Open Barcode & QR</a>
         </article>
 
-        <!-- 7. Tool: Video Loop -->
-        <article class="card">
+        <!-- 8. Tool: Video Loop -->
+        <article class="card" data-category="media">
           <span class="tag">Free</span>
           <h3>Video Loop</h3>
           <p>Turn short video clips into seamless loops that run for hours. Processed entirely in browser memory.</p>
@@ -307,8 +337,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/video-loop/" target="_blank" rel="noopener">Open Video Loop</a>
         </article>
 
-        <!-- 8. Tool: Image Compressor -->
-        <article class="card">
+        <!-- 9. Tool: Image Compressor -->
+        <article class="card" data-category="image">
           <span class="tag">Free</span>
           <h3>Image Compressor</h3>
           <p>Compress PNG, JPEG, and WebP images instantly in your browser without losing noticeable visual quality.</p>
@@ -321,8 +351,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/image-compress" target="_blank" rel="noopener">Open Compressor</a>
         </article>
 
-        <!-- 9. Tool: Image to PDF Converter -->
-        <article class="card">
+        <!-- 10. Tool: Image to PDF Converter -->
+        <article class="card" data-category="image">
           <span class="tag">Free</span>
           <h3>Image to PDF</h3>
           <p>Combine multiple PNG, JPG, or WebP images into a single clean PDF document right inside your browser.</p>
@@ -335,8 +365,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/image-to-pdf-converter/" target="_blank" rel="noopener">Open Image to PDF</a>
         </article>
 
-        <!-- 10. Tool: Background Removal -->
-        <article class="card">
+        <!-- 11. Tool: Background Removal -->
+        <article class="card" data-category="image">
           <span class="tag">Free</span>
           <h3>Background Removal</h3>
           <p>Remove backgrounds from photos instantly inside your browser. Fully private with no server upload.</p>
@@ -349,8 +379,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/background-removal/" target="_blank" rel="noopener">Open Background Removal</a>
         </article>
 
-        <!-- 11. Tool: Scientific Calculator -->
-        <article class="card">
+        <!-- 12. Tool: Scientific Calculator -->
+        <article class="card" data-category="utility">
           <span class="tag">Free</span>
           <h3>Scientific Calculator</h3>
           <p>Advanced calculations, trigonometric functions, and equations computed locally with zero latency.</p>
@@ -363,8 +393,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/scientific-calculator" target="_blank" rel="noopener">Open Calculator</a>
         </article>
 
-        <!-- 12. Tool: Media Downloads -->
-        <article class="card">
+        <!-- 13. Tool: Media Downloads -->
+        <article class="card" data-category="media">
           <span class="tag">Free</span>
           <h3>Media Downloads</h3>
           <p>Manage and download media files efficiently straight from your client-side browser session.</p>
@@ -377,8 +407,8 @@ footer a:hover{color:var(--ink)}
           <a class="btn primary" href="https://mithunsg08.github.io/heytools/media-downloads" target="_blank" rel="noopener">Open Media Downloads</a>
         </article>
 
-        <!-- 13. Tool: Password Generator -->
-        <article class="card">
+        <!-- 14. Tool: Password Generator -->
+        <article class="card" data-category="utility">
           <span class="tag">Free</span>
           <h3>Password Generator</h3>
           <p>Create ultra-secure, random passwords customized with symbols, numbers, and custom lengths instantly.</p>
@@ -424,6 +454,7 @@ footer a:hover{color:var(--ink)}
     <div>&copy; <span id="yr">2026</span> HeyTools. Built to run on your device.</div>
     <div>
       <a href="https://opsreveal.preventloss.org/" target="_blank" rel="noopener">OpsReveal</a> &nbsp;&nbsp; 
+      <a href="https://mithunsg08.github.io/heytools/dice-roller/" target="_blank" rel="noopener">Dice Roller</a> &nbsp;&nbsp; 
       <a href="https://mithunsg08.github.io/heytools/word-counter/" target="_blank" rel="noopener">Word Counter</a> &nbsp;&nbsp; 
       <a href="https://mithunsg08.github.io/heytools/world-clock/" target="_blank" rel="noopener">World Clock</a> &nbsp;&nbsp; 
       <a href="https://mithunsg08.github.io/heytools/compass/" target="_blank" rel="noopener">Compass</a> &nbsp;&nbsp; 
@@ -439,6 +470,31 @@ footer a:hover{color:var(--ink)}
     </div>
   </div>
 </footer>
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // Category Filtering Script
+  const filterButtons = document.querySelectorAll('.cat-btn');
+  const toolCards = document.querySelectorAll('.tools .card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Update active state on buttons
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const selectedCategory = button.getAttribute('data-filter');
+
+      toolCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
