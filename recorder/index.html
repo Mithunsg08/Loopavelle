@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recorder – Free Online Voice, Video &amp; Screen Recorder | Private, No Sign-up</title>
+<meta name="description" content="Recorder is a free online voice recorder, video recorder and screen recorder. Pause, add markers, go fullscreen and save recordings privately on your phone. Works in your browser – no app, no sign-up, no uploads.">
+<meta name="keywords" content="recorder, online recorder, voice recorder, audio recorder, video recorder, screen recorder, free online recorder, mic recorder, record voice online, record video online, browser recorder, private recorder, pause recorder, record on phone">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="author" content="Recorder">
+<meta name="theme-color" content="#7c5cff">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Recorder – Free Online Voice, Video &amp; Screen Recorder">
+<meta property="og:description" content="Record voice, video or your screen with pause, markers and fullscreen. Saved only on your device. No sign-up, no uploads.">
+<meta property="og:site_name" content="Recorder">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Recorder – Free Online Voice, Video &amp; Screen Recorder">
+<meta name="twitter:description" content="Private browser recorder with pause, markers and fullscreen. Saved on your device.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff7ab8'/%3E%3Cstop offset='1' stop-color='%237c5cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23g)'/%3E%3Ccircle cx='32' cy='32' r='10' fill='white'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Recorder","alternateName":"Online Voice, Video and Screen Recorder","applicationCategory":"MultimediaApplication","operatingSystem":"Any (Web browser, Android, iOS, Windows, macOS, Linux)","browserRequirements":"Requires a modern browser with MediaRecorder support","description":"Free online voice recorder, video recorder and screen recorder that runs entirely in your browser and stores recordings privately on your device.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Voice recording","Video recording with front and back camera","Screen recording on desktop","Pause and resume in every mode","Timestamp markers","Fullscreen recorder mode","Microphone selection","Quality settings","Countdown timer","Local on-device storage","Playback speed control","Download and share recordings"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to record voice or video online","totalTime":"PT1M","step":[
+{"@type":"HowToStep","position":1,"name":"Choose a mode and tap record","text":"Pick Voice, Video or Screen, allow microphone or camera access, then tap the big record button."},
+{"@type":"HowToStep","position":2,"name":"Pause, mark or go fullscreen","text":"Use pause to take a break, the flag button to add markers, and the fullscreen button for a distraction-free recorder."},
+{"@type":"HowToStep","position":3,"name":"Stop and keep it","text":"Tap stop. Your recording is saved privately on your device. Play it back, rename it, share it or download it."}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is this online recorder really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Recorder is completely free with no sign-up, no watermark and no time limit other than your device storage."}},
+{"@type":"Question","name":"Where are my recordings stored?","acceptedAnswer":{"@type":"Answer","text":"Recordings are saved in your browser's private storage on your own device. Nothing is uploaded to any server."}},
+{"@type":"Question","name":"Can I pause a recording and continue later?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pause and resume work in voice, video and screen modes. The timer stops while paused and the final file is one continuous recording."}},
+{"@type":"Question","name":"Does the recorder work on iPhone and Android?","acceptedAnswer":{"@type":"Answer","text":"Yes. It works in modern mobile browsers such as Safari, Chrome and Firefox. Screen recording is only available on desktop browsers."}},
+{"@type":"Question","name":"How do I use fullscreen mode?","acceptedAnswer":{"@type":"Answer","text":"Tap the fullscreen button next to the mode switch. Only the recorder and your recordings are shown, without the rest of the page."}},
+{"@type":"Question","name":"What are markers?","acceptedAnswer":{"@type":"Answer","text":"Markers are timestamp flags you add while recording by tapping the flag button. Tap a marker later to jump straight to that moment."}},
+{"@type":"Question","name":"What format are the recordings?","acceptedAnswer":{"@type":"Answer","text":"The format depends on your browser: usually WebM or MP4 for video and WebM, MP4 or OGG for audio. These play on almost every device."}},
+{"@type":"Question","name":"How do I keep a recording permanently?","acceptedAnswer":{"@type":"Answer","text":"Tap the download button on a recording to save the file to your device. Clearing browser data removes recordings that were not downloaded."}},
+{"@type":"Question","name":"Can I choose which microphone to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. Open Settings and select any connected microphone, including headsets and USB mics."}},
+{"@type":"Question","name":"Why is my microphone not working?","acceptedAnswer":{"@type":"Answer","text":"Allow microphone access in the browser prompt, check that no other app is using the mic, and make sure the page is opened over HTTPS."}}
+]}
+</script>
+<style>
+:root{
+  --bg1:#fff4fb;--bg2:#eef0ff;--card:rgba(255,255,255,.72);--card-b:rgba(124,92,255,.14);
+  --text:#221b3a;--muted:#6f6990;--a:#7c5cff;--b:#ff7ab8;--c:#4fd1c5;--danger:#ff4d6d;
+  --shadow:0 20px 50px -20px rgba(92,60,200,.35);
+}
+:root[data-theme="dark"]{
+  --bg1:#150f2b;--bg2:#0c1022;--card:rgba(32,26,62,.6);--card-b:rgba(180,160,255,.16);
+  --text:#f1eeff;--muted:#a49fc7;--shadow:0 20px 50px -20px rgba(0,0,0,.7);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg1:#150f2b;--bg2:#0c1022;--card:rgba(32,26,62,.6);--card-b:rgba(180,160,255,.16);
+    --text:#f1eeff;--muted:#a49fc7;--shadow:0 20px 50px -20px rgba(0,0,0,.7);
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{
+  font-family:ui-rounded,"SF Pro Rounded","Nunito","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+  color:var(--text);min-height:100vh;
+  background:linear-gradient(160deg,var(--bg1),var(--bg2));background-attachment:fixed;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);overflow-x:hidden;
+}
+body.lock{overflow:hidden}
+.blob{position:fixed;border-radius:50%;filter:blur(70px);opacity:.45;z-index:0;pointer-events:none;animation:float 14s ease-in-out infinite}
+.b1{width:300px;height:300px;background:var(--b);top:-80px;left:-80px}
+.b2{width:340px;height:340px;background:var(--a);bottom:-100px;right:-100px;animation-delay:-5s}
+.b3{width:200px;height:200px;background:var(--c);top:45%;left:60%;opacity:.25;animation-delay:-9s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.12)}}
+.wrap{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:16px 16px 40px}
+header{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 10px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;letter-spacing:.2px}
+.logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--b),var(--a));display:grid;place-items:center;box-shadow:0 8px 20px -6px var(--a)}
+.logo i{width:12px;height:12px;border-radius:50%;background:#fff;display:block;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.4);opacity:.7}}
+.icon-btn{border:1px solid var(--card-b);background:var(--card);color:var(--text);width:42px;height:42px;border-radius:14px;font-size:1.1rem;cursor:pointer;backdrop-filter:blur(14px);transition:transform .2s;flex:none}
+.icon-btn:active{transform:scale(.92)}
+h1{font-size:clamp(1.6rem,6vw,2.1rem);line-height:1.15;margin:8px 0 6px;font-weight:800}
+h1 span{background:linear-gradient(90deg,var(--b),var(--a));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:0 0 16px;line-height:1.5}
+.card{background:var(--card);border:1px solid var(--card-b);border-radius:28px;box-shadow:var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+
+/* app + fullscreen */
+.app.fs{position:fixed;inset:0;z-index:100;overflow:auto;background:linear-gradient(160deg,var(--bg1),var(--bg2));padding:max(14px,env(safe-area-inset-top)) 16px max(30px,env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+.app.fs>.app-in{max-width:760px;margin:0 auto}
+.app.fs .stage{height:min(64vh,520px)}
+.app.fs .steps{display:none}
+.top{display:flex;align-items:center;gap:10px;margin:14px 14px 0}
+.top .seg{flex:1;margin:0}
+.seg{display:flex;padding:5px;border-radius:18px;background:rgba(124,92,255,.1);position:relative}
+.seg button{flex:1;border:0;background:none;color:var(--muted);font:inherit;font-weight:700;padding:10px 4px;border-radius:14px;cursor:pointer;position:relative;z-index:1;transition:color .3s;font-size:.92rem}
+.seg button.on{color:#fff}
+.seg .pill{position:absolute;top:5px;bottom:5px;left:5px;border-radius:14px;background:linear-gradient(135deg,var(--b),var(--a));transition:transform .35s cubic-bezier(.3,1.4,.5,1);box-shadow:0 8px 18px -8px var(--a)}
+.stage{position:relative;height:min(78vw,340px);margin:0 auto}
+canvas{width:100%;height:100%;display:block}
+#preview{position:absolute;left:50%;top:50%;width:46%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;object-fit:cover;opacity:0;pointer-events:none;transition:opacity .4s;background:#000;box-shadow:0 0 0 4px rgba(255,255,255,.5)}
+#preview.rect{width:78%;aspect-ratio:16/9;border-radius:20px;object-fit:contain}
+#preview.show{opacity:1}
+#preview.paused{filter:grayscale(.7) brightness(.7)}
+.cd{position:absolute;inset:0;display:grid;place-items:center;font-size:5rem;font-weight:900;color:#fff;text-shadow:0 6px 30px var(--a);opacity:0;pointer-events:none}
+.cd.show{opacity:1;animation:cdp 1s ease-out infinite}
+@keyframes cdp{from{transform:scale(1.6);opacity:0}30%{opacity:1}to{transform:scale(.9);opacity:.2}}
+.pbadge{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--card-b);padding:5px 12px;border-radius:99px;font-size:.8rem;font-weight:800;opacity:0;transition:opacity .3s;display:flex;gap:6px;align-items:center}
+.pbadge.show{opacity:1}
+.pbadge i{width:8px;height:8px;border-radius:50%;background:var(--danger);animation:blink 1s infinite}
+.pbadge.pz i{background:#ffb020;animation:none}
+@keyframes blink{50%{opacity:.2}}
+.timer{text-align:center;font-size:2.4rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:1px;margin-top:-4px}
+.timer.pz{animation:blink 1.2s infinite}
+.status{text-align:center;color:var(--muted);font-size:.92rem;min-height:1.4em;margin:2px 0 8px}
+.controls{display:flex;align-items:center;justify-content:center;gap:24px;padding:6px 0 14px}
+.rec{width:88px;height:88px;border-radius:50%;border:0;cursor:pointer;position:relative;background:linear-gradient(135deg,var(--b),var(--a));box-shadow:0 14px 30px -8px var(--a),inset 0 -6px 12px rgba(0,0,0,.15),inset 0 6px 12px rgba(255,255,255,.35);transition:transform .2s}
+.rec:active{transform:scale(.92)}
+.rec::before{content:"";position:absolute;inset:26px;border-radius:50%;background:#fff;transition:all .3s}
+.rec.live::before{inset:30px;border-radius:10px}
+.rec.live::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--b);animation:ring 1.4s ease-out infinite}
+.rec.paused::after{animation:none;opacity:.5}
+@keyframes ring{from{transform:scale(.9);opacity:.9}to{transform:scale(1.3);opacity:0}}
+.side{width:58px;height:58px;border-radius:50%;border:1px solid var(--card-b);background:var(--card);color:var(--text);font-size:1.35rem;cursor:pointer;transition:all .3s;box-shadow:var(--shadow)}
+.side:active{transform:scale(.9)}
+.side.dim{opacity:.4;pointer-events:none;box-shadow:none}
+.side.act{background:linear-gradient(135deg,var(--b),var(--a));color:#fff;border-color:transparent}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:0 14px 14px}
+.chip{border:1px solid var(--card-b);background:rgba(124,92,255,.08);color:var(--text);font:inherit;font-size:.85rem;font-weight:700;padding:8px 14px;border-radius:99px;cursor:pointer}
+.chip.on{background:linear-gradient(135deg,var(--b),var(--a));color:#fff;border-color:transparent}
+.chip[hidden]{display:none}
+.settings{margin:0 14px 14px;border-radius:20px;border:1px solid var(--card-b);padding:4px 14px;background:rgba(124,92,255,.05)}
+.settings summary{cursor:pointer;font-weight:800;padding:10px 0;list-style:none}
+.settings summary::-webkit-details-marker{display:none}
+.settings summary::after{content:"▾";float:right;color:var(--muted)}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--card-b);font-size:.92rem}
+.srow select{font:inherit;color:var(--text);background:var(--card);border:1px solid var(--card-b);border-radius:12px;padding:7px 10px;max-width:58%}
+.srow input[type=checkbox]{appearance:none;-webkit-appearance:none;width:46px;height:27px;border-radius:99px;background:rgba(124,92,255,.2);position:relative;cursor:pointer;transition:.25s;flex:none}
+.srow input[type=checkbox]::after{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;transition:.25s;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.srow input[type=checkbox]:checked{background:linear-gradient(135deg,var(--b),var(--a))}
+.srow input[type=checkbox]:checked::after{transform:translateX(19px)}
+.kbd{font-size:.78rem;color:var(--muted);text-align:center;padding:0 14px 16px}
+.kbd b{background:var(--card);border:1px solid var(--card-b);border-radius:6px;padding:1px 6px;color:var(--text)}
+.steps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:16px 0 6px}
+.steps span{font-size:.82rem;color:var(--muted);background:var(--card);border:1px solid var(--card-b);padding:6px 12px;border-radius:99px}
+.steps b{color:var(--a)}
+h2{font-size:1.25rem;margin:26px 4px 10px}
+.lh{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:26px 4px 10px}
+.lh h2{margin:0}
+.lh small{color:var(--muted);font-weight:600;font-size:.82rem}
+.lib-tools{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.lib-tools input{flex:1;min-width:140px;font:inherit;color:var(--text);background:var(--card);border:1px solid var(--card-b);border-radius:14px;padding:10px 14px}
+.meter{height:6px;border-radius:9px;background:rgba(124,92,255,.15);overflow:hidden;margin:2px 2px 4px}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--b),var(--a));transition:width .6s}
+.minfo{color:var(--muted);font-size:.78rem;margin:0 4px 12px}
+.item{padding:14px;margin-bottom:12px;border-radius:22px;animation:pop .45s cubic-bezier(.3,1.4,.5,1)}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.96)}}
+.row{display:flex;align-items:center;gap:12px}
+.thumb{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font-size:1.3rem;background:linear-gradient(135deg,rgba(255,122,184,.25),rgba(124,92,255,.25));flex:none}
+.meta{flex:1;min-width:0}
+.name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:none;border:0;color:var(--text);font:inherit;font-weight:700;padding:0;width:100%;text-align:left}
+.name:focus{outline:2px solid var(--a);border-radius:6px}
+.info{color:var(--muted);font-size:.8rem;margin-top:2px}
+.acts{display:flex;gap:6px}
+.acts button{width:36px;height:36px;border-radius:12px;border:1px solid var(--card-b);background:rgba(124,92,255,.08);color:var(--text);cursor:pointer;font-size:.95rem}
+.acts button:active{transform:scale(.9)}
+.acts .del{color:var(--danger)}
+.mk{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.mk button{border:1px solid var(--card-b);background:rgba(255,122,184,.12);color:var(--text);font:inherit;font-size:.78rem;font-weight:700;padding:4px 10px;border-radius:99px;cursor:pointer}
+.player{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.player audio{width:100%}
+.player video{width:100%;border-radius:16px;background:#000;max-height:60vh}
+.player .spd{align-self:flex-end}
+.empty{text-align:center;padding:30px 16px;color:var(--muted)}
+.empty div{font-size:2.2rem;margin-bottom:6px;animation:float 5s ease-in-out infinite}
+.privacy{display:flex;gap:10px;align-items:center;padding:14px 16px;margin-top:18px;font-size:.88rem;color:var(--muted);line-height:1.45}
+
+/* SEO content */
+.seo{margin-top:34px;color:var(--muted);line-height:1.7;font-size:.96rem}
+.seo h2{color:var(--text);margin-top:34px}
+.seo h3{color:var(--text);font-size:1.02rem;margin:18px 0 4px}
+.seo p{margin:8px 0}
+.seo ul,.seo ol{padding-left:20px;margin:8px 0}
+.seo li{margin:4px 0}
+.seo .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.seo .grid div{padding:14px;border-radius:20px}
+.seo .grid b{display:block;color:var(--text);margin-bottom:4px}
+.seo details{padding:12px 16px;margin-bottom:8px;border-radius:18px}
+.seo summary{cursor:pointer;font-weight:700;color:var(--text)}
+.seo table{width:100%;border-collapse:collapse;font-size:.88rem;margin:10px 0}
+.seo th,.seo td{padding:8px 10px;border-bottom:1px solid var(--card-b);text-align:left}
+.seo th{color:var(--text)}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:30px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,40px);background:var(--text);color:var(--bg1);padding:12px 18px;border-radius:99px;font-weight:700;font-size:.9rem;opacity:0;transition:all .35s;z-index:200;max-width:90vw;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media (max-width:480px){.seo .grid{grid-template-columns:1fr}.acts button{width:34px;height:34px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div class="wrap">
+  <header>
+    <div class="brand"><div class="logo"><i></i></div>Recorder</div>
+    <button class="icon-btn" id="theme" aria-label="Toggle light or dark theme">🌗</button>
+  </header>
+
+  <main>
+    <h1>Free online recorder. <span>Private by design.</span></h1>
+    <p class="sub">Record voice, video or your screen with pause, markers and fullscreen. Saved on your device, never uploaded.</p>
+
+    <div class="app" id="app"><div class="app-in">
+      <section class="card" aria-label="Recorder tool">
+        <div class="top">
+          <div class="seg" id="seg" role="tablist">
+            <div class="pill"></div>
+            <button class="on" data-m="voice" role="tab">🎙️ Voice</button>
+            <button data-m="video" role="tab">🎥 Video</button>
+            <button data-m="screen" role="tab" id="screenBtn">🖥️ Screen</button>
+          </div>
+          <button class="icon-btn" id="fs" aria-label="Toggle fullscreen" title="Fullscreen (F)">⛶</button>
+        </div>
+        <div class="stage">
+          <canvas id="orb"></canvas><video id="preview" muted playsinline></video>
+          <div class="pbadge" id="badge"><i></i><span id="btxt">REC</span></div>
+          <div class="cd" id="cd"></div>
+        </div>
+        <div class="timer" id="timer" aria-live="polite">00:00</div>
+        <div class="status" id="status">Tap the button to start</div>
+        <div class="controls">
+          <button class="side dim" id="pause" aria-label="Pause or resume" title="Pause / resume (P)">⏸</button>
+          <button class="rec" id="rec" aria-label="Start or stop recording" title="Record / stop (Space)"></button>
+          <button class="side dim" id="mark" aria-label="Add marker" title="Add marker (M)">🚩</button>
+        </div>
+        <div class="chips">
+          <button class="chip" id="mute" aria-label="Mute microphone">🎤 Mic on</button>
+          <button class="chip" id="flip" hidden>🔄 Flip camera</button>
+        </div>
+        <details class="settings">
+          <summary>⚙️ Settings</summary>
+          <div class="srow"><span>Microphone</span><select id="mic" data-k="mic"><option value="">Default microphone</option></select></div>
+          <div class="srow"><span>Video quality</span><select data-k="vq" data-t="n"><option value="480">480p · small</option><option value="720">720p · HD</option><option value="1080">1080p · Full HD</option></select></div>
+          <div class="srow"><span>Audio quality</span><select data-k="ab" data-t="n"><option value="64000">Light (64 kbps)</option><option value="128000">Standard (128 kbps)</option><option value="256000">High (256 kbps)</option></select></div>
+          <div class="srow"><span>Start countdown</span><select data-k="cd" data-t="n"><option value="0">Off</option><option value="3">3 seconds</option><option value="5">5 seconds</option><option value="10">10 seconds</option></select></div>
+          <div class="srow"><span>Noise suppression</span><input type="checkbox" data-k="ns"></div>
+          <div class="srow"><span>Echo cancellation</span><input type="checkbox" data-k="ec"></div>
+          <div class="srow"><span>Auto volume (AGC)</span><input type="checkbox" data-k="agc"></div>
+          <div class="srow"><span>Mirror front camera preview</span><input type="checkbox" data-k="mirror"></div>
+          <div class="srow"><span>Keep screen awake</span><input type="checkbox" data-k="awake"></div>
+        </details>
+        <div class="kbd"><b>Space</b> record/stop · <b>P</b> pause · <b>M</b> marker · <b>F</b> fullscreen</div>
+      </section>
+
+      <div class="steps"><span><b>1</b> Tap record</span><span><b>2</b> Tap stop</span><span><b>3</b> Saved on your device</span></div>
+
+      <div class="lh"><h2>Your recordings</h2><small id="count"></small></div>
+      <div class="lib-tools">
+        <input type="search" id="q" placeholder="Search recordings…" aria-label="Search recordings">
+        <button class="chip on" data-f="all">All</button>
+        <button class="chip" data-f="voice">🎙️</button>
+        <button class="chip" data-f="video">🎥</button>
+        <button class="chip" data-f="screen">🖥️</button>
+        <button class="chip" id="clear">Clear all</button>
+      </div>
+      <div class="meter"><i id="mbar"></i></div>
+      <div class="minfo" id="minfo"></div>
+      <div id="list"></div>
+    </div></div>
+
+    <div class="card privacy">🔒 <span>Everything happens on your device. Recordings are stored in this browser and never leave your phone unless you download or share them.</span></div>
+  </main>
+
+  <article class="seo">
+    <h2>Recorder: the free online voice, video and screen recorder</h2>
+    <p><strong>Recorder</strong> is a fast, modern <strong>online recorder</strong> that works right in your browser. Capture your voice, record video with your front or back camera, or record your computer screen – then play it back, rename it, share it or download it. There is nothing to install, no account to create and no watermark. Because everything is processed <strong>on your device</strong>, your recordings stay private.</p>
+
+    <h2>What you can do with Recorder</h2>
+    <div class="grid">
+      <div class="card"><b>🎙️ Voice recorder</b>Record lectures, interviews, meetings, songs, ideas and voice notes in clear audio with noise suppression and echo cancellation.</div>
+      <div class="card"><b>🎥 Video recorder</b>Record HD or Full HD video with your front or back camera. Switch cameras in one tap.</div>
+      <div class="card"><b>🖥️ Screen recorder</b>On desktop browsers, record a screen, window or tab together with system sound and your microphone.</div>
+      <div class="card"><b>⏸ Pause &amp; resume</b>Take a break without ending the recording. The final file is one continuous take.</div>
+      <div class="card"><b>🚩 Markers</b>Flag important moments while recording and jump straight to them later.</div>
+      <div class="card"><b>⛶ Fullscreen mode</b>A distraction-free recorder that shows only the tool and your recordings.</div>
+      <div class="card"><b>🎚️ Quality controls</b>Choose 480p, 720p or 1080p video and 64–256 kbps audio to balance quality and file size.</div>
+      <div class="card"><b>🔒 Private storage</b>Recordings are saved in your browser's local storage. No uploads, no servers.</div>
+    </div>
+
+    <h2>How to record voice or video online</h2>
+    <ol>
+      <li><strong>Choose a mode and tap record.</strong> Pick Voice, Video or Screen, allow microphone or camera access, and press the big record button.</li>
+      <li><strong>Pause, mark or go fullscreen.</strong> Use the pause button any time, add markers with the flag, or open fullscreen for a clean workspace.</li>
+      <li><strong>Stop and keep it.</strong> Tap stop and the recording is saved on your device. Play it, rename it, share it or download the file.</li>
+    </ol>
+
+    <h2>Why use a browser-based recorder?</h2>
+    <p>Traditional recording apps need to be downloaded, updated and given broad permissions. A web recorder opens instantly on phones, tablets, Chromebooks and computers. Recorder uses the browser's built-in <em>MediaRecorder</em> technology, so audio and video are encoded locally and saved straight to private on-device storage. That means faster start-up, less storage used by apps and complete control over your files.</p>
+
+    <h2>Popular uses</h2>
+    <ul>
+      <li><strong>Students:</strong> record lectures, study notes and language practice.</li>
+      <li><strong>Journalists and researchers:</strong> capture interviews and flag key quotes with markers.</li>
+      <li><strong>Musicians and singers:</strong> sketch song ideas, vocals and rehearsals.</li>
+      <li><strong>Creators:</strong> record video messages, tutorials and voice-overs.</li>
+      <li><strong>Remote teams:</strong> record screen walkthroughs, bug reports and demos.</li>
+      <li><strong>Everyday life:</strong> voice memos, reminders, family moments and personal diaries.</li>
+    </ul>
+
+    <h2>Tips for better recordings</h2>
+    <ul>
+      <li>Hold the phone 15–20 cm from your mouth and speak across it, not directly into it, to reduce pops.</li>
+      <li>Record in a quiet, soft room – curtains, carpets and sofas reduce echo.</li>
+      <li>Use a headset or external microphone and pick it under Settings → Microphone.</li>
+      <li>Use the countdown so you have time to get ready before recording begins.</li>
+      <li>Turn on Do Not Disturb so calls and notifications do not interrupt your take.</li>
+      <li>For video, face a window or soft light and keep the camera at eye level.</li>
+      <li>Add markers for key moments, then jump to them when reviewing.</li>
+    </ul>
+
+    <h2>Supported browsers and devices</h2>
+    <table>
+      <tr><th>Feature</th><th>Android (Chrome)</th><th>iPhone / iPad (Safari)</th><th>Desktop</th></tr>
+      <tr><td>Voice recording</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Video recording</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Screen recording</td><td>No</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Fullscreen mode</td><td>Yes</td><td>Yes (full-page view)</td><td>Yes</td></tr>
+    </table>
+
+    <h2>Recorder vs. traditional recording apps</h2>
+    <table>
+      <tr><th></th><th>Recorder</th><th>Typical app</th></tr>
+      <tr><td>Install needed</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Account / sign-up</td><td>No</td><td>Often</td></tr>
+      <tr><td>Uploads your audio</td><td>Never</td><td>Often (cloud)</td></tr>
+      <tr><td>Watermark or time limit</td><td>None</td><td>Common in free tiers</td></tr>
+      <tr><td>Cost</td><td>Free</td><td>Free with ads or paid</td></tr>
+    </table>
+
+    <h2>Recording formats explained</h2>
+    <p>Your browser chooses the best format it supports. <strong>WebM</strong> (Opus audio, VP8/VP9 video) is common on Chrome, Edge and Firefox. <strong>MP4</strong> (AAC audio, H.264 video) is used by Safari. <strong>OGG</strong> (Opus) may appear on some Firefox builds. All are widely playable, and most editors and messaging apps accept them. If you need another format, convert the downloaded file with any free converter.</p>
+
+    <h2>Privacy and security</h2>
+    <p>Recorder does not send audio, video or screen content to any server. Files are stored in your browser's IndexedDB on your device and are visible only to you. Microphone and camera access is requested by your browser and is only active while you record. When you stop, all capture devices are released immediately. To remove recordings permanently, delete them in the app or clear the site's data in your browser.</p>
+
+    <h2>Frequently asked questions</h2>
+    <details class="card"><summary>Is this online recorder really free?</summary><p>Yes. Recorder is completely free with no sign-up, no watermark and no time limit other than your device storage.</p></details>
+    <details class="card"><summary>Where are my recordings stored?</summary><p>In your browser's private storage on your own device. Nothing is uploaded to any server.</p></details>
+    <details class="card"><summary>Can I pause a recording and continue later?</summary><p>Yes. Pause and resume work in voice, video and screen modes. The timer stops while paused and the final file is one continuous recording.</p></details>
+    <details class="card"><summary>Does the recorder work on iPhone and Android?</summary><p>Yes. It works in modern mobile browsers such as Safari, Chrome and Firefox. Screen recording is only available on desktop browsers.</p></details>
+    <details class="card"><summary>How do I use fullscreen mode?</summary><p>Tap the fullscreen button next to the mode switch. Only the recorder and your recordings are shown, without the rest of the page.</p></details>
+    <details class="card"><summary>What are markers?</summary><p>Markers are timestamp flags you add while recording by tapping the flag button. Tap a marker later to jump straight to that moment.</p></details>
+    <details class="card"><summary>What format are the recordings?</summary><p>The format depends on your browser: usually WebM or MP4 for video and WebM, MP4 or OGG for audio. These play on almost every device.</p></details>
+    <details class="card"><summary>How do I keep a recording permanently?</summary><p>Tap the download button on a recording to save the file to your device. Clearing browser data removes recordings that were not downloaded.</p></details>
+    <details class="card"><summary>Can I choose which microphone to use?</summary><p>Yes. Open Settings and select any connected microphone, including headsets and USB mics.</p></details>
+    <details class="card"><summary>Why is my microphone not working?</summary><p>Allow microphone access in the browser prompt, check that no other app is using the mic, and make sure the page is opened over HTTPS.</p></details>
+  </article>
+  <noscript><p>Recorder needs JavaScript enabled to record voice, video and screen in your browser.</p></noscript>
+  <footer>© Recorder · Free online voice, video &amp; screen recorder · Runs 100% in your browser</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const rec=$('#rec'),pauseB=$('#pause'),markB=$('#mark'),muteB=$('#mute'),flipB=$('#flip'),timerEl=$('#timer'),statusEl=$('#status'),
+      seg=$('#seg'),preview=$('#preview'),listEl=$('#list'),countEl=$('#count'),badge=$('#badge'),btxt=$('#btxt'),cdEl=$('#cd'),app=$('#app');
+let mode='voice',facing='user',mr=null,chunks=[],startT=0,acc=0,tick=null,state='idle',
+    actx=null,analyser=null,data=null,level=0,allStreams=[],micTracks=[],markers=[],muted=false,wake=null,cache=[],filter='all';
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* theme */
+const root=document.documentElement;
+try{const t=localStorage.getItem('rc-theme');if(t)root.dataset.theme=t}catch(e){}
+$('#theme').onclick=()=>{
+  const dark=getComputedStyle(root).getPropertyValue('--bg1').trim()==='#150f2b';
+  const n=dark?'light':'dark';root.dataset.theme=n;try{localStorage.setItem('rc-theme',n)}catch(e){}
+};
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('show'),2600)}
+const fmt=s=>{s=Math.floor(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),r=s%60;return (h?h+':':'')+String(m).padStart(2,'0')+':'+String(r).padStart(2,'0')};
+const size=b=>b>1073741824?(b/1073741824).toFixed(2)+' GB':b>1048576?(b/1048576).toFixed(1)+' MB':Math.max(1,Math.round(b/1024))+' KB';
+
+/* settings */
+const S=Object.assign({vq:720,ab:128000,cd:0,ns:true,ec:true,agc:true,mirror:true,awake:true,mic:''},(()=>{try{return JSON.parse(localStorage.getItem('rc-set'))||{}}catch(e){return{}}})());
+function saveS(){try{localStorage.setItem('rc-set',JSON.stringify(S))}catch(e){}}
+$$('[data-k]').forEach(el=>{
+  const k=el.dataset.k;
+  if(el.type==='checkbox')el.checked=!!S[k];else el.value=S[k];
+  el.onchange=()=>{S[k]=el.type==='checkbox'?el.checked:(el.dataset.t==='n'?Number(el.value):el.value);saveS()};
+});
+async function loadMics(){
+  try{
+    const d=await navigator.mediaDevices.enumerateDevices(),sel=$('#mic');
+    const mics=d.filter(x=>x.kind==='audioinput'&&x.deviceId&&x.deviceId!=='default'&&x.deviceId!=='communications');
+    sel.innerHTML='<option value="">Default microphone</option>'+mics.map((m,i)=>`<option value="${esc(m.deviceId)}">${esc(m.label||'Microphone '+(i+1))}</option>`).join('');
+    sel.value=S.mic;if(sel.value!==S.mic){S.mic='';sel.value=''}
+  }catch(e){}
+}
+loadMics();
+
+/* mode switch */
+const isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+if(isMobile||!(navigator.mediaDevices&&navigator.mediaDevices.getDisplayMedia))$('#screenBtn').remove();
+const segBtns=$$('#seg button'),pill=$('#seg .pill');
+function placePill(){const i=segBtns.findIndex(b=>b.dataset.m===mode),n=segBtns.length;
+  pill.style.width=`calc((100% - 10px) / ${n})`;pill.style.transform=`translateX(${i*100}%)`;
+  segBtns.forEach(b=>b.classList.toggle('on',b.dataset.m===mode));
+  flipB.hidden=mode!=='video';
+  statusEl.textContent=mode==='screen'?'Tap to share your screen & record':mode==='video'?'Tap to record video':'Tap the button to start';
+}
+segBtns.forEach(b=>b.onclick=()=>{if(state!=='idle')return toast('Stop the recording first');mode=b.dataset.m;placePill()});
+placePill();
+flipB.onclick=()=>{if(state!=='idle')return toast('Switch camera before recording');facing=facing==='user'?'environment':'user';toast(facing==='user'?'Front camera':'Back camera')};
+
+/* mute */
+muteB.onclick=()=>{
+  muted=!muted;micTracks.forEach(t=>t.enabled=!muted);
+  muteB.textContent=muted?'🔇 Mic muted':'🎤 Mic on';muteB.classList.toggle('on',muted);
+  if(state==='rec'||state==='pause')toast(muted?'Microphone muted':'Microphone on');
+};
+
+/* fullscreen (tool only) */
+const fsBtn=$('#fs');
+const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+function setFS(on){app.classList.toggle('fs',on);document.body.classList.toggle('lock',on);fsBtn.textContent=on?'✕':'⛶';fsBtn.setAttribute('aria-label',on?'Exit fullscreen':'Enter fullscreen')}
+function toggleFS(){
+  if(app.classList.contains('fs')){
+    if(fsEl()){(document.exitFullscreen||document.webkitExitFullscreen).call(document)}
+    setFS(false);return;
+  }
+  const rf=app.requestFullscreen||app.webkitRequestFullscreen;
+  setFS(true);
+  if(rf){try{const p=rf.call(app);p&&p.catch&&p.catch(()=>{})}catch(e){}}
+}
+fsBtn.onclick=toggleFS;
+['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{if(!fsEl()&&app.classList.contains('fs'))setFS(false)}));
+
+/* recording */
+function pickMime(){
+  const c=mode==='voice'?['audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus']:['video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];
+  return c.find(t=>window.MediaRecorder&&MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(t))||'';
+}
+function audioC(withDev){return {echoCancellation:S.ec,noiseSuppression:S.ns,autoGainControl:S.agc,...(withDev&&S.mic?{deviceId:{exact:S.mic}}:{})}}
+async function gum(c){
+  try{return await navigator.mediaDevices.getUserMedia(c)}
+  catch(e){
+    if((e.name==='OverconstrainedError'||e.name==='NotFoundError')&&S.mic){S.mic='';saveS();c=JSON.parse(JSON.stringify(c));if(c.audio&&c.audio.deviceId)delete c.audio.deviceId;return await navigator.mediaDevices.getUserMedia(c)}
+    throw e;
+  }
+}
+const VQ={480:[854,480,1.2e6],720:[1280,720,2.5e6],1080:[1920,1080,5e6]};
+async function acquire(){
+  const AC=window.AudioContext||window.webkitAudioContext;
+  actx=new AC();if(actx.resume)actx.resume().catch(()=>{});
+  analyser=actx.createAnalyser();analyser.fftSize=256;data=new Uint8Array(analyser.frequencyBinCount);
+  micTracks=[];allStreams=[];let ms;
+  if(mode==='screen'){
+    const disp=await navigator.mediaDevices.getDisplayMedia({video:{frameRate:30},audio:true});allStreams.push(disp);
+    let mic=null;try{mic=await gum({audio:audioC(true)});allStreams.push(mic);micTracks=mic.getAudioTracks()}catch(e){}
+    const mix=actx.createGain(),dest=actx.createMediaStreamDestination();
+    if(disp.getAudioTracks().length)actx.createMediaStreamSource(new MediaStream([disp.getAudioTracks()[0]])).connect(mix);
+    if(mic)actx.createMediaStreamSource(mic).connect(mix);
+    mix.connect(dest);mix.connect(analyser);
+    ms=new MediaStream([...disp.getVideoTracks(),...dest.stream.getAudioTracks()]);
+    disp.getVideoTracks()[0].onended=()=>{if(state==='rec'||state==='pause')stop()};
+  }else{
+    const [w,h]=VQ[S.vq]||VQ[720];
+    ms=await gum(mode==='video'?{audio:audioC(true),video:{facingMode:facing,width:{ideal:w},height:{ideal:h}}}:{audio:audioC(true)});
+    allStreams.push(ms);micTracks=ms.getAudioTracks();
+    if(micTracks.length)actx.createMediaStreamSource(new MediaStream(micTracks)).connect(analyser);
+  }
+  micTracks.forEach(t=>t.enabled=!muted);
+  loadMics();
+  return ms;
+}
+function releaseAll(){
+  allStreams.forEach(s=>s.getTracks().forEach(t=>t.stop()));allStreams=[];
+  if(actx){actx.close().catch(()=>{});actx=null}analyser=null;
+  preview.classList.remove('show','paused','rect');preview.srcObject=null;
+  if(wake){wake.release().catch(()=>{});wake=null}
+}
+function errMsg(e){
+  if(e&&(e.name==='NotAllowedError'||e.name==='SecurityError'))return mode==='screen'?'Screen sharing was cancelled or blocked':'Please allow microphone'+(mode==='video'?' and camera':'')+' access';
+  if(e&&e.name==='NotFoundError')return 'No microphone or camera found';
+  if(e&&e.name==='NotReadableError')return 'Mic or camera is in use by another app';
+  return 'Could not start recording';
+}
+function setUI(){
+  const live=state==='rec'||state==='pause';
+  rec.classList.toggle('live',live||state==='count');rec.classList.toggle('paused',state==='pause');
+  pauseB.classList.toggle('dim',!live);markB.classList.toggle('dim',!live);
+  pauseB.textContent=state==='pause'?'▶':'⏸';pauseB.classList.toggle('act',state==='pause');
+  timerEl.classList.toggle('pz',state==='pause');
+  badge.classList.toggle('show',live);badge.classList.toggle('pz',state==='pause');btxt.textContent=state==='pause'?'PAUSED':'REC';
+  preview.classList.toggle('paused',state==='pause');
+}
+async function start(){
+  if(state!=='idle')return;
+  if(!navigator.mediaDevices||!window.MediaRecorder)return toast('Recording is not supported in this browser');
+  state='busy';statusEl.textContent='Waiting for permission…';
+  let ms;
+  try{ms=await acquire()}catch(e){state='idle';releaseAll();statusEl.textContent='Tap the button to start';return toast(errMsg(e))}
+  const mime=pickMime(),opts={};if(mime)opts.mimeType=mime;opts.audioBitsPerSecond=S.ab;
+  if(mode!=='voice')opts.videoBitsPerSecond=(VQ[S.vq]||VQ[720])[2];
+  try{mr=new MediaRecorder(ms,opts)}catch(e){try{mr=new MediaRecorder(ms,mime?{mimeType:mime}:undefined)}catch(e2){state='idle';releaseAll();return toast('Could not start recorder')}}
+  chunks=[];acc=0;markers=[];
+  mr.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
+  const recMode=mode;mr.onstop=()=>save(recMode);
+  if(mode!=='voice'){
+    preview.srcObject=ms;preview.classList.toggle('rect',mode==='screen');
+    preview.style.transform=(mode==='video'&&facing==='user'&&S.mirror)?'translate(-50%,-50%) scaleX(-1)':'translate(-50%,-50%)';
+    preview.play().catch(()=>{});preview.classList.add('show');
+  }
+  if(S.cd>0){
+    state='count';setUI();
+    for(let i=S.cd;i>0;i--){if(state!=='count')return;cdEl.textContent=i;cdEl.classList.remove('show');void cdEl.offsetWidth;cdEl.classList.add('show');statusEl.textContent='Starting in '+i+'… tap to cancel';await sleep(1000)}
+    cdEl.classList.remove('show');if(state!=='count')return;
+  }
+  mr.start(250);startT=Date.now();state='rec';setUI();
+  statusEl.textContent='Recording…';
+  tick=setInterval(updTimer,200);
+  if(S.awake&&'wakeLock' in navigator)navigator.wakeLock.request('screen').then(w=>wake=w).catch(()=>{});
+}
+function elapsed(){return (acc+(state==='rec'?(Date.now()-startT):0))/1000}
+function updTimer(){const t=fmt(elapsed());timerEl.textContent=t;document.title=(state==='rec'?'● ':'⏸ ')+t+' · Recorder'}
+function stop(){
+  if(state==='count'||state==='busy'){state='idle';cdEl.classList.remove('show');releaseAll();setUI();statusEl.textContent='Cancelled';return}
+  if(!mr||(state!=='rec'&&state!=='pause'))return;
+  acc=elapsed()*1000;state='idle';clearInterval(tick);
+  document.title=ORIG;
+  try{mr.stop()}catch(e){}
+  releaseAll();setUI();
+}
+const ORIG=document.title;
+async function save(recMode){
+  const type=mr.mimeType||(recMode==='voice'?'audio/webm':'video/webm');
+  const blob=new Blob(chunks,{type});
+  if(!blob.size){statusEl.textContent='Nothing was recorded';return}
+  const d=new Date(),label={voice:'Voice',video:'Video',screen:'Screen'}[recMode];
+  const name=label+' '+d.toLocaleDateString(undefined,{month:'short',day:'numeric'})+' '+d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+  try{
+    await addRec({name,kind:recMode,type,blob,dur:acc/1000,size:blob.size,date:Date.now(),markers:markers.slice()});
+    statusEl.textContent='Saved on your device ✓';toast('Saved ✓');
+    if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();
+  }catch(e){statusEl.textContent='Could not save – storage full?';toast('Could not save')}
+  timerEl.textContent='00:00';chunks=[];loadAll();
+}
+rec.onclick=()=>state==='idle'?start():stop();
+function togglePause(){
+  if(state==='rec'){acc=elapsed()*1000;state='pause';mr.pause();statusEl.textContent='Paused – tap ▶ to continue';updTimer()}
+  else if(state==='pause'){startT=Date.now();state='rec';mr.resume();statusEl.textContent='Recording…'}
+  else return;
+  setUI();
+}
+pauseB.onclick=togglePause;
+function addMarker(){
+  if(state!=='rec'&&state!=='pause')return;
+  const t=elapsed();markers.push(t);toast('🚩 Marker '+markers.length+' at '+fmt(t));
+}
+markB.onclick=addMarker;
+addEventListener('beforeunload',e=>{if(state==='rec'||state==='pause'){e.preventDefault();e.returnValue=''}});
+addEventListener('keydown',e=>{
+  if(/INPUT|SELECT|TEXTAREA/.test((e.target.tagName||''))||e.ctrlKey||e.metaKey||e.altKey)return;
+  const k=e.key.toLowerCase();
+  if(k===' '){e.preventDefault();rec.click()}
+  else if(k==='p')togglePause();
+  else if(k==='m')addMarker();
+  else if(k==='f')toggleFS();
+  else if(k==='escape'&&app.classList.contains('fs')&&!fsEl())setFS(false);
+});
+
+/* IndexedDB */
+let dbp;
+function db(){return dbp||(dbp=new Promise((res,rej)=>{
+  const r=indexedDB.open('hushbloom',1);
+  r.onupgradeneeded=()=>r.result.createObjectStore('recs',{keyPath:'id',autoIncrement:true});
+  r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);
+}))}
+async function tx(m,fn){const d=await db();return new Promise((res,rej)=>{const t=d.transaction('recs',m);const q=fn(t.objectStore('recs'));t.oncomplete=()=>res(q&&q.result);t.onerror=()=>rej(t.error)})}
+const addRec=r=>tx('readwrite',s=>s.add(r)),allRecs=()=>tx('readonly',s=>s.getAll()),putRec=r=>tx('readwrite',s=>s.put(r)),delRec=id=>tx('readwrite',s=>s.delete(id)),clearRecs=()=>tx('readwrite',s=>s.clear());
+
+/* library */
+const urls=new Map(),ICON={voice:'🎙️',video:'🎥',screen:'🖥️'};
+const ext=t=>t.includes('mp4')?'mp4':t.includes('ogg')?'ogg':'webm';
+async function loadAll(){
+  try{cache=(await allRecs()).sort((a,b)=>b.date-a.date)}catch(e){cache=[]}
+  renderList();updStorage();
+}
+async function updStorage(){
+  const total=cache.reduce((a,r)=>a+r.size,0);
+  let txt=cache.length+' recording'+(cache.length===1?'':'s')+' · '+size(total);
+  try{if(navigator.storage&&navigator.storage.estimate){const e=await navigator.storage.estimate();if(e.quota){$('#mbar').style.width=Math.min(100,(e.usage||0)/e.quota*100)+'%';txt+=' · device storage '+size(e.usage||0)+' of '+size(e.quota)}}}catch(e){}
+  $('#minfo').textContent=cache.length?txt:'';
+}
+function player(el,r,at){
+  let p=el.querySelector('.player'),m;
+  if(!p){
+    const u=URL.createObjectURL(r.blob);urls.set(r.id,u);
+    p=document.createElement('div');p.className='player';
+    p.innerHTML=(r.kind==='voice'?`<audio controls src="${u}"></audio>`:`<video controls playsinline src="${u}"></video>`)+'<button class="chip spd">Speed 1×</button>';
+    el.appendChild(p);
+    const sp=[1,1.5,2,.75];let si=0;m=p.querySelector('audio,video');
+    p.querySelector('.spd').onclick=e=>{si=(si+1)%sp.length;m.playbackRate=sp[si];e.target.textContent='Speed '+sp[si]+'×'};
+  }
+  m=p.querySelector('audio,video');
+  if(at!=null){try{m.currentTime=at}catch(e){}}
+  m.play().catch(()=>{});
+}
+function renderList(){
+  const q=$('#q').value.trim().toLowerCase();
+  const recs=cache.filter(r=>(filter==='all'||r.kind===filter)&&(!q||r.name.toLowerCase().includes(q)));
+  countEl.textContent=cache.length?cache.length+' saved':'';
+  if(!recs.length){listEl.innerHTML='<div class="card empty"><div>🌸</div>'+(cache.length?'No matches.':'No recordings yet.<br>Your first one will bloom here.')+'</div>';return}
+  listEl.innerHTML='';
+  recs.forEach(r=>{
+    const el=document.createElement('div');el.className='card item';
+    const mk=(r.markers||[]).map((t,i)=>`<button data-t="${t}">🚩 ${i+1} · ${fmt(t)}</button>`).join('');
+    el.innerHTML=`<div class="row"><div class="thumb">${ICON[r.kind]||'🎙️'}</div>
+      <div class="meta"><input class="name" aria-label="Recording name"><div class="info">${fmt(r.dur)} · ${size(r.size)} · ${new Date(r.date).toLocaleDateString()}</div></div>
+      <div class="acts"><button class="play" aria-label="Play">▶</button><button class="shr" aria-label="Share">↗</button><button class="dl" aria-label="Download">⬇</button><button class="del" aria-label="Delete">🗑</button></div></div>${mk?'<div class="mk">'+mk+'</div>':''}`;
+    const inp=el.querySelector('.name');inp.value=r.name;
+    inp.onchange=async()=>{r.name=inp.value.trim()||r.name;await putRec(r);toast('Renamed')};
+    el.querySelector('.play').onclick=()=>{
+      const p=el.querySelector('.player');
+      if(p){const m=p.querySelector('audio,video');m.pause();p.remove();return}
+      player(el,r);
+    };
+    el.querySelectorAll('.mk button').forEach(b=>b.onclick=()=>player(el,r,Number(b.dataset.t)));
+    const fname=()=>(r.name.replace(/[^\w\- ]+/g,'').trim()||'recording')+'.'+ext(r.type);
+    el.querySelector('.dl').onclick=()=>{
+      const u=URL.createObjectURL(r.blob),a=document.createElement('a');
+      a.href=u;a.download=fname();document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toast('Downloading…');
+    };
+    el.querySelector('.shr').onclick=async()=>{
+      const f=new File([r.blob],fname(),{type:r.type});
+      try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:r.name});return}}catch(e){if(e.name==='AbortError')return}
+      toast('Sharing not supported here – use download');
+    };
+    el.querySelector('.del').onclick=async()=>{
+      if(!confirm('Delete this recording?'))return;
+      await delRec(r.id);if(urls.has(r.id))URL.revokeObjectURL(urls.get(r.id));toast('Deleted');loadAll();
+    };
+    listEl.appendChild(el);
+  });
+}
+$('#q').oninput=renderList;
+$$('[data-f]').forEach(b=>b.onclick=()=>{filter=b.dataset.f;$$('[data-f]').forEach(x=>x.classList.toggle('on',x===b));renderList()});
+$('#clear').onclick=async()=>{
+  if(!cache.length)return toast('Nothing to clear');
+  if(!confirm('Delete ALL recordings? This cannot be undone.'))return;
+  await clearRecs();urls.forEach(u=>URL.revokeObjectURL(u));urls.clear();toast('All recordings deleted');loadAll();
+};
+loadAll();
+
+/* 3D-style orb */
+const cv=$('#orb'),cx=cv.getContext('2d');let W,H,dpr;
+function sz(){dpr=Math.min(devicePixelRatio||1,2);const r=cv.getBoundingClientRect();W=cv.width=Math.max(1,r.width*dpr);H=cv.height=Math.max(1,r.height*dpr)}
+addEventListener('resize',sz);document.addEventListener('fullscreenchange',()=>setTimeout(sz,100));
+new ResizeObserver(sz).observe(cv);sz();
+let t=0;
+function draw(){
+  requestAnimationFrame(draw);
+  const paused=state==='pause';
+  t+=paused?.003:.012;
+  let target;
+  if(analyser&&state==='rec'){analyser.getByteFrequencyData(data);let s=0;for(let i=0;i<data.length;i++)s+=data[i];target=s/data.length/160}
+  else if(paused)target=0;
+  else target=.06+Math.sin(t*2)*.03;
+  level+=(target-level)*.18;
+  cx.clearRect(0,0,W,H);
+  cx.globalAlpha=paused?.65:1;
+  const x=W/2,y=H/2,R=Math.min(W,H)*.25,live=state==='rec';
+  for(let k=0;k<3;k++){
+    cx.save();cx.translate(x,y);cx.rotate(t*(.4+k*.2)+k*1.2);cx.scale(1,.32+k*.05);
+    const rr=R*(1.55+k*.18+level*.4);
+    cx.beginPath();cx.arc(0,0,rr,0,Math.PI*2);
+    cx.strokeStyle=`rgba(${k==1?255:124},${k==1?122:92},${k==1?184:255},${.28-k*.05})`;cx.lineWidth=2*dpr;cx.stroke();
+    const a=t*(1.6-k*.3)+k*2;cx.beginPath();cx.arc(Math.cos(a)*rr,Math.sin(a)*rr,5*dpr,0,7);
+    cx.fillStyle=k==1?'#ff7ab8':'#7c5cff';cx.fill();cx.restore();
+  }
+  const gl=cx.createRadialGradient(x,y,R*.4,x,y,R*2.4);
+  gl.addColorStop(0,`rgba(255,122,184,${.35+level*.4})`);gl.addColorStop(1,'rgba(124,92,255,0)');
+  cx.fillStyle=gl;cx.fillRect(0,0,W,H);
+  for(let l=3;l>=0;l--){
+    cx.beginPath();
+    const n=64,rr=R*(1+l*.07)*(1+level*.35);
+    for(let i=0;i<=n;i++){
+      const a=i/n*Math.PI*2;
+      const w=Math.sin(a*3+t*(1.5+l*.4)+l)*.07+Math.sin(a*5-t*2+l*2)*.04;
+      const rad=rr*(1+w*(live?1+level*3:.8));
+      const px=x+Math.cos(a)*rad,py=y+Math.sin(a)*rad;
+      i?cx.lineTo(px,py):cx.moveTo(px,py);
+    }
+    cx.closePath();
+    const g=cx.createRadialGradient(x-R*.4,y-R*.5,R*.1,x,y,rr*1.2);
+    if(l===0){g.addColorStop(0,'#ffd1ea');g.addColorStop(.45,'#ff7ab8');g.addColorStop(1,'#7c5cff')}
+    else{g.addColorStop(0,'rgba(255,160,210,.16)');g.addColorStop(1,'rgba(124,92,255,.16)')}
+    cx.fillStyle=g;cx.fill();
+  }
+  if(!preview.classList.contains('show')){
+    cx.beginPath();cx.ellipse(x-R*.35,y-R*.45,R*.28,R*.14,-.6,0,7);cx.fillStyle='rgba(255,255,255,.45)';cx.fill();
+  }
+  cx.globalAlpha=1;
+}
+draw();
+})();
+</script>
+</body>
+</html>
