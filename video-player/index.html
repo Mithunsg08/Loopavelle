@@ -143,6 +143,11 @@ details{border-bottom:.5px solid var(--l)}summary{padding:14px 2px;cursor:pointe
 footer{text-align:center;color:var(--m);font-size:.78rem;padding:34px 16px 60px;line-height:1.7}
 .seo ol{list-style:none;counter-reset:s;padding:0;display:grid;gap:12px}.seo ol li{counter-increment:s;display:flex;gap:14px;color:var(--m);line-height:1.65}.seo ol li::before{content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;background:var(--ac);color:var(--aci);display:grid;place-items:center;font-weight:800}.seo ol b{color:var(--t)}
 .seo table{width:100%;border-collapse:collapse;font-size:.9rem}.seo th,.seo td{text-align:left;padding:12px;border-bottom:.5px solid var(--l);color:var(--m);vertical-align:top;line-height:1.6}.seo th{color:var(--t);width:24%}
+.ask{position:fixed;inset:0;z-index:250;display:grid;place-items:center;background:rgba(0,0,0,.6);backdrop-filter:blur(16px);opacity:0;visibility:hidden;transition:.4s var(--e)}
+.ask.show{opacity:1;visibility:visible}
+.ask>div{width:min(430px,92vw);padding:30px 26px;border-radius:30px;background:rgba(28,28,30,.92);color:#fff;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;transform:translateY(30px) scale(.94);transition:.5s var(--e);box-shadow:0 40px 100px #000}
+.ask.show>div{transform:none}.ask h3{font-size:1.35rem;letter-spacing:-.03em}.ask p{color:#a1a1a6;line-height:1.6;font-size:.92rem}.ask .big{animation:none;font-size:1.05rem;padding:15px 30px}
+.ask .ico{font-size:2.6rem;animation:br 3s infinite}
 .drop{position:fixed;inset:12px;z-index:150;border:2px dashed var(--t);border-radius:30px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);display:none;place-items:center;font-size:1.6rem;font-weight:700}
 body.drag .drop{display:grid}
 @media(max-width:720px){.vol,.d{display:none}.grid{grid-template-columns:1fr}.pl{border-radius:18px}.pill span{display:none}.pop{bottom:76px}}
@@ -172,6 +177,7 @@ body.drag .drop{display:grid}
         <p>Local files. Live TV. Even without internet.</p>
         <button class="big" id="imp">📂 Import all</button>
         <div class="sec"><button class="gh" data-go="tv">Live TV</button><button class="gh" data-go="st">Stream</button><button class="gh" data-go="hi">History</button></div>
+        <div class="sec" id="rec"></div>
       </div>
       <div class="spin"></div>
       <div class="fx l" id="fxL">−10s</div><div class="fx r" id="fxR">+10s</div>
@@ -243,7 +249,7 @@ body.drag .drop{display:grid}
       <div class="tool"><button class="btn pri xl" id="imp2">📂 Import all</button><button class="btn" id="pickF">Choose files</button><input class="inp" id="lq" type="search" placeholder="Filter your videos…"></div>
       <div class="chips" id="dirs"></div>
       <ul class="grid" id="lib"></ul>
-      <p class="hint">Your browser asks permission once to read the folder. Files stay on your device — nothing is uploaded. Played videos get a ✓ and resume where you stopped.</p>
+      <p class="hint">Browsers never let a website scan your whole device, so you allow one folder (sub-folders included). Chrome and Edge remember it and list your videos automatically next time; other browsers ask again. Nothing is uploaded. Played videos get a ✓ and resume where you stopped.</p>
     </div>
     <div class="tp" id="t-tv">
       <div class="tool"><input class="inp" id="tq" type="search" placeholder="Search live channels…"><select class="inp" id="tc"></select><select class="inp" id="tk"></select><button class="btn" id="tvSave">⬇ Save for offline</button><span class="hint" id="tn"></span></div>
@@ -286,6 +292,12 @@ body.drag .drop{display:grid}
 </div>
 <footer>Video Player is a free, private media player and does not host any channels or videos.<br>Space play · F fullscreen · T wide · M mute · C subtitles · S screenshot · ←/→ seek · N/P next/previous</footer>
 
+<div class="ask" id="ask"><div>
+  <div class="ico">📂</div><h3>Allow access to your videos?</h3>
+  <p>Next, your browser will ask you to choose a folder and confirm access. Video Player only <b>reads</b> it to list your videos — nothing is uploaded, and files play straight from your device.</p>
+  <button class="big" id="askOk">Allow &amp; choose folder</button><button class="gh" id="askNo" style="background:rgba(255,255,255,.1)">Not now</button>
+  <p style="font-size:.78rem">Tip: pick a folder like Movies or Videos. Chrome and Edge can block system folders such as Downloads or Desktop.</p>
+</div></div>
 <div class="toast" id="toast"></div>
 <input type="file" id="fIn" accept="video/*,audio/*,.mkv,.srt,.vtt" multiple hidden>
 <input type="file" id="dIn" webkitdirectory multiple hidden>
@@ -464,32 +476,47 @@ $$('[data-go]').forEach(b=>b.onclick=()=>{tab(b.dataset.go);$('.panel').scrollIn
 /* ---------- library: Import all ---------- */
 const MEDIA=/\.(mp4|m4v|mkv|webm|mov|avi|ogv|mp3|m4a|wav|flac|ogg|opus|aac|ts|3gp|wmv)$/i;
 let lib=[],shownL=200;
-async function importAll(){
-  if(window.showDirectoryPicker){
-    try{const h=await showDirectoryPicker({mode:'read'});await dbo('readwrite',s=>s.put({name:h.name,handle:h}));renderDirs();await scan(h)}
-    catch(e){if(e.name!=='AbortError')$('#dIn').click()}
-  }else $('#dIn').click();
+const canDir=!!window.showDirectoryPicker;
+function importAll(){
+  if(!canDir){(matchMedia('(pointer:coarse)').matches?$('#fIn'):$('#dIn')).click();return}   // sync click keeps the user gesture
+  $('#ask').classList.add('show');
 }
+async function pickDir(){
+  $('#ask').classList.remove('show');
+  try{let h;try{h=await showDirectoryPicker({id:'vp-media',mode:'read',startIn:'videos'})}catch(e){if(e.name==='TypeError')h=await showDirectoryPicker({mode:'read'});else throw e}
+    await dbo('readwrite',s=>s.put({name:h.name,handle:h}));await scan(h);renderDirs()}
+  catch(e){if(e.name==='AbortError')return;toast('Couldn’t open that folder ('+(e.name||'error')+'). Try a sub-folder like Movies, or press “Choose files”.',6000)}
+}
+$('#askOk').onclick=pickDir;$('#askNo').onclick=()=>$('#ask').classList.remove('show');$('#ask').onclick=e=>{if(e.target.id==='ask')e.target.classList.remove('show')};
 $('#imp').onclick=$('#imp2').onclick=importAll;$('#pickF').onclick=()=>$('#fIn').click();
-async function walk(dir,pre,out,st){for await(const [n,h] of dir.entries()){if(st.n>8000)return;
-  if(h.kind==='directory'){if(!n.startsWith('.'))await walk(h,pre+n+'/',out,st)}
-  else if(MEDIA.test(n)){out.push({src:'local',hk:'l:'+dir.name+'/'+pre+n,title:n,path:pre+n,handle:h,kind:'file',folder:dir.name});st.n++}}}
-async function scan(h){
-  toast('Scanning “'+h.name+'”…',60000);const out=[],st={n:0};
-  try{await walk(h,'',out,st)}catch{return toast('Couldn’t read that folder')}
-  lib=lib.filter(e=>e.folder!==h.name).concat(out);shownL=200;tab('lo');renderLib();
-  toast(out.length?`Imported ${out.length.toLocaleString()} videos from “${h.name}”`:'No videos found in that folder',4000);
-  $('#lib').scrollIntoView({behavior:'smooth',block:'nearest'});
+async function walk(dir,pre,out,st,root){for await(const [n,h] of dir.entries()){if(st.n>8000)return;
+  if(h.kind==='directory'){if(!n.startsWith('.'))await walk(h,pre+n+'/',out,st,root)}
+  else if(MEDIA.test(n)){out.push({src:'local',hk:'l:'+root+'/'+pre+n,title:n,path:pre+n,handle:h,kind:'file',folder:root});st.n++;if(st.n%100===0)toast('Found '+st.n+' videos…',60000)}}}
+const heroReady=n=>{if(!cur)$('#hero p').textContent=`✓ ${n.toLocaleString()} videos ready — choose one from the Library below.`};
+async function scan(h,quiet){
+  if(!quiet)toast('Scanning “'+h.name+'”…',60000);const out=[],st={n:0};
+  try{await walk(h,'',out,st,h.name)}catch{return toast('Couldn’t read that folder')}
+  lib=lib.filter(e=>e.folder!==h.name).concat(out);shownL=200;renderLib();heroReady(lib.length);
+  toast(out.length?`Imported ${out.length.toLocaleString()} videos from “${h.name}”`:'No videos found in that folder — try a different folder',4500);
+  if(!quiet){tab('lo');setTimeout(()=>$('.panel').scrollIntoView({behavior:'smooth'}),250)}
 }
-async function renderDirs(){const ds=(await dbo('readonly',s=>s.getAll())||[]).filter(d=>d.handle);window._d=ds;$('#dirs').innerHTML=ds.map(d=>`<button class="chip" data-d="${esc(d.name)}">📁 ${esc(d.name)} · reconnect</button>`).join('')}
+async function renderDirs(auto){
+  const ds=((await dbo('readonly',s=>s.getAll()))||[]).filter(d=>d.handle);window._d=ds;const need=[];
+  for(const d of ds){let p='prompt';try{p=await d.handle.queryPermission({mode:'read'})}catch{}
+    if(p==='granted'){if(auto&&!lib.some(e=>e.folder===d.name))await scan(d.handle,true)}else need.push(d)}
+  $('#dirs').innerHTML=ds.map(d=>`<button class="chip" data-d="${esc(d.name)}">📁 ${esc(d.name)} · refresh</button>`).join('');
+  $('#rec').innerHTML=need.map(d=>`<button class="gh" data-d="${esc(d.name)}">🔄 Reconnect “${esc(d.name)}”</button>`).join('');
+}
 $('#dirs').onclick=async e=>{const b=e.target.closest('[data-d]');if(!b)return;const d=_d.find(x=>x.name===b.dataset.d);try{let p=await d.handle.queryPermission({mode:'read'});if(p!=='granted')p=await d.handle.requestPermission({mode:'read'});p==='granted'?await scan(d.handle):toast('Permission wasn’t granted')}catch{toast('That folder is no longer available')}};
+$('#rec').onclick=$('#dirs').onclick;
 $('#fIn').onchange=e=>{addFiles(e.target.files);e.target.value=''};$('#dIn').onchange=e=>{addFiles(e.target.files);e.target.value=''};
 function addFiles(fl,auto){fl=[...fl];const media=fl.filter(f=>f.type.startsWith('video/')||f.type.startsWith('audio/')||MEDIA.test(f.name));
   if(!media.length){const s=fl.find(f=>/\.(srt|vtt)$/i.test(f.name));if(s)s.text().then(subs);else toast('No playable files found');return}
   const en=media.map(f=>{const p=f.webkitRelativePath||f._path||f.name;return{src:'local',hk:'l:'+p+':'+f.size,title:f.name,path:p,file:f,size:f.size,kind:'file',folder:p.includes('/')?p.split('/')[0]:''}});
   const have=new Set(lib.map(e=>e.hk));lib=lib.concat(en.filter(e=>!have.has(e.hk)));shownL=200;tab('lo');renderLib();
-  if(auto??en.length<=3)setQ(lib,lib.findIndex(e=>e.hk===en[0].hk));else toast(`Imported ${en.length.toLocaleString()} videos`)}
+  if(auto??en.length<=3)setQ(lib,lib.findIndex(e=>e.hk===en[0].hk));else{toast(`Imported ${en.length.toLocaleString()} videos`);heroReady(lib.length);setTimeout(()=>$('.panel').scrollIntoView({behavior:'smooth'}),250)}}
 function renderLib(){
+  $('[data-t=lo]').textContent=lib.length?`Library · ${lib.length.toLocaleString()}`:'Library';
   const q=$('#lq').value.trim().toLowerCase();lib.sort((a,b)=>nat(a.path,b.path));const rows=q?lib.filter(r=>r.path.toLowerCase().includes(q)):lib;window._r=rows;
   $('#lib').innerHTML=rows.length?rows.slice(0,shownL).map((m,i)=>`<li class="it${cur&&cur.hk===m.hk?' cur':''}" data-i="${i}" data-k="${esc(m.hk)}"><div class="th">${esc((m.title.split('.').pop()||'').slice(0,4).toUpperCase())}</div><div class="mt"><b title="${esc(m.path)}">${esc(m.title)}</b><small>${played.has(m.hk)?'✓ Played · ':''}${esc(m.path.includes('/')?m.path.split('/').slice(0,-1).join('/'):'Local file')}${m.size?' · '+sz(m.size):''}</small></div></li>`).join('')+(rows.length>shownL?`<li class="it" data-more style="justify-content:center;font-weight:700">Show more (${rows.length-shownL})</li>`:''):`<li class="empty">📂<br>${q?'No videos match.':'No videos yet.<br>Press <b>Import all</b> and allow access to a folder, or drop files anywhere on this page.'}</li>`}
 $('#lq').oninput=()=>{shownL=200;renderLib()};
@@ -562,7 +589,7 @@ function parseLink(raw){let u=raw.trim();if(!/^[a-z]+:\/\//i.test(u))u='https://
 
 /* ---------- init ---------- */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});$$('.rv').forEach(el=>io.observe(el));
-applyS();netUI(true);offUI();if(navigator.onLine&&!store.get('vp5tv',null))setTimeout(()=>fetch(IDX).then(r=>r.ok?r.text():Promise.reject()).then(t=>saveTVList(parse(t))).catch(()=>{}),2500);renderLib();renderHist();renderDirs();plats();drawRes();
+applyS();netUI(true);offUI();if(navigator.onLine&&!store.get('vp5tv',null))setTimeout(()=>fetch(IDX).then(r=>r.ok?r.text():Promise.reject()).then(t=>saveTVList(parse(t))).catch(()=>{}),2500);renderLib();renderHist();renderDirs(true);plats();drawRes();
 const qp=new URLSearchParams(location.search);if(qp.get('url')){tab('st');const it=parseLink(qp.get('url'));if(it)setQ([it],0)}
 </script>
 <noscript><p style="padding:40px;text-align:center">Video Player needs JavaScript.</p></noscript>
